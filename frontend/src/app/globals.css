@@ -31,3 +31,27 @@ body {
     text-wrap: balance;
   }
 }
+
+
+.navStyle {
+    transition: background-color 300ms ease-in-out;
+  }
+  
+  .linkStyle {
+    text-decoration: none;
+    color: black; /* Change la couleur selon tes préférences */
+    transition: color 300ms ease-in-out;
+  }
+  
+  .linkStyle:hover {
+    color: #ffc107; /* Ou toute autre couleur de survol */
+  }
+  
+  body {
+    background-image: url('/images/background.png'); /* Chemin relatif à partir du dossier public */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; /* Fixe l'image en arrière-plan */
+  }
+  
