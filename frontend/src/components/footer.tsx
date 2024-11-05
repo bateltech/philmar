@@ -5,10 +5,10 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="relative bg-cover bg-center text-white py-16 px-4" style={{ backgroundImage: "url('/images/footer-background.png')" }} >
+    <footer className="relative bg-cover bg-center text-white py-16 px-4" style={{ backgroundImage: "url('/images/footer.png')" }} >
 
         {/* Shadow Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-50 pointer-events-none z-0"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-65 pointer-events-none z-0"></div>
 
         {/* Content aligned to the right */}
         <div className="relative container z-10 mx-auto flex flex-col items-center md:items-end space-y-8">
@@ -20,15 +20,15 @@ const Footer = () => {
                 <input 
                     type="email" 
                     placeholder="Entrez votre email ici..." 
-                    className="p-2 w-80 text-black rounded-md border border-red-500"
+                    className="p-2 w-80 text-black border border-red-500"
                 />
           
                 <textarea 
                     placeholder="Entrez le message ici..." 
-                    className="p-2 w-80 h-32 text-black rounded-md border border-red-500"
+                    className="p-2 w-80 h-32 text-black border border-red-500"
                 />
           
-                <button className="bg-white text-black font-semibold py-2 px-6 rounded-md mt-4">
+                <button className="bg-white text-black font-semibold py-2 px-6 mt-4">
                     Envoyer
                 </button>
 
