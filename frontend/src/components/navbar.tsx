@@ -11,12 +11,40 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const nav = document.querySelector('.navStyle');
+      const items = document.querySelectorAll('.linkStyle');
+      const icons = document.querySelector('.icons');
+      const titre = document.querySelector('.titre');
+
       if (window.scrollY > 100) {
-        nav.classList.add('bg-white', 'bg-opacity-80');
+        nav.classList.add('bg-white', 'bg-opacity-90');
         nav.classList.remove('bg-transparent');
+
+        items.forEach(item => {
+            item.classList.remove('text-white');
+            item.classList.add('text-black');
+        });
+
+        icons.classList.add('text-black');
+        icons.classList.remove('text-white');
+
+        titre.classList.add('text-black');
+        titre.classList.remove('text-white');
+
+
       } else {
         nav.classList.add('bg-transparent');
-        nav.classList.remove('bg-white', 'bg-opacity-80');
+        nav.classList.remove('bg-white', 'bg-opacity-90');
+
+        items.forEach(item => {
+          item.classList.remove('text-black');
+          item.classList.add('text-white');
+        });
+
+        icons.classList.add('text-white');
+        icons.classList.remove('text-black');
+
+        titre.classList.add('text-white');
+        titre.classList.remove('text-black');
       }
     };
 
@@ -31,7 +59,7 @@ const Navbar = () => {
         {/* Logo et Nom Philmar */}
             <div className="flex items-center space-x-3">
                 <Image src="/images/logo.png" alt="Philmar Logo" width={50} height={50} />
-                <span className="font-bold text-lg text-black">Philmar</span>
+                <span className="font-bold text-lg titre">Philmar</span>
             </div>
 
             {/* Liens du menu et Icônes des réseaux sociaux */}
@@ -48,7 +76,7 @@ const Navbar = () => {
                 </ul>
 
                 {/* Icônes des réseaux sociaux */}
-                <div className="flex space-x-4 text-black">
+                <div className="flex space-x-4 text-white icons">
                     <Link href="mailto:example@gmail.com" passHref aria-label="Gmail" className="hover:text-amber-500">
                         <FontAwesomeIcon icon={faEnvelope} size="lg" />
                     </Link>
