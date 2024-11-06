@@ -15,7 +15,7 @@ const Footer = () => {
        
             {/* Contact Form */}
             <div className="flex flex-col items-center space-y-4">
-                <h2 className="text-lg text-right">Pour toutes proposition de travail, vous pouvez me contacter</h2>
+                <h2 className="text-lg text-right">Pour toute proposition de travail, vous pouvez me contacter</h2>
           
                 <input 
                     type="email" 
