@@ -25,8 +25,14 @@ const Navbar = () => {
         nav.classList.remove('bg-transparent');
 
         items.forEach(item => {
-          item.classList.remove('text-white');
-          item.classList.add('text-black');
+          const linkPath = item.getAttribute('href');
+          if (isActive(linkPath)) {
+            // Skip applying color changes to the active link
+            item.classList.add('text-amber-500', 'font-bold', 'border-b-2', 'border-amber-500');
+          } else {
+            item.classList.remove('text-white');
+            item.classList.add('text-black');
+          }
         });
 
         icons.classList.add('text-black');
@@ -39,8 +45,14 @@ const Navbar = () => {
         nav.classList.remove('bg-white', 'bg-opacity-90');
 
         items.forEach(item => {
-          item.classList.remove('text-black');
-          item.classList.add('text-white');
+          const linkPath = item.getAttribute('href');
+          if (isActive(linkPath)) {
+            // Skip applying color changes to the active link
+            item.classList.add('text-amber-500', 'font-bold', 'border-b-2', 'border-amber-500');
+          } else {
+            item.classList.remove('text-black');
+            item.classList.add('text-white');
+          }
         });
 
         icons.classList.add('text-white');
@@ -54,14 +66,15 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [pathname]);
 
   return (
+    
     <header className="fixed top-0 right-0 left-0 z-20 transition-colors duration-300 w-full">
       <nav className="flex justify-between items-center navStyle bg-transparent px-6 py-4">
         <div className="flex items-center space-x-3">
           <Image src="/images/logo.png" alt="Philmar Logo" width={50} height={50} />
-          <span className="font-bold text-lg titre">Philmar</span>
+          <span className="font-bold text-lg titre tracking-wider" style={{ fontFamily: '"Waiting for the Sunrise", cursive' }}>Philmar</span>
         </div>
 
         <div className="flex space-x-8 items-center">
@@ -102,6 +115,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-

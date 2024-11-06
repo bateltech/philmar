@@ -35,7 +35,7 @@ body {
 .navStyle {
     transition: background-color 300ms ease-in-out;
   }
-  
+
   .linkStyle {
     text-decoration: none;
     transition: color 300ms ease-in-out;
