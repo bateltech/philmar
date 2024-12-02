@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 export default function Accueil() {
   return (
+    
     <div className="min-h-screen flex flex-col">
       {/* Section 1: Hero */}
       <section className="relative h-screen bg-cover bg-left bg-no-repeat" style={{ backgroundImage: "url('/images/home_phil.png')" }}>

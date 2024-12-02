@@ -1,16 +1,28 @@
-import Link from 'next/link';
 import './globals.css';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 
+export const metadata = {
+    title: "Philmar - Site Officiel",
+    description: "Découvrez la discographie, les performances et la biographie de Philmar.",
+    keywords: "Philmar, musique, concerts, albums, artiste",
+    openGraph: {
+      title: "Philmar - Site Officiel",
+      description: "Découvrez les albums, la biographie et les événements de Philmar.",
+      images: "/images/artist-cover.jpg",
+      type: "website",
+    },
+    icons: {
+      icon: "/favicon.ico",
+      apple: "/images/apple-touch-icon.png",
+    },
+    themeColor: "#ffffff",
+  };
+  
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <html lang="fr">
-        <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            <link href='https://fonts.googleapis.com/css?family=Waiting for the Sunrise' rel='stylesheet'></link>
-        </head>
       <body>
       <Navbar />
         {children}
