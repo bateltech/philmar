@@ -89,22 +89,22 @@ const Navbar = () => {
           </ul>
 
           <div className="flex space-x-4 text-white icons">
-            <Link href="mailto:example@gmail.com" passHref aria-label="Gmail" className="hover:text-amber-500">
+            <Link href="mailto:philmarzic@lilo.org" passHref aria-label="Gmail" className="hover:text-amber-500" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faEnvelope} size="lg" />
             </Link>
-            <Link href="https://youtube.com" passHref aria-label="YouTube" className="hover:text-amber-500">
+            <Link href="https://www.youtube.com/@PhilmarZic" passHref aria-label="YouTube" className="hover:text-amber-500" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faYoutube} size="lg" />
             </Link>
-            <Link href="https://facebook.com" passHref aria-label="Facebook" className="hover:text-amber-500">
+            <Link href="https://www.facebook.com/philmarzic/" passHref aria-label="Facebook" className="hover:text-amber-500" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faFacebookF} size="lg" />
             </Link>
-            <Link href="https://instagram.com" passHref aria-label="Instagram" className="hover:text-amber-500">
+            <Link href="https://www.instagram.com/philmarzic/" passHref aria-label="Instagram" className="hover:text-amber-500" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faInstagram} size="lg" />
             </Link>
-            <Link href="https://soundcloud.com" passHref aria-label="SoundCloud" className="hover:text-amber-500">
+            <Link href="https://soundcloud.com/philmarzic" passHref aria-label="SoundCloud" className="hover:text-amber-500" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faSoundcloud} size="lg" />
             </Link>
-            <Link href="https://linkedin.com" passHref aria-label="LinkedIn" className="hover:text-amber-500">
+            <Link href="https://fr.linkedin.com/in/philmar" passHref aria-label="LinkedIn" className="hover:text-amber-500" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faLinkedinIn} size="lg" />
             </Link>
           </div>

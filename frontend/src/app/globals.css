@@ -53,3 +53,30 @@ body {
     background-attachment: fixed; /* Fixe l'image en arrière-plan */
   }
   
+
+  /* Custom rounded scrollbar for AlbumCard */
+.scrollbar-thin {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #999 #333; /* Firefox */
+  }
+  
+  /* Webkit scrollbar styling for Chrome, Edge, Safari */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 10px; /* Rounded track */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 5rem; /* More rounded thumb */
+    border: 2px solid #333; /* Creates a gap effect with the track */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: #bbb;
+  }
+  
