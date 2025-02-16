@@ -110,7 +110,12 @@ export default function Concerts() {
             <h2 className="text-3xl md:text-4xl font-bold">Les plus récents</h2>
 
             {/* Bouton à droite */}
-            <Link href="/spectacles" className="inline-block border border-white px-6 py-3 text-lg rounded-full hover:bg-white hover:text-black transition">
+            <Link href="/spectacles" 
+            onClick={(e) => {
+              e.preventDefault();  // Empêcher le comportement Next.js par défaut
+              window.location.href = "/spectacles"; // Forcer le reload
+            }}
+            className="inline-block border border-white px-6 py-3 text-lg rounded-full hover:bg-white hover:text-black transition">
               Checkez les spectacles de Philmar →
             </Link>
           </div>
