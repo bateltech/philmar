@@ -1,0 +1,27 @@
+[
+    {
+      "title": "Concerts Solo",
+      "description": "Philmar propose un voyage musical à travers les régions du monde avec des chants envoûtants et divers instruments.",
+      "image": "/images/concerts/concert-solo.png",
+      "link": "/concerts/solo"
+    },
+    {
+      "title": "Philmar & Flo",
+      "description": "Le voyage panoramique de deux musiciens, Philmar et Flo del Mundo, offre une expérience riche en émotions.",
+      "image": "/images/concerts/philmar-flo.jpg",
+      "link": "/concerts/philmar-flo"
+    },
+    {
+      "title": "Erebia",
+      "description": "Philmar et Laetitia Rose forment un duo qui propose des mantras sacrés indiens accompagnés de divers instruments.",
+      "image": "/images/concerts/erebia.jpg",
+      "link": "/concerts/erebia"
+    },
+    {
+      "title": "Kendalph-Philmar",
+      "description": "Performance électro avec des sonorités variées, allant de moments calmes à des ambiances vibrantes et intenses.",
+      "image": "/images/concerts/kendalph.jpg",
+      "link": "/concerts/kendalph-philmar"
+    }
+  ]
+  
