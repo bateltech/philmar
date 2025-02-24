@@ -70,7 +70,7 @@ const Navbar = () => {
 
   return (
     
-    <header className="fixed top-0 right-0 left-0 z-20 transition-colors duration-300 w-full">
+    <header className="fixed top-0 right-0 left-0 z-20 transition-colors duration-300 w-full animate-slideInFromTop">
       <nav className="flex justify-between items-center navStyle bg-transparent px-6 py-4">
         <div className="flex items-center space-x-3">
           <Image src="/images/logo.png" alt="Philmar Logo" width={50} height={50} />
