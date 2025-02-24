@@ -5,7 +5,7 @@ export default function Accueil() {
   return (
     
     <div className="min-h-screen flex flex-col">
-      {/* Section 1: Hero */}
+      {/* Section 1: Hero  */}
       <section className="relative h-screen bg-cover bg-left bg-no-repeat" style={{ backgroundImage: "url('/images/home_phil.png')" }}>
         {/*<div className="absolute inset-0 bg-black bg-opacity-30"></div>*/} {/* Overlay */}
         <div className="relative z-10 h-full flex flex-col justify-center items-end text-white px-8">
