@@ -2,6 +2,7 @@
 import useIntersectionObserver from '@/components/useIntersectionObserver';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function Accueil() {
     const [heroRef, isHeroVisible] = useIntersectionObserver();
@@ -18,14 +19,29 @@ export default function Accueil() {
     const [sectionRef3, isSectionVisible3] = useIntersectionObserver({
         threshold: 0.1, // Trigger when 10% of the section is visible
     });
+    const [bgImage, setBgImage] = useState("/images/home_phil.png");
+    useEffect(() => {
+        const updateBackground = () => {
+          if (window.innerWidth < 768) {
+            setBgImage("/images/home_phil2.png");
+          } else {
+            setBgImage("/images/home_phil.png");
+          }
+        };
+    
+        updateBackground(); // Set initial background
+        window.addEventListener("resize", updateBackground);
+    
+        return () => window.removeEventListener("resize", updateBackground);
+      }, []);
     return (
         <div className="min-h-screen flex flex-col">
             {/* Section 1: Hero */}
             <section
-                ref={heroRef}
-                className="relative h-screen bg-cover bg-left bg-no-repeat"
-                style={{ backgroundImage: "url('/images/home_phil.png')" }}
-            >
+      ref={heroRef}
+      className="relative h-screen bg-cover bg-left bg-no-repeat"
+      style={{ backgroundImage: `url('${bgImage}')` }}
+    >
                 <div
 
                     className={`relative z-10 h-full flex flex-col justify-center items-end text-white px-8  ${isHeroVisible ? "animate-slideInFromRight" : "opacity-0"
