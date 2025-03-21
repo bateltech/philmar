@@ -66,7 +66,9 @@ export default function Discographie() {
           </div>
 
           {/* Albums Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 justify-items-center mt-8 mx-4 md:mx-8 lg:mx-16">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 
+            gap-4 md:gap-6 lg:gap-8 justify-items-center mt-8 
+            mx-4 md:mx-8 lg:mx-16">
             {selectedGenre === 'all' || selectedGenre === 'album' ? (
               <AlbumCard title="Steppe by Steppe" imageSrc="/images/discographie/steppe_by_steppe.png" genre="album" forSale={true}
                 description="Un album ethno ou world par son appel au voyage et les instruments du monde, mais avec des sons bien rock, des inspirations classiques, des synthés aériens ou electro, des rythmes hip-hop, des harmonies jazz-funk, des chants gutturaux ou planants" />

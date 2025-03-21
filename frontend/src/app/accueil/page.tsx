@@ -119,11 +119,13 @@ export default function Accueil() {
                                 }`}
                         >
                             {/* Image Container */}
-                            <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
+                            <div className="flex-shrink-0 flex items-center justify-center 
+                              w-14 h-14 sm:w-10 sm:h-10 md:w-20 md:h-20 lg:w-24 lg:h-24 
+                             bg-orange-950 rounded-full border-4 border-orange-950">
                                 <img
                                     src="images/spectacles.svg"
                                     alt="Spectacles Icon"
-                                    className="w-8 h-8 md:w-12 md:h-12" // Responsive icon size
+                                    className="w-6 h-6 md:w-10 md:h-10"
                                 />
                             </div>
 
@@ -148,11 +150,13 @@ export default function Accueil() {
                                 }`}
                         >
                             {/* Image Container */}
-                            <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
+                            <div className="flex-shrink-0 flex items-center justify-center 
+                              w-14 h-14 sm:w-10 sm:h-10 md:w-20 md:h-20 lg:w-24 lg:h-24 
+                              bg-orange-950 rounded-full border-4 border-orange-950">
                                 <img
                                     src="images/concerts.svg"
                                     alt="Concerts Icon"
-                                    className="w-8 h-8 md:w-12 md:h-12" // Responsive icon size
+                                    className="w-6 h-6 md:w-10 md:h-10" // Responsive icon size
                                 />
                             </div>
 
@@ -176,87 +180,91 @@ export default function Accueil() {
 
             {/* Section 4: Formations */}
             <section
-    ref={sectionRef2} // Attach the ref to the section
-    className="relative py-12 md:py-16 bg-cover bg-center bg-contain h-auto md:h-[50rem] w-full text-white flex items-center"
-    style={{ backgroundImage: "url('/images/formations-bg.jpg')" }}
->
-    {/* Overlay */}
-    <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-[2px]"></div>
-
-    {/* Content Container */}
-    <div className="relative z-10 container mx-auto text-center px-4">
-        {/* Title with Slide-In from Top Animation */}
-        <h2
-            className={`text-4xl font-bold mb-8 md:mb-12 ${isSectionVisible2 ? "animate-slideInFromTop" : "opacity-0"
-                }`}
-        >
-            Formations
-        </h2>
-
-        {/* Cards Container */}
-        <div className="flex flex-col md:flex-row justify-center gap-6 md:gap-14 lg:gap-16 p-10 md:p-4 lg:p-16">
-            {/* Voix Card with Slide-In from Bottom Animation */}
-            <div
-                className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-12 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible2 ? "animate-slideInFromBottom" : "opacity-0"
-                    }`}
+                ref={sectionRef2} // Attach the ref to the section
+                className="relative py-12 md:py-16 bg-cover bg-center bg-contain h-auto md:h-[50rem] w-full text-white flex items-center"
+                style={{ backgroundImage: "url('/images/formations-bg.jpg')" }}
             >
-                {/* Image Container */}
-                <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
-                    <img
-                        src="images/voix.svg"
-                        alt="Voix Icon"
-                        className="w-8 h-8 md:w-12 md:h-12" // Responsive icon size
-                    />
-                </div>
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-[2px]"></div>
 
-                {/* Text Content */}
-                <div className="flex flex-col text-left">
-                    <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Voix</h3>
-                    <p className="text-sm md:text-base text-justify">
-                        La voix et le chant sont peu abordés techniquement, mais par des jeux musicaux, en partant du principe
-                        que chanter est totalement naturel, que nous avons plus à lâcher nos barrières (tensions physiques,
-                        émotions cristallisées), qu'à développer des moyens (techniques) que nous avons déjà dès la naissance.
-                    </p>
-                    <Link href="/voix">
-                        <button className="mt-2 md:mt-4 text-blue-700 font-semibold text-sm md:text-base py-1 md:py-2 rounded">
-                            En savoir plus →
-                        </button>
-                    </Link>
-                </div>
-            </div>
+                {/* Content Container */}
+                <div className="relative z-10 container mx-auto text-center px-4">
+                    {/* Title with Slide-In from Top Animation */}
+                    <h2
+                        className={`text-4xl font-bold mb-8 md:mb-12 ${isSectionVisible2 ? "animate-slideInFromTop" : "opacity-0"
+                            }`}
+                    >
+                        Formations
+                    </h2>
 
-            {/* Instruments du monde Card with Slide-In from Bottom Animation */}
-            <div
-                className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-12 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible2 ? "animate-slideInFromBottom" : "opacity-0"
-                    }`}
-            >
-                {/* Image Container */}
-                <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
-                    <img
-                        src="images/instruments.svg"
-                        alt="Instruments Icon"
-                        className="w-8 h-8 md:w-12 md:h-12" // Responsive icon size
-                    />
-                </div>
+                    {/* Cards Container */}
+                    <div className="flex flex-col md:flex-row justify-center gap-6 md:gap-14 lg:gap-16 p-10 md:p-4 lg:p-16">
+                        {/* Voix Card with Slide-In from Bottom Animation */}
+                        <div
+                            className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-12 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible2 ? "animate-slideInFromBottom" : "opacity-0"
+                                }`}
+                        >
+                            {/* Image Container */}
+                            <div className="flex-shrink-0 flex items-center justify-center 
+                              w-14 h-14 sm:w-10 sm:h-10 md:w-20 md:h-20 lg:w-24 lg:h-24 
+                             bg-orange-950 rounded-full border-4 border-orange-950">
+                                <img
+                                    src="images/voix.svg"
+                                    alt="Voix Icon"
+                                    className="w-6 h-6 md:w-10 md:h-10"  // Responsive icon size
+                                />
+                            </div>
 
-                {/* Text Content */}
-                <div className="flex flex-col text-left">
-                    <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Instruments du monde</h3>
-                    <p className="text-sm md:text-base text-justify">
-                        Ce sont des ateliers qui présentent de manière interactive toutes les sortes d'instruments utilisés dans
-                        les traditions culturelles. S'adressant à différentes collectivités locales, il se décline en plusieurs
-                        approches suivant le public concerné.
-                    </p>
-                    <Link href="/instruments">
-                        <button className="mt-2 md:mt-4 text-blue-700 font-semibold text-sm md:text-base py-1 md:py-2 rounded">
-                            En savoir plus →
-                        </button>
-                    </Link>
+                            {/* Text Content */}
+                            <div className="flex flex-col text-left">
+                                <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Voix</h3>
+                                <p className="text-sm md:text-base text-justify">
+                                    La voix et le chant sont peu abordés techniquement, mais par des jeux musicaux, en partant du principe
+                                    que chanter est totalement naturel, que nous avons plus à lâcher nos barrières (tensions physiques,
+                                    émotions cristallisées), qu'à développer des moyens (techniques) que nous avons déjà dès la naissance.
+                                </p>
+                                <Link href="/voix">
+                                    <button className="mt-2 md:mt-4 text-blue-700 font-semibold text-sm md:text-base py-1 md:py-2 rounded">
+                                        En savoir plus →
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+
+                        {/* Instruments du monde Card with Slide-In from Bottom Animation */}
+                        <div
+                            className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-12 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible2 ? "animate-slideInFromBottom" : "opacity-0"
+                                }`}
+                        >
+                            {/* Image Container */}
+                            <div className="flex-shrink-0 flex items-center justify-center 
+                              w-14 h-14 sm:w-10 sm:h-10 md:w-20 md:h-20 lg:w-24 lg:h-24 
+                             bg-orange-950 rounded-full border-4 border-orange-950">
+                                <img
+                                    src="images/instruments.svg"
+                                    alt="Instruments Icon"
+                                    className="w-6 h-6 md:w-10 md:h-10"   // Responsive icon size
+                                />
+                            </div>
+
+                            {/* Text Content */}
+                            <div className="flex flex-col text-left">
+                                <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Instruments du monde</h3>
+                                <p className="text-sm md:text-base text-justify">
+                                    Ce sont des ateliers qui présentent de manière interactive toutes les sortes d'instruments utilisés dans
+                                    les traditions culturelles. S'adressant à différentes collectivités locales, il se décline en plusieurs
+                                    approches suivant le public concerné.
+                                </p>
+                                <Link href="/instruments">
+                                    <button className="mt-2 md:mt-4 text-blue-700 font-semibold text-sm md:text-base py-1 md:py-2 rounded">
+                                        En savoir plus →
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
+            </section>
 
             {/* Section 5: Autres Passions */}
             <section
