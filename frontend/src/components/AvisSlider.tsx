@@ -88,7 +88,7 @@ export default function AvisSlider() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
             aria-label="Avis précédent"
-            className="absolute -left-20 top-1/2 -translate-y-1/2 select-none text-white/80 hover:text-white p-1"
+            className="absolute -left-2 0 top-1/2 -translate-y-1/2 select-none text-white/80 hover:text-white p-1"
           >
             <ChevronLeft className="w-7 h-7" />
           </button>
