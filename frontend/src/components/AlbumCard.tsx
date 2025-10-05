@@ -17,6 +17,7 @@ const AlbumCard = ({ title, description, imageSrc, genre, forSale }: AlbumCardPr
 
   return (
     <div
+<<<<<<< Updated upstream
       className="relative w-[250px] md:w-[300px] h-[250px] md:h-[300px] overflow-hidden shadow-lg transition-transform transform hover:scale-110"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -27,13 +28,41 @@ const AlbumCard = ({ title, description, imageSrc, genre, forSale }: AlbumCardPr
         layout="fill"
         objectFit="cover"
       />
+=======
+      className="group relative w-full h-full aspect-square overflow-hidden shadow-lg transition-transform transform hover:scale-105"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Image */}
+      <div className="w-full h-full relative">
+        <Image src={imageSrc} alt={title} layout="fill" objectFit="cover" />
+      </div>
+>>>>>>> Stashed changes
 
       {/* Hover Overlay with Scrollable Content */}
       {hovered && (
+<<<<<<< Updated upstream
         <div className="absolute inset-0 bg-black bg-opacity-80 flex flex-col justify-between p-4 text-left text-white h-full overflow-y-auto scrollbar-thin">
           <div>
             <h3 className="text-lg font-bold mb-2">{title}</h3>
             <p className="text-[0.875em] text-justify">{description}</p>
+=======
+        <div className="absolute inset-0 bg-black bg-opacity-80 flex flex-col justify-between p-4 text-left text-white h-full overflow-hidden">
+          <div className="overflow-hidden">
+            {/* SCROLLING TITLE */}
+            <div className="overflow-hidden w-full">
+              <div className="inline-block min-w-full group-hover:animate-marquee">
+                <h3 className="text-lg font-bold mb-2 whitespace-nowrap w-max">
+                  {title}
+                </h3>
+              </div>
+            </div>
+
+            {/* Description scrollable */}
+            <p className="text-[0.875em] max-h-[10em] overflow-y-auto pr-1 scrollbar-transparent">
+              {description}
+            </p>
+>>>>>>> Stashed changes
           </div>
           <div className="flex w-full space-x-4 justify-end mt-2">
             <button

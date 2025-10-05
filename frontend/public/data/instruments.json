@@ -1,0 +1,54 @@
+[
+  {
+    "nom": "Bansuri",
+    "image": "/images/instruments/Bansuri.png"
+  },
+  {
+    "nom": "Bongos",
+    "image": "/images/instruments/Bongos.png"
+  },
+  {
+    "nom": "Djembé",
+    "image": "/images/instruments/Djembé.png"
+  },
+  {
+    "nom": "Esraj",
+    "image": "/images/instruments/Esraj.png"
+  },
+  {
+    "nom": "Futujara",
+    "image": "/images/instruments/Futujara.png"
+  },
+  {
+    "nom": "Guimbardes Altaï et Tatar",
+    "image": "/images/instruments/Guimbardes Altaï et Tatar.png"
+  },
+  {
+    "nom": "Guitare Classique",
+    "image": "/images/instruments/Guitare Classique.png"
+  },
+  {
+    "nom": "Harmonium Indien",
+    "image": "/images/instruments/Harmonium Indien.png"
+  },
+  {
+    "nom": "Mandoline",
+    "image": "/images/instruments/Mandoline.png"
+  },
+  {
+    "nom": "Saz",
+    "image": "/images/instruments/Saz.png"
+  },
+  {
+    "nom": "Tambour Océan",
+    "image": "/images/instruments/Tambour Océan.png"
+  },
+  {
+    "nom": "Tar",
+    "image": "/images/instruments/Tar.png"
+  },
+  {
+    "nom": "Udu",
+    "image": "/images/instruments/Udu.png"
+  }
+]

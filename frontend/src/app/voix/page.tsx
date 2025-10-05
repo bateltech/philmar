@@ -1,10 +1,16 @@
+'use client';
+import AvisSliderVoix from '@/components/AvisSliderVoix';
 export default function Voix() {
     return (
-      <div>
-        <h1>Voix</h1>
-        <p>Bienvenue sur la page Voix.</p>
-        {/* Ajoute ici le contenu de la voix */}
-      </div>
+          <main className="bg-black text-white">
+            
+    
+      
+            <section className="pt-20 px-4 md:px-20 pb-28">
+              <h3 className="text-xl font-semibold text-center mb-8">Avis des participants</h3>
+              <AvisSliderVoix />
+            </section>
+          </main>
     );
   }
   
