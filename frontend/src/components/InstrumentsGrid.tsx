@@ -54,16 +54,16 @@ const InstrumentsGrid = () => {
 
   return (
     <div className="text-white">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-10 m-auto max-w-4xl">
         {instrumentsToShow.map((instrument, index) => (
           <div key={index} className="flex flex-col items-center">
             <img
               src={instrument.image}
               alt={instrument.nom}
-              className="w-full aspect-square object-cover rounded shadow-md"
+              className="w-full aspect-square object-cover rounded-md shadow-md"
               loading="lazy"
             />
-            <p className="mt-2 text-center italic text-sm">{instrument.nom}</p>
+            <p className="mt-2 text-center italic text-md">{instrument.nom}</p>
           </div>
         ))}
       </div>
