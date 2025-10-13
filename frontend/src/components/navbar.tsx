@@ -109,15 +109,9 @@ const Navbar = () => {
   }, [mobileOpen]);
 
   return (
-<<<<<<< Updated upstream
-    
-    <header className="fixed top-0 right-0 left-0 z-20 transition-colors duration-300 w-full">
-      <nav className="flex justify-between items-center navStyle bg-transparent px-6 py-4">
-=======
     <header className="fixed top-0 right-0 left-0 z-50 transition-colors w-full">
       <nav className="flex items-center justify-between navStyle bg-transparent px-4 md:px-6 py-3 md:py-4">
         {/* NE PAS TOUCHER ▼▼▼ (conformément à ta demande) */}
->>>>>>> Stashed changes
         <div className="flex items-center space-x-3">
           <Image src="/images/logo.png" alt="Philmar Logo" width={50} height={50} />
           <span className="font-bold text-lg titre tracking-wider" style={{ fontFamily: '"Waiting for the Sunrise", cursive' }}>Philmar</span>
