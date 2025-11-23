@@ -7,11 +7,13 @@ import AvisSlider from '@/components/AvisSlider';
 export default function Instruments() {
   return (
     <main className="bg-black text-white">
-      <section className="pt-12 px-4 md:px-20">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 uppercase">
+      <section className="pt-12 px-4 md:px-20 mt-4">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 mt-16 uppercase">
           Ateliers découverte des instruments du monde
         </h2>
-        <p className="text-center max-w-3xl mx-auto text-sm md:text-base mb-10">
+        {/* <p className="text-center max-w-3xl mx-auto text-sm md:text-base mb-10"> */}
+        <p className="text-center mt-8 mb-24 text-lg leading-relaxed px-4 md:px-0">
+          
           Animés par Philmar, ces ateliers interactifs mettent en valeur une grande diversité d'instruments du monde à travers une approche artistique vivante mêlant expressivité, jeu vocal et maîtrise multi instrumentale.
         </p>
         <AtelierCarousel />

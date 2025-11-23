@@ -176,8 +176,8 @@ const Navbar = () => {
               <div className={`absolute left-1/2 -translate-x-1/2 top-full ${openForm ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto' : 'opacity-0 scale-95 -translate-y-1 pointer-events-none'} transition-all duration-150 ease-out`}>
                 <div className="pt-2">
                   <ul className="min-w-[200px] rounded-xl shadow-xl shadow-black/30 ring-1 ring-white/10 border border-white/10 bg-black/70 text-white backdrop-blur-md py-2">
-                    <li><Link href="/instruments" className="block px-4 py-2 hover:bg-white/10 rounded-md">Instruments</Link></li>
-                    <li><Link href="/voix" className="block px-4 py-2 hover:bg-white/10 rounded-md">Voix</Link></li>
+                    <li><Link href="/instruments" className="block px-4 py-2 hover:bg-white/10 rounded-md">Instruments du monde</Link></li>
+                    <li><Link href="/voix" className="block px-4 py-2 hover:bg-white/10 rounded-md">Voie du chant</Link></li>
                   </ul>
                 </div>
               </div>

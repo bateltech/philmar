@@ -1,5 +1,6 @@
 "use client"; // Mark this page as a Client Component
 import { useState } from 'react';
+import useIntersectionObserver from '@/components/useIntersectionObserver';
 import Image from 'next/image';
 import Link from 'next/link';
 import SoundCloudPlayer from '@/components/SoundCloudPlayer';
@@ -9,8 +10,21 @@ export default function Accueil() {
     const [isPlayerOpen, setIsPlayerOpen] = useState(false);
     const { config } = usePlayerConfig();
     const playlistUrl = config?.soundcloud?.playlistUrl ?? 'https://soundcloud.com/philmarzic/sets/steppe-by-steppe';
-
-
+    
+    const [heroRef, isHeroVisible] = useIntersectionObserver();
+    const [textRef, isTextVisible] = useIntersectionObserver({ threshold: 0.1 });
+    const [imageRef, isImageVisible] = useIntersectionObserver({ threshold: 0.1 });
+    // Use the intersection observer hook
+    const [sectionRef, isSectionVisible] = useIntersectionObserver({
+        threshold: 0.1, // Trigger when 10% of the section is visible
+    });
+    // Use the intersection observer hook
+    const [sectionRef2, isSectionVisible2] = useIntersectionObserver({
+        threshold: 0.1, // Trigger when 10% of the section is visible
+    });
+    const [sectionRef3, isSectionVisible3] = useIntersectionObserver({
+        threshold: 0.1, // Trigger when 10% of the section is visible
+    });
     return (
         <div className="min-h-screen flex flex-col">
 
@@ -18,13 +32,15 @@ export default function Accueil() {
             {/* <SoundCloudPlayer isOpen={isPlayerOpen} onClose={() => setIsPlayerOpen(false)} /> */}
             <SoundCloudPlayer isOpen={isPlayerOpen} onClose={() => setIsPlayerOpen(false)} url={playlistUrl} />
             {/* Section 1: Hero */}
-            <section 
+            <section
+                ref={heroRef}
                 className="relative h-screen bg-cover bg-left bg-no-repeat"
                 style={{ backgroundImage: "url('/images/home_phil.png')" }}
             >
                 <div
 
-                    className={`relative z-10 h-full flex flex-col justify-center items-end text-white px-8 }`}
+                    className={`relative z-10 h-full flex flex-col justify-center items-end text-white px-8  ${isHeroVisible ? "animate-slideInFromRight" : "opacity-0"
+                        }`}
                 >
                     <div className="flex flex-col items-start mr-10">
                         <h1 className="text-3xl font-semibold mb-4 text-white">
@@ -49,13 +65,12 @@ export default function Accueil() {
                     </div>
                 </div>
             </section>
-            
             {/* Section 2: Biographie */}
             <section className="py-24 my-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/biographie.png')" }}>
                 <div className="container mx-auto h-full flex flex-col md:flex-row items-center justify-center">
                     {/* Text Section */}
-                    <div 
-                        className={`md:w-3/5 p-16 `}>
+                    <div ref={textRef}
+                        className={`md:w-3/5 p-16 ${isTextVisible ? "animate-slideInFromLeft" : ""}`}>
                         <h2 className="text-4xl font-bold mb-8 text-white">Biographie</h2>
                         <p className="text-lg text-white text-justify mb-4">
                             Musicien depuis plus de 30 ans, j'ai eu la chance de jouer dans de nombreux groupes, explorant des genres variés comme le rock, la variété, le jazz, l'ethnique, l'électro et le folk.
@@ -76,148 +91,192 @@ export default function Accueil() {
                         </Link>
                     </div>
 
-                {/* Image Section with Decorative Squares */}
-                <div className="md:w-2/5 p-16 relative justify-center">
-                {/* Portrait Image as an element inside the div */}
-                    <div className="relative w-[360px] h-[640px] bg-cover bg-center shadow-lg z-10" style={{ backgroundImage: "url('/images/biographie_image.jpg')" }}>
+                    {/* Image Section with Decorative Squares */}
+                    <div ref={imageRef}
+                        className={`md:w-2/5 p-16 relative justify-center ${isImageVisible ? "animate-slideInFromRight" : ""}`}>
+                        {/* Portrait Image as an element inside the div */}
+                        <div className="relative w-[360px] h-[640px] bg-cover bg-center shadow-lg z-10" style={{ backgroundImage: "url('/images/biographie_image.jpg')" }}>
 
-                        {/* Actual img element for better control and accessibility */}
-                        <img src="/images/biographie_image.jpg" alt="Biographie" className="w-full h-full object-cover" />
-                        {/* Decorative Squares under the image */}
-                    {/* <div className="absolute top-[-8px] left-[-8px] w-16 h-16 border-t-2 border-l-2 border-black z-0"></div>
+                            {/* Actual img element for better control and accessibility */}
+                            <img src="/images/biographie_image.jpg" alt="Biographie" className="w-full h-full object-cover" />
+                            {/* Decorative Squares under the image */}
+                            {/* <div className="absolute top-[-8px] left-[-8px] w-16 h-16 border-t-2 border-l-2 border-black z-0"></div>
                     <div className="absolute bottom-[-8px] right-[-8px] w-16 h-16 border-b-2 border-r-2 border-black z-0"></div> */}
+
+                        </div>
 
                     </div>
 
                 </div>
-
-            </div>
             </section>
-            
 
 
-      {/* Section 3: Performances */}
-        <section className="relative py-16 bg-cover bg-center bg-contain h-[50rem] w-full text-white flex items-center" style={{ backgroundImage: "url('/images/performances-bg.jpg')" }}>
-            
-            <div className="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-[2px]"></div> {/* Overlay */}
-            
-            <div className="relative z-10 container mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-12">Performances</h2>
-            <div className="flex flex-col md:flex-row justify-center mx-[4rem]">
+            {/* Section 3: Performances */}
 
-                {/* Spectacles Card */}
-                <div className="md:w-1/2 bg-white text-black bg-opacity-55 p-6 m-12 shadow-lg flex space-x-4">
-                
+            <section
+                ref={sectionRef} // Attach the ref to the section
+                className="relative py-12 md:py-16 bg-cover bg-center bg-contain h-auto md:h-[50rem] w-full text-white flex items-center"
+                style={{ backgroundImage: "url('/images/performances-bg.jpg')" }}
+            >
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-[2px]"></div>
+
+                {/* Content Container */}
+                <div className="relative z-10 container mx-auto text-center px-4">
+                    {/* Title with Slide-In from Top Animation */}
+                    <h2
+                        className={`text-3xl md:text-4xl font-bold mb-6 md:mb-12 ${isSectionVisible ? "animate-slideInFromTop" : "opacity-0"
+                            }`}
+                    >
+                        Performances
+                    </h2>
+
+                    {/* Cards Container */}
+                    <div className="flex flex-col md:flex-row justify-center gap-6 md:gap-14 lg:gap-16 p-10 md:p-4 lg:p-16">
+                        {/* Spectacles Card with Slide-In from Bottom Animation */}
+                        <div
+                            className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-12 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible ? "animate-slideInFromBottom" : "opacity-0"
+                                }`}
+                        >
+                            {/* Image Container */}
+                            <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
+                                <img
+                                    src="images/spectacles.svg"
+                                    alt="Spectacles Icon"
+                                    className="w-8 h-8 md:w-12 md:h-12" // Responsive icon size
+                                />
+                            </div>
+
+                            {/* Text Content */}
+                            <div className="flex flex-col text-left">
+                                <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Spectacles</h3>
+                                <p className="text-sm md:text-base text-justify">
+                                    Dans mes spectacles, j'aime fusionner différentes formes d'art pour créer une expérience unique.
+                                    Que ce soit à travers le théâtre, la danse ou des contes musicaux, chaque représentation est une aventure immersive...
+                                </p>
+                                <Link href="/spectacles">
+                                    <button className="mt-2 md:mt-4 text-blue-700 font-semibold text-sm md:text-base py-1 md:py-2 rounded">
+                                        En savoir plus →
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+
+                        {/* Concerts Card with Slide-In from Bottom Animation */}
+                        <div
+                            className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-12 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible ? "animate-slideInFromBottom" : "opacity-0"
+                                }`}
+                        >
+                            {/* Image Container */}
+                            <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
+                                <img
+                                    src="images/concerts.svg"
+                                    alt="Concerts Icon"
+                                    className="w-8 h-8 md:w-12 md:h-12" // Responsive icon size
+                                />
+                            </div>
+
+                            {/* Text Content */}
+                            <div className="flex flex-col text-left">
+                                <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Concerts</h3>
+                                <p className="text-sm md:text-base text-justify">
+                                    En concert, j'explore la profondeur de la musique, que ce soit en solo ou avec d'autres artistes.
+                                    Chaque performance est une occasion de partager des moments intimes et authentiques avec le public...
+                                </p>
+                                <Link href="/spectacles">
+                                    <button className="mt-2 md:mt-4 text-blue-700 font-semibold text-sm md:text-base py-1 md:py-2 rounded">
+                                        En savoir plus →
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Section 4: Formations */}
+            <section
+    ref={sectionRef2} // Attach the ref to the section
+    className="relative py-12 md:py-16 bg-cover bg-center bg-contain h-auto md:h-[50rem] w-full text-white flex items-center"
+    style={{ backgroundImage: "url('/images/formations-bg.jpg')" }}
+>
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-[2px]"></div>
+
+    {/* Content Container */}
+    <div className="relative z-10 container mx-auto text-center px-4">
+        {/* Title with Slide-In from Top Animation */}
+        <h2
+            className={`text-4xl font-bold mb-8 md:mb-12 ${isSectionVisible2 ? "animate-slideInFromTop" : "opacity-0"
+                }`}
+        >
+            Formations
+        </h2>
+
+        {/* Cards Container */}
+        <div className="flex flex-col md:flex-row justify-center gap-6 md:gap-14 lg:gap-16 p-10 md:p-4 lg:p-16">
+            {/* Voix Card with Slide-In from Bottom Animation */}
+            <div
+                className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-12 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible2 ? "animate-slideInFromBottom" : "opacity-0"
+                    }`}
+            >
                 {/* Image Container */}
-                <div className="flex-shrink-0 flex items-center justify-center w-24 h-24 mt-4 bg-orange-950 rounded-full border-4 border-orange-950">
-                    <img src="images/spectacles.svg" alt=""/>
+                <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
+                    <img
+                        src="images/voix.svg"
+                        alt="Voix Icon"
+                        className="w-8 h-8 md:w-12 md:h-12" // Responsive icon size
+                    />
                 </div>
 
                 {/* Text Content */}
-                <div className="flex flex-col text-left p-6">
-                    <h3 className="text-2xl font-bold mb-4">Spectacles</h3>
-                    <p className="mt-2 text-justify">
-                    Dans mes spectacles, j'aime fusionner différentes formes d'art pour créer une expérience unique.
-                     Que ce soit à travers le théâtre, la danse ou des contes musicaux, chaque représentation est une aventure immersive...
+                <div className="flex flex-col text-left">
+                    <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Voix</h3>
+                    <p className="text-sm md:text-base text-justify">
+                        La voix et le chant sont peu abordés techniquement, mais par des jeux musicaux, en partant du principe
+                        que chanter est totalement naturel, que nous avons plus à lâcher nos barrières (tensions physiques,
+                        émotions cristallisées), qu'à développer des moyens (techniques) que nous avons déjà dès la naissance.
                     </p>
-    
-                    <Link href="/spectacles">
-                    <button className="mt-4 text-blue-700 font-semibold py-2 rounded">
-                        En savoir plus →
-                    </button>
+                    <Link href="/voix">
+                        <button className="mt-2 md:mt-4 text-blue-700 font-semibold text-sm md:text-base py-1 md:py-2 rounded">
+                            En savoir plus →
+                        </button>
                     </Link>
                 </div>
-                </div>
+            </div>
 
-
-                {/* Concerts Card */}
-                <div className="md:w-1/2 bg-white text-black bg-opacity-55 p-6 m-12 shadow-lg flex space-x-4">
-                
+            {/* Instruments du monde Card with Slide-In from Bottom Animation */}
+            <div
+                className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-12 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible2 ? "animate-slideInFromBottom" : "opacity-0"
+                    }`}
+            >
                 {/* Image Container */}
-                <div className="flex-shrink-0 flex items-center justify-center w-24 h-24 mt-4 bg-orange-950 rounded-full border-4 border-orange-950">
-                    <img src="images/concerts.svg" alt=""/>
+                <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
+                    <img
+                        src="images/instruments.svg"
+                        alt="Instruments Icon"
+                        className="w-8 h-8 md:w-12 md:h-12" // Responsive icon size
+                    />
                 </div>
 
                 {/* Text Content */}
-                <div className="flex flex-col text-left p-6">
-                    <h3 className="text-2xl font-bold mb-4">Concerts</h3>
-                    <p className="mt-2 text-justify">
-                    En concert, j'explore la profondeur de la musique, que ce soit en solo ou avec d'autres artistes.
-                     Chaque performance est une occasion de partager des moments intimes et authentiques avec le public...
+                <div className="flex flex-col text-left">
+                    <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Instruments du monde</h3>
+                    <p className="text-sm md:text-base text-justify">
+                        Ce sont des ateliers qui présentent de manière interactive toutes les sortes d'instruments utilisés dans
+                        les traditions culturelles. S'adressant à différentes collectivités locales, il se décline en plusieurs
+                        approches suivant le public concerné.
                     </p>
-    
-                    <Link href="/spectacles">
-                    <button className="mt-4 text-blue-700 font-semibold py-2 rounded">
-                        En savoir plus →
-                    </button>
+                    <Link href="/instruments">
+                        <button className="mt-2 md:mt-4 text-blue-700 font-semibold text-sm md:text-base py-1 md:py-2 rounded">
+                            En savoir plus →
+                        </button>
                     </Link>
                 </div>
-                </div>
-
-
-            </div>
-            </div>
-        </section>
-
-      {/* Section 4: Formations */}
-        <section className="relative py-16 bg-cover bg-center bg-contain h-[50rem] w-full text-white flex items-center" style={{ backgroundImage: "url('/images/formations-bg.jpg')" }}>
-        <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-[2px]"></div> {/* Overlay */}
-
-        <div className="relative z-10 container mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-12">Formations</h2>
-            <div className="flex flex-col md:flex-row justify-center mx-[4rem]">
-
-            {/* Voix Card */}
-            <div className="md:w-1/2 bg-white text-black bg-opacity-55 p-6 m-12 shadow-lg flex space-x-4">
-
-                {/* Image Container */}
-                <div className="flex-shrink-0 flex items-center justify-center w-24 h-24 mt-4 bg-orange-950 rounded-full border-4 border-orange-950">
-                <img src="images/voix.svg" alt=""/>
-                </div>
-
-                {/* Text Content */}
-                <div className="flex flex-col text-left p-6">
-                <h3 className="text-2xl font-bold mb-4">Voix</h3>
-                <p className="mt-2 text-justify">
-                La voix et le chant sont peu abordés techniquement, mais par des jeux musicaux, en partant du principe que chanter est totalement naturel,
-                 que nous avons plus à lâcher nos barrières (tensions physiques, émotions cristallisées), qu'à développer des moyens (techniques) que nous avons déjà dès la naissance.
-                </p>
-
-                <Link href="/voix">
-                    <button className="mt-4 text-blue-700 font-semibold py-2 rounded">
-                    En savoir plus →
-                    </button>
-                </Link>
-                </div>
-            </div>
-
-            {/* Instruments du monde Card */}
-            <div className="md:w-1/2 bg-white text-black bg-opacity-55 p-6 m-12 shadow-lg flex space-x-4">
-
-                {/* Image Container */}
-                <div className="flex-shrink-0 flex items-center justify-center w-24 h-24 mt-4 bg-orange-950 rounded-full border-4 border-orange-950">
-                <img src="images/instruments.svg" alt=""/>
-                </div>
-
-                {/* Text Content */}
-                <div className="flex flex-col text-left p-6">
-                <h3 className="text-2xl font-bold mb-4">Instruments du monde</h3>
-                <p className="mt-2 text-justify">
-                Ce sont des ateliers qui présentent de manière interactive toutes les sortes d'instruments utilisés dans les traditions culturelles.
-                 S'adressant à différentes collectivités locales, il se décline en plusieurs approches suivant le public concerné
-                </p>
-
-                <Link href="/instruments">
-                    <button className="mt-4 text-blue-700 font-semibold py-2 rounded">
-                    En savoir plus →
-                    </button>
-                </Link>
-                </div>
-            </div>
-
             </div>
         </div>
-        </section>
+    </div>
+</section>
 
 
     {/* Section 5: Autres Passions */}
@@ -280,7 +339,6 @@ export default function Accueil() {
         </div>
     </div>
     </section>
-
-    </div>
+        </div>
     );
 }
