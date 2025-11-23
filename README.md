@@ -4,15 +4,15 @@ Artist website developed with Next.js
 ## To Do
 
 ### Page Instruments
-- [ ] Component Ateliers
-- [ ] Component Instruments
-- [ ] Component Avis
+- [x] Component Ateliers
+- [x] Component Instruments
+- [x] Component Avis
 
 ### Page Voix
-- [ ] Introduction (Méthode / Objectifs / Moyens)
-- [ ] Component Stages / Ateliers / Cours
-- [ ] Filtres pour le component
-- [ ] Component Avis
+- [x] Introduction (Méthode / Objectifs / Moyens)
+- [x] Component Stages / Ateliers / Cours
+- [x] Filtres pour le component
+- [x] Component Avis
 
 ### Page Discographie
 - [ ] Ajouter les liens d'achats
@@ -27,7 +27,7 @@ Artist website developed with Next.js
 - [ ] Carousel de spectacles
 
 ### Page Accueil
-- [ ] Lecteur SoundCloud customisé
+- [x] Lecteur SoundCloud customisé
 - [ ] Drag & Drop le lecteur
 
 ### Footer
