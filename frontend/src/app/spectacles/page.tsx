@@ -68,10 +68,10 @@ export default function Spectacles() {
         {/* Contenu de la Hero Section */}
         <div className="relative z-10 max-w-4xl text-white">
           {/* Titre principal */}
-          <h1 className="text-4xl md:text-6xl font-bold">Spectacles</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mt-18 mb-8">Spectacles</h1> 
 
           {/* Texte de description */}
-          <p className="mt-6 text-lg leading-relaxed px-4 md:px-0">
+          <p className="mt-8 mb-24 text-lg leading-relaxed px-4 md:px-0">
           Dans ses spectacles, Philmar offre une expérience unique où la musique qu'il compose s'entrelace avec l'art du mouvement et du conte. Il collabore avec des danseurs talentueux qui interprètent des chorégraphies envoûtantes, ainsi qu'avec des conteurs qui partagent des histoires captivantes, créant ainsi un univers artistique où la musique et les arts se rencontrent et se complètent.
           </p>
 
