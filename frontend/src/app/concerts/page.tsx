@@ -68,7 +68,7 @@ export default function Concerts() {
         {/* Contenu de la Hero Section */}
         <div className="relative z-10 max-w-6xl text-white">
           {/* Titre principal */}
-          <h1 className="text-4xl md:text-6xl font-bold mt-18 mb-24">Concerts</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mt-18 mb-8">Concerts</h1>
 
           {/* Texte de description */}
           <p className="mt-8 mb-24 text-lg leading-relaxed px-4 md:px-0">
