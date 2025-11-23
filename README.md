@@ -35,6 +35,7 @@ Artist website developed with Next.js
 
 ### Animation
 
+
 ### Responsivity
 
 ### SEO
