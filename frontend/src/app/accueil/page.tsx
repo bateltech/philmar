@@ -34,16 +34,16 @@ export default function Accueil() {
             {/* Section 1: Hero */}
             <section
                 ref={heroRef}
-                className="relative h-screen bg-cover bg-left bg-no-repeat"
+                className="relative min-h-screen bg-cover bg-left bg-no-repeat"
                 style={{ backgroundImage: "url('/images/home_phil.png')" }}
             >
                 <div
 
-                    className={`relative z-10 h-full flex flex-col justify-center items-end text-white px-8  ${isHeroVisible ? "animate-slideInFromRight" : "opacity-0"
+                    className={`relative z-10 min-h-screen flex items-center justify-center md:justify-end text-white px-6 sm:px-10  ${isHeroVisible ? "animate-slideInFromRight" : "opacity-0"
                         }`}
                 >
-                    <div className="flex flex-col items-start mr-10">
-                        <h1 className="text-3xl font-semibold mb-4 text-white">
+                    <div className="flex flex-col items-start md:mr-10 max-w-xl">
+                        <h1 className="text-2xl sm:text-3xl font-semibold mb-4 text-white">
                             Philmar - Philippe Martin
                         </h1>
                         <p className="max-w-lg text-lg mb-6 text-white">
@@ -67,10 +67,10 @@ export default function Accueil() {
             </section>
             {/* Section 2: Biographie */}
             <section className="py-24 my-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/biographie.png')" }}>
-                <div className="container mx-auto h-full flex flex-col md:flex-row items-center justify-center">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col md:flex-row items-center justify-center">
                     {/* Text Section */}
                     <div ref={textRef}
-                        className={`md:w-3/5 p-16 ${isTextVisible ? "animate-slideInFromLeft" : ""}`}>
+                        className={`md:w-3/5 px-6 py-10 sm:px-10 lg:p-16 ${isTextVisible ? "animate-slideInFromLeft" : ""}`}>
                         <h2 className="text-4xl font-bold mb-8 text-white">Biographie</h2>
                         <p className="text-lg text-white text-justify mb-4">
                             Musicien depuis plus de 30 ans, j'ai eu la chance de jouer dans de nombreux groupes, explorant des genres variés comme le rock, la variété, le jazz, l'ethnique, l'électro et le folk.
@@ -93,9 +93,9 @@ export default function Accueil() {
 
                     {/* Image Section with Decorative Squares */}
                     <div ref={imageRef}
-                        className={`md:w-2/5 p-16 relative justify-center ${isImageVisible ? "animate-slideInFromRight" : ""}`}>
+                        className={`md:w-2/5 px-6 py-10 sm:px-10 lg:p-16 relative flex justify-center ${isImageVisible ? "animate-slideInFromRight" : ""}`}>
                         {/* Portrait Image as an element inside the div */}
-                        <div className="relative w-[360px] h-[640px] bg-cover bg-center shadow-lg z-10" style={{ backgroundImage: "url('/images/biographie_image.jpg')" }}>
+                        <div className="relative w-[260px] sm:w-[320px] md:w-[360px] h-[460px] sm:h-[560px] md:h-[640px] bg-cover bg-center shadow-lg z-10" style={{ backgroundImage: "url('/images/biographie_image.jpg')" }}>
 
                             {/* Actual img element for better control and accessibility */}
                             <img src="/images/biographie_image.jpg" alt="Biographie" className="w-full h-full object-cover" />
@@ -132,14 +132,14 @@ export default function Accueil() {
                     </h2>
 
                     {/* Cards Container */}
-                    <div className="flex flex-col md:flex-row justify-center gap-6 md:gap-14 lg:gap-16 p-10 md:p-4 lg:p-16">
+                    <div className="flex flex-col md:flex-row justify-center gap-6 md:gap-12 lg:gap-16 px-4 sm:px-8 lg:px-16 md:p-4 lg:p-16">
                         {/* Spectacles Card with Slide-In from Bottom Animation */}
                         <div
-                            className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-12 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible ? "animate-slideInFromBottom" : "opacity-0"
+                            className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-6 sm:p-8 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible ? "animate-slideInFromBottom" : "opacity-0"
                                 }`}
                         >
                             {/* Image Container */}
-                            <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
+                            <div className="flex-shrink-0 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
                                 <img
                                     src="images/spectacles.svg"
                                     alt="Spectacles Icon"
@@ -164,11 +164,11 @@ export default function Accueil() {
 
                         {/* Concerts Card with Slide-In from Bottom Animation */}
                         <div
-                            className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-12 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible ? "animate-slideInFromBottom" : "opacity-0"
+                            className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-6 sm:p-8 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible ? "animate-slideInFromBottom" : "opacity-0"
                                 }`}
                         >
                             {/* Image Container */}
-                            <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
+                            <div className="flex-shrink-0 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
                                 <img
                                     src="images/concerts.svg"
                                     alt="Concerts Icon"
@@ -214,14 +214,14 @@ export default function Accueil() {
         </h2>
 
         {/* Cards Container */}
-        <div className="flex flex-col md:flex-row justify-center gap-6 md:gap-14 lg:gap-16 p-10 md:p-4 lg:p-16">
+        <div className="flex flex-col md:flex-row justify-center gap-6 md:gap-12 lg:gap-16 px-4 sm:px-8 lg:px-16 md:p-4 lg:p-16">
             {/* Voix Card with Slide-In from Bottom Animation */}
             <div
-                className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-12 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible2 ? "animate-slideInFromBottom" : "opacity-0"
+                className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-6 sm:p-8 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible2 ? "animate-slideInFromBottom" : "opacity-0"
                     }`}
             >
                 {/* Image Container */}
-                <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
+                <div className="flex-shrink-0 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
                     <img
                         src="images/voix.svg"
                         alt="Voix Icon"
@@ -247,11 +247,11 @@ export default function Accueil() {
 
             {/* Instruments du monde Card with Slide-In from Bottom Animation */}
             <div
-                className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-12 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible2 ? "animate-slideInFromBottom" : "opacity-0"
+                className={`w-full md:w-1/2 lg:w-150 bg-white text-black bg-opacity-55 p-6 sm:p-8 md:p-6 lg:p-8 shadow-lg flex flex-row items-start gap-4 ${isSectionVisible2 ? "animate-slideInFromBottom" : "opacity-0"
                     }`}
             >
                 {/* Image Container */}
-                <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
+                <div className="flex-shrink-0 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-orange-950 rounded-full border-4 border-orange-950">
                     <img
                         src="images/instruments.svg"
                         alt="Instruments Icon"
@@ -280,20 +280,20 @@ export default function Accueil() {
 
 
     {/* Section 5: Autres Passions */}
-    <section id="projets" className="relative py-16 bg-fill bg-center text-white flex items-center h-[60rem] w-full" style={{ backgroundImage: "url('/images/passion.png')" }}>
+    <section id="projets" className="relative py-20 bg-fill bg-center text-white flex items-center min-h-screen w-full" style={{ backgroundImage: "url('/images/passion.png')" }}>
     {/*<div className="absolute inset-0 bg-black bg-opacity-80"></div>*/}
     {/* Overlay */}
 
     <div className="relative z-10 container mx-auto text-center">
         <h2 className="text-4xl font-bold mb-12">Autres Passions</h2>
-        <p className="text-lg w-full mx-auto mb-12 px-24">
+        <p className="text-base sm:text-lg max-w-4xl mx-auto mb-12 px-6 sm:px-12">
         Au-delà des mélodies et des harmonies, j’ai également une passion pour l’écriture et la nature. En tant qu’auteur, j’aime partager des histoires qui résonnent avec la même intensité que ma musique. Mon amour pour la nature m’a aussi conduit à créer un éco-lieu, un projet qui reflète mon désir de vivre en harmonie avec notre environnement.
         </p>
 
-        <div className="flex md:flex-row justify-evenly space-y-8 md:space-y-0 md:space-x-8">
+        <div className="flex flex-col md:flex-row justify-evenly gap-10">
         
         {/* Eco Lieu Card */}
-        <div className="bg-transparent text-white text-left p-6 shadow-lg flex flex-col md:w-1/3 relative">
+        <div className="bg-transparent text-white text-left p-6 shadow-lg flex flex-col w-full md:w-1/3 relative">
             {/* Card Title */}
             <div className="absolute top-[20px] px-6 left-0 bg-[#6B1F1A] text-white text-center font-semibold py-2 px-4 w-max text-xl">
             Eco Lieu
@@ -316,7 +316,7 @@ export default function Accueil() {
         </div>
 
         {/* Ouvrages Card */}
-        <div className="bg-transparent text-white text-left p-6 shadow-lg flex flex-col md:w-1/3 relative">
+        <div className="bg-transparent text-white text-left p-6 shadow-lg flex flex-col w-full md:w-1/3 relative">
             {/* Card Title */}
             <div className="absolute top-[20px] px-6 left-0 bg-[#6B1F1A] text-white text-center font-semibold py-2 px-4 w-max text-xl">
             Ouvrages
