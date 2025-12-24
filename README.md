@@ -28,14 +28,30 @@ Artist website developed with Next.js
 
 ### Page Accueil
 - [x] Lecteur SoundCloud customisé
-- [ ] Drag & Drop le lecteur
+- [x] Mini lecteur customisé version mobile
+- [x] Drag & Drop le lecteur
 
 ### Footer
 - [ ] Formulaire de contact
 
 ### Animation
-
+- [ ] Page Accueil
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
 
 ### Responsivity
+- [x] Page Accueil
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
 
 ### SEO
