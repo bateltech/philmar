@@ -1,0 +1,138 @@
+[
+  {
+    "title": "Steppe by Steppe",
+    "imageSrc": "/images/discographie/steppe_by_steppe.png",
+    "genre": "album",
+    "year": 1998,
+    "forSale": true,
+    "description": "Un album ethno ou world par son appel au voyage et les instruments du monde, mais avec des sons bien rock, des inspirations classiques, des synthés aériens ou electro, des rythmes hip-hop, des harmonies jazz-funk, des chants gutturaux ou planants"
+  },
+  {
+    "title": "ABRAXAS PROJEKT - Jérôme Paressant \"SHAKTI\"",
+    "imageSrc": "/images/discographie/shakti.png",
+    "genre": "album",
+    "year": 2000,
+    "forSale": true,
+    "description": "Une musique où la clarinette, la voix, les instruments électriques, les percussions côtoient les sons \"échantillonnés\", les \"boucles\" électroniques… Musique à la fois tellurique, douce, tribale, onirique, incantatoire..."
+  },
+  {
+    "title": "POLARIS",
+    "imageSrc": "/images/discographie/polaris.png",
+    "genre": "album",
+    "year": 2005,
+    "forSale": false,
+    "description": "Un duo d'improvisation piano-voix constitué par Matthieu Roussineau et Philippe Martin. C'est une musique spontanée, originale qui crée en temps réel ses mélodies et ses harmonies. Riches de leurs expériences musicales antérieures (classique, jazz, world,...), les 2 musiciens célèbrent en une écoute mutuelle et en empathie avec le public, la Musique de l'Instant."
+  },
+  {
+    "title": "Sur le Chemin",
+    "imageSrc": "/images/discographie/sur_le_chemin.png",
+    "genre": "album",
+    "year": 2019,
+    "forSale": false,
+    "description": "C'est une musique libre et aérée quelque peu inspirée des éléments de la nature. Surtout acoustique, et fondée sur l'improvisation, cette \"musique de l'Instant\" suscite rêverie ou méditation... Les chants répondent aux guitares ou aux flûtes, les sons et autres percussions impulsent des ambiances tranquilles, tour à tour légères ou profondes. Avec en bonus un remix électro d'un de ces morceaux par Abraxas et la clarinette de J. Paressant."
+  },
+  {
+    "title": "ABRAXAS PROJEKT \"COSMIK\"",
+    "imageSrc": "/images/discographie/cosmik.jpg",
+    "genre": "album",
+    "year": 2020,
+    "forSale": false,
+    "description": "La rencontre des musiques électroniques et du jazz se nourrit d'influences \"transversales\", où Trip-Hop, Ambient, Dub, Musiques du Monde, Rock, Musiques Improvisées s'entrecroisent pour d'énergiques et contemplatives \"transes\" sonores."
+  },
+  {
+    "title": "Le Rêve d'Husky",
+    "imageSrc": "/images/discographie/le_reve_dhusky.png",
+    "genre": "conte",
+    "year": 2025,
+    "forSale": false,
+    "description": "Adaptation discographique du spectacle de marionnettes (Ti Mahot Marionnettes). Le petit chien Husky finit par s’endormir et plonge dans le monde du rêve. Il rencontre là toutes sortes de personnages amusants ou féériques qui le mèneront à l’oiseau des 7 couleurs."
+  },
+  {
+    "title": "\"STARMANIA\" Les Choucas",
+    "imageSrc": "/images/discographie/les_choucas.png",
+    "genre": "enregistrement",
+    "year": 2025,
+    "forSale": false,
+    "description": "On ne présente plus le spectacle Starmania de M. Berger et L. Plamondon... Cette version du groupe régional pendant sa tournée en Rhône-Alpes est pleine de fraîcheur, avec une maîtrise vocale au service des chansons, des envolées guitaristiques, des moments d'émotion."
+  },
+  {
+    "title": "GENRE HUMAIN - single \"LES PRETENDANTS\"",
+    "imageSrc": "/images/discographie/les_pretendants.png",
+    "genre": "enregistrement",
+    "year": 2025,
+    "forSale": true,
+    "description": "Un single collector! Un marchand, un guerrier et un alchimiste prétendent chacun à leur manière conquérir la princesse… Avec des paroles d'inspiration médiévale, une voix théâtrale et une musique progressive, c'est une expression à la fois épique et humoristique de notre imaginaire d'une époque."
+  },
+  {
+    "title": "PHILMAR L'instant",
+    "imageSrc": "/images/discographie/linstant.png",
+    "genre": "album",
+    "year": 2025,
+    "forSale": false,
+    "description": "concert en solo \"free ethno ambiant\" Axée sur des improvisatons vocales sans paroles, une musique de l'instant nous enmène en voyage, nous fait danser. Sur le vif de l'inspiration, guitare, mix d'échantillonneur, percussions ou flûtes accompagnent les psalmodies mystiques, les mélopées chamaniques."
+  },
+  {
+    "title": "On fête Noël chez Mathilde et Renardeau (N°1)",
+    "imageSrc": "/images/discographie/on_fete_noel.jpg",
+    "genre": "conte",
+    "year": 2025,
+    "forSale": true,
+    "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 6 chansons (Philmar a arrangé et interprété des musiques traditionnelles, et des chansons ont été interprétées par des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Une ambiance d'hiver et de Noël pour cet album."
+  },
+  {
+    "title": "Retour en fanfare pour Mathilde et Renardeau (N°2)",
+    "imageSrc": "/images/discographie/retour_en_fanfare.jpg",
+    "genre": "conte",
+    "year": 2025,
+    "forSale": true,
+    "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 6 chansons (Philmar a arrangé et interprété des musiques traditionnelles, et des chansons ont été interprétées par des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Une ambiance légère et printanière pour cet album."
+  },
+  {
+    "title": "Mathilde et Renardeau À la rescousse (N°3)",
+    "imageSrc": "/images/discographie/a_la_rescousse.jpg",
+    "genre": "conte",
+    "year": 2025,
+    "forSale": true,
+    "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 6 chansons (Philmar a arrangé et interprété des musiques traditionnelles, et des chansons ont été interprétées par des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Aventures et fêtes amusantes dans cet album."
+  },
+  {
+    "title": "Saint Nicolas frappe chez Mathilde et Renardeau (N°4)",
+    "imageSrc": "/images/discographie/saint_nicolas.jpg",
+    "genre": "conte",
+    "year": 2025,
+    "forSale": true,
+    "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 6 chansons (Philmar a arrangé et interprété des musiques traditionnelles, et des chansons ont été interprétées par des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Dans l'ambiance des Fêtes de fin d'année pour cet album, toujours de l'humour et de l'aventure avec Mathilde et Renardeau et leurs amis."
+  },
+  {
+    "title": "Mathilde et Renardeau Champions d'Europe (N°5)",
+    "imageSrc": "/images/discographie/champions_deurope.jpg",
+    "genre": "conte",
+    "year": 2025,
+    "forSale": true,
+    "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 4 chansons (des musiques des chansons traditionnelles interprétées par Philmar et d'autres musiciens, et des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Pour cet album, un regard humoristique sur le sport de compétition autour de l'équipe du sensationnel crapaud Scipio. Et bien sûr aventures et chansons qui attendent nos amis Mathilde et Renardeau."
+  },
+  {
+    "title": "GENRE HUMAIN \"HOMO MUTABILIS\"",
+    "imageSrc": "/images/discographie/the_shamanic_groove.jpg",
+    "genre": "enregistrement",
+    "year": 2025,
+    "forSale": true,
+    "description": "A l'écoute des courants qui coulent dans le monde et au fond d'eux, ces \"humains\" expriment la Terre de l'humanité et de la nature. Ajoutant quelques enregistrements inédits de répétition à ceux de studio, ces divers morceaux offrent une palette large des inspirations du groupe... (chansons rock, groove, quelques envolées lyriques ou rock progressif, et des ambiances world, des percussions...)"
+  },
+  {
+    "title": "ZIA \"ATMAN / TCHAÏ\"",
+    "imageSrc": "/images/discographie/zia.png",
+    "genre": "enregistrement",
+    "year": 2025,
+    "forSale": false,
+    "description": "Une Quête du Son primordial, d'une authentique Transe libératrice, en parcourant tambours et cordes, voix et vents, paysages et peuples, dans une géographie imaginaire qui nous en ramène au plus profond de nous-même. Instruments traditionnels et parfois électriques se répondent, et construisent l'architecture sonore éphémère propre à l'improvisation."
+  },
+  {
+    "title": "PHILMAR / FLUCTUS \"RENCONTRE\"",
+    "imageSrc": "/images/discographie/rencontre.png",
+    "genre": "album",
+    "year": 2025,
+    "forSale": true,
+    "description": "C’est un mélange d'instruments ethniques et de machines électro, dans une approche plutôt planante même s’il y a souvent des rythmes. Les voix de ce duo prennent aussi une place importante au coeur de ces voyages sonores vivants. Car tout cela est mené par des improvisations (en enregistrement, sur scène) sur la base de quelques échantillons ou séquences choisis sur le vif."
+  }
+]
