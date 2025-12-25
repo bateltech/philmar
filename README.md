@@ -17,8 +17,8 @@ Artist website developed with Next.js
 ### Page Discographie
 - [ ] Ajouter les liens d'achats
 - [ ] Ajouter un mini lecteur minimaliste pour chaque disco
-- [ ] Filtres de tri
-- [ ] Titre qui slide à gauche s'il est trop long
+- [x] Filtres de tri
+- [x] Titre qui slide à gauche s'il est trop long
 
 ### Page Concerts
 - [ ] Carousel des concerts
