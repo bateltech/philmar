@@ -15,8 +15,8 @@ Artist website developed with Next.js
 - [x] Component Avis
 
 ### Page Discographie
-- [ ] Ajouter les liens d'achats
-- [ ] Ajouter un mini lecteur minimaliste pour chaque disco
+- [x] Ajouter les liens d'achats
+- [x] Ajouter un mini lecteur minimaliste pour chaque disco
 - [x] Filtres de tri
 - [x] Titre qui slide à gauche s'il est trop long
 
@@ -36,8 +36,8 @@ Artist website developed with Next.js
 
 ### Animation
 - [ ] Page Accueil
-- [ ] 
-- [ ] 
+- [ ] Page Discographie
+- [ ] Page Biographie
 - [ ] 
 - [ ] 
 - [ ] 
@@ -46,8 +46,8 @@ Artist website developed with Next.js
 
 ### Responsivity
 - [x] Page Accueil
-- [ ] 
-- [ ] 
+- [ ] Page Discographie
+- [ ] Page Biographie
 - [ ] 
 - [ ] 
 - [ ] 

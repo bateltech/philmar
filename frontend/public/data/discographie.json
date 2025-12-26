@@ -5,6 +5,8 @@
     "genre": "album",
     "year": 1998,
     "forSale": true,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/philmarzic/sets/steppe-by-steppe?si=4c83bdaea9e34b2d90ce60fc5d4e2a0d&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
     "description": "Un album ethno ou world par son appel au voyage et les instruments du monde, mais avec des sons bien rock, des inspirations classiques, des synthés aériens ou electro, des rythmes hip-hop, des harmonies jazz-funk, des chants gutturaux ou planants"
   },
   {
@@ -13,6 +15,8 @@
     "genre": "album",
     "year": 2000,
     "forSale": true,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "Une musique où la clarinette, la voix, les instruments électriques, les percussions côtoient les sons \"échantillonnés\", les \"boucles\" électroniques… Musique à la fois tellurique, douce, tribale, onirique, incantatoire..."
   },
   {
@@ -21,6 +25,8 @@
     "genre": "album",
     "year": 2005,
     "forSale": false,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "Un duo d'improvisation piano-voix constitué par Matthieu Roussineau et Philippe Martin. C'est une musique spontanée, originale qui crée en temps réel ses mélodies et ses harmonies. Riches de leurs expériences musicales antérieures (classique, jazz, world,...), les 2 musiciens célèbrent en une écoute mutuelle et en empathie avec le public, la Musique de l'Instant."
   },
   {
@@ -29,6 +35,8 @@
     "genre": "album",
     "year": 2019,
     "forSale": false,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/philmarzic/la_memoire-sur_le_chemin?si=3d5fb443847b40a0b204e71354243130&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
     "description": "C'est une musique libre et aérée quelque peu inspirée des éléments de la nature. Surtout acoustique, et fondée sur l'improvisation, cette \"musique de l'Instant\" suscite rêverie ou méditation... Les chants répondent aux guitares ou aux flûtes, les sons et autres percussions impulsent des ambiances tranquilles, tour à tour légères ou profondes. Avec en bonus un remix électro d'un de ces morceaux par Abraxas et la clarinette de J. Paressant."
   },
   {
@@ -37,6 +45,8 @@
     "genre": "album",
     "year": 2020,
     "forSale": false,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "La rencontre des musiques électroniques et du jazz se nourrit d'influences \"transversales\", où Trip-Hop, Ambient, Dub, Musiques du Monde, Rock, Musiques Improvisées s'entrecroisent pour d'énergiques et contemplatives \"transes\" sonores."
   },
   {
@@ -45,6 +55,8 @@
     "genre": "conte",
     "year": 2025,
     "forSale": false,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "Adaptation discographique du spectacle de marionnettes (Ti Mahot Marionnettes). Le petit chien Husky finit par s’endormir et plonge dans le monde du rêve. Il rencontre là toutes sortes de personnages amusants ou féériques qui le mèneront à l’oiseau des 7 couleurs."
   },
   {
@@ -53,6 +65,8 @@
     "genre": "enregistrement",
     "year": 2025,
     "forSale": false,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "On ne présente plus le spectacle Starmania de M. Berger et L. Plamondon... Cette version du groupe régional pendant sa tournée en Rhône-Alpes est pleine de fraîcheur, avec une maîtrise vocale au service des chansons, des envolées guitaristiques, des moments d'émotion."
   },
   {
@@ -61,6 +75,8 @@
     "genre": "enregistrement",
     "year": 2025,
     "forSale": true,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/philmarzic/homo_mutabilis-genre_humain?si=eab1524de6994ff8b256572b6ee5b06f&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
     "description": "Un single collector! Un marchand, un guerrier et un alchimiste prétendent chacun à leur manière conquérir la princesse… Avec des paroles d'inspiration médiévale, une voix théâtrale et une musique progressive, c'est une expression à la fois épique et humoristique de notre imaginaire d'une époque."
   },
   {
@@ -69,6 +85,8 @@
     "genre": "album",
     "year": 2025,
     "forSale": false,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/philmarzic/linstant-philmar?si=1166bc4f3cfb4d5dae989de19dec51be&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
     "description": "concert en solo \"free ethno ambiant\" Axée sur des improvisatons vocales sans paroles, une musique de l'instant nous enmène en voyage, nous fait danser. Sur le vif de l'inspiration, guitare, mix d'échantillonneur, percussions ou flûtes accompagnent les psalmodies mystiques, les mélopées chamaniques."
   },
   {
@@ -77,6 +95,8 @@
     "genre": "conte",
     "year": 2025,
     "forSale": true,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 6 chansons (Philmar a arrangé et interprété des musiques traditionnelles, et des chansons ont été interprétées par des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Une ambiance d'hiver et de Noël pour cet album."
   },
   {
@@ -85,6 +105,8 @@
     "genre": "conte",
     "year": 2025,
     "forSale": true,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 6 chansons (Philmar a arrangé et interprété des musiques traditionnelles, et des chansons ont été interprétées par des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Une ambiance légère et printanière pour cet album."
   },
   {
@@ -93,6 +115,8 @@
     "genre": "conte",
     "year": 2025,
     "forSale": true,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 6 chansons (Philmar a arrangé et interprété des musiques traditionnelles, et des chansons ont été interprétées par des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Aventures et fêtes amusantes dans cet album."
   },
   {
@@ -101,6 +125,8 @@
     "genre": "conte",
     "year": 2025,
     "forSale": true,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 6 chansons (Philmar a arrangé et interprété des musiques traditionnelles, et des chansons ont été interprétées par des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Dans l'ambiance des Fêtes de fin d'année pour cet album, toujours de l'humour et de l'aventure avec Mathilde et Renardeau et leurs amis."
   },
   {
@@ -109,6 +135,8 @@
     "genre": "conte",
     "year": 2025,
     "forSale": true,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 4 chansons (des musiques des chansons traditionnelles interprétées par Philmar et d'autres musiciens, et des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Pour cet album, un regard humoristique sur le sport de compétition autour de l'équipe du sensationnel crapaud Scipio. Et bien sûr aventures et chansons qui attendent nos amis Mathilde et Renardeau."
   },
   {
@@ -117,6 +145,8 @@
     "genre": "enregistrement",
     "year": 2025,
     "forSale": true,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/philmarzic/homo_mutabilis-genre_humain?si=eab1524de6994ff8b256572b6ee5b06f&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
     "description": "A l'écoute des courants qui coulent dans le monde et au fond d'eux, ces \"humains\" expriment la Terre de l'humanité et de la nature. Ajoutant quelques enregistrements inédits de répétition à ceux de studio, ces divers morceaux offrent une palette large des inspirations du groupe... (chansons rock, groove, quelques envolées lyriques ou rock progressif, et des ambiances world, des percussions...)"
   },
   {
@@ -125,6 +155,8 @@
     "genre": "enregistrement",
     "year": 2025,
     "forSale": false,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "Une Quête du Son primordial, d'une authentique Transe libératrice, en parcourant tambours et cordes, voix et vents, paysages et peuples, dans une géographie imaginaire qui nous en ramène au plus profond de nous-même. Instruments traditionnels et parfois électriques se répondent, et construisent l'architecture sonore éphémère propre à l'improvisation."
   },
   {
@@ -133,6 +165,8 @@
     "genre": "album",
     "year": 2025,
     "forSale": true,
+    "purchaseLink": "https://example.com/buy/steppe",
+    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "C’est un mélange d'instruments ethniques et de machines électro, dans une approche plutôt planante même s’il y a souvent des rythmes. Les voix de ce duo prennent aussi une place importante au coeur de ces voyages sonores vivants. Car tout cela est mené par des improvisations (en enregistrement, sur scène) sur la base de quelques échantillons ou séquences choisis sur le vif."
   }
 ]
