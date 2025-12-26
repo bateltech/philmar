@@ -12,11 +12,14 @@ type Album = {
   year: number;
   forSale: boolean;
   description: string;
+  purchaseLink: string;
+  soundcloudLink: string;
 };
 
 export default function Discographie () {
     const [selectedGenre, setSelectedGenre] = useState<'all' | 'album' | 'enregistrement' | 'conte'>('all');
     const [sortMode, setSortMode] = useState<SortMode>('recent');
+    const [activePlayerId, setActivePlayerId] = useState<string | null>(null);
 
     const [albums, setAlbums] = useState<Album[]>([]);
     useEffect(() => {
@@ -89,7 +92,15 @@ export default function Discographie () {
                 imageSrc={album.imageSrc}
                 genre={album.genre}
                 forSale={album.forSale}
-                description={album.description}
+                description={album.description} 
+                purchaseLink={album.purchaseLink}
+                soundcloudLink={album.soundcloudLink}
+                isPlayerActive={activePlayerId === album.title}
+                onTogglePlayer={() =>
+                  setActivePlayerId(
+                    activePlayerId === album.title ? null : album.title
+                  )
+                }
               />
             ))}
         </div>
