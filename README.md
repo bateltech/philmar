@@ -21,12 +21,12 @@ Artist website developed with Next.js 14
 - [x] Titre qui slide à gauche s'il est trop long
 
 ### Page Concerts
-- [x] Carousel des concerts
-- [ ] Résoudre le glitch visuel
+- [x] Carrousel des concerts
+- [x] Résoudre le glitch visuel
 
 ### Page Spectacles
-- [x] Carousel de spectacles
-- [ ] Résoudre le glitch visuel
+- [x] Carrousel de spectacles
+- [x] Résoudre le glitch visuel
 
 ### Page Accueil
 - [x] Lecteur SoundCloud customisé
