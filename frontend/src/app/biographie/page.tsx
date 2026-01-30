@@ -32,7 +32,7 @@ export default function Biographie() {
 
             </p>
           <p className="text-sm leading-relaxed mt-8 ml-16">
-            Ayant commencé la guitare classique à l'âge de 12 ans, Philmar est surtout joueur dans des groupes de rock à partir de l'âge de 16 ans. Autodidacte dès le départ, il n’a jamais suivi de cours de musique. Sa soif d’aventure le pousse vers le monde, à propager et à faire propager les musiques du monde, guidé par ses rencontres et son évolution personnelle.
+            Ayant commencé la guitare classique à l&apos;âge de 12 ans, Philmar est surtout joueur dans des groupes de rock à partir de l&apos;âge de 16 ans. Autodidacte dès le départ, il n’a jamais suivi de cours de musique. Sa soif d’aventure le pousse vers le monde, à propager et à faire propager les musiques du monde, guidé par ses rencontres et son évolution personnelle.
           </p>
         </div>
       </section>
@@ -90,7 +90,7 @@ export default function Biographie() {
 
       {/* Section 3 - Nouvelles Orientations + Slider */}
       <section className="flex flex-col md:flex-row items-center gap-8 px-6 md:px-12 py-12" data-aos="fade-up">
-        {/* Swiper remplaçant l'image statique */}
+        {/* Swiper remplaçant l&apos;image statique */}
         <div className="md:w-1/2 w-full h-[400px] relative overflow-hidden rounded-lg">
           <Swiper
             modules={[Autoplay, EffectFade]}
