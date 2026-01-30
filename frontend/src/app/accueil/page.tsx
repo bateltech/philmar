@@ -13,6 +13,7 @@ export default function Accueil() {
     
     const [heroRef, isHeroVisible] = useIntersectionObserver();
     const [textRef, isTextVisible] = useIntersectionObserver({ threshold: 0.1 });
+    const [textRef2, isTextVisible2] = useIntersectionObserver({ threshold: 0.1 });
     const [imageRef, isImageVisible] = useIntersectionObserver({ threshold: 0.1 });
     // Use the intersection observer hook
     const [sectionRef, isSectionVisible] = useIntersectionObserver({
@@ -26,7 +27,7 @@ export default function Accueil() {
         threshold: 0.1, // Trigger when 10% of the section is visible
     });
     return (
-        <div className="min-h-screen flex flex-col">
+        <div role='main' className="min-h-screen flex flex-col">
 
             {/* Le lecteur est monté une fois ici pour rester présent partout */}
             {/* <SoundCloudPlayer isOpen={isPlayerOpen} onClose={() => setIsPlayerOpen(false)} /> */}
@@ -35,19 +36,19 @@ export default function Accueil() {
             <section
                 ref={heroRef}
                 className="relative min-h-screen bg-cover bg-left bg-no-repeat"
-                style={{ backgroundImage: "url('/images/home_phil.png')" }}
+                style={{ backgroundImage: "url('/images/home_phil.png')",}}
             >
                 <div
 
                     className={`relative z-10 min-h-screen flex items-center justify-center md:justify-end text-white px-6 sm:px-10  ${isHeroVisible ? "animate-slideInFromRight" : "opacity-0"
                         }`}
                 >
-                    <div className="flex flex-col items-start md:mr-10 max-w-xl">
+                    <div className="flex flex-col items-start md:mr-10 max-w-xl animate-slideInFromRight">
                         <h1 className="text-2xl sm:text-3xl font-semibold mb-4 text-white">
                             Philmar - Philippe Martin
                         </h1>
                         <p className="max-w-lg text-lg mb-6 text-white">
-                            Musicien dans l'âme et professionnel depuis plus de 30 ans, Philmar vibre et fait vibrer de ses chants et instruments, nous faisant ainsi voyager vers de lointains horizons et jusqu'au cœur de nous-même.
+                            Musicien dans l&apos;âme et professionnel depuis plus de 30 ans, Philmar vibre et fait vibrer de ses chants et instruments, nous faisant ainsi voyager vers de lointains horizons et jusqu&apos;au cœur de nous-même.
                         </p>
                         <button 
                         onClick={() => setIsPlayerOpen(true)} 
@@ -73,12 +74,12 @@ export default function Accueil() {
                         className={`md:w-3/5 px-6 py-10 sm:px-10 lg:p-16 ${isTextVisible ? "animate-slideInFromLeft" : ""}`}>
                         <h2 className="text-4xl font-bold mb-8 text-white">Biographie</h2>
                         <p className="text-lg text-white text-justify mb-4">
-                            Musicien depuis plus de 30 ans, j'ai eu la chance de jouer dans de nombreux groupes, explorant des genres variés comme le rock, la variété, le jazz, l'ethnique, l'électro et le folk.
-                            J'ai également enregistré plusieurs albums et collaboré avec des conteurs, des comédiens, des danseuses et des plasticiens pour des spectacles et des performances.
+                            Musicien depuis plus de 30 ans, j&apos;ai eu la chance de jouer dans de nombreux groupes, explorant des genres variés comme le rock, la variété, le jazz, l&apos;ethnique, l&apos;électro et le folk.
+                            J&apos;ai également enregistré plusieurs albums et collaboré avec des conteurs, des comédiens, des danseuses et des plasticiens pour des spectacles et des performances.
                         </p>
                         <p className="text-lg text-white text-justify mb-4">
-                            J'ai commencé avec la guitare, tant acoustique qu'électrique, mais je me suis rapidement tourné vers le chant, qui est devenu mon instrument de prédilection. Aujourd'hui, je joue divers instruments du monde (cordes, vent, percussions) et je chante dans de nombreux styles, allant du yodel au chant oriental, en passant par le chant de gorge et le joik, sans oublier le scat jazz et d'autres chants occidentaux.
-                            J'anime également des ateliers et des stages sur l'exploration de la voix et la découverte des instruments du monde.
+                            J&apos;ai commencé avec la guitare, tant acoustique qu&apos;électrique, mais je me suis rapidement tourné vers le chant, qui est devenu mon instrument de prédilection. Aujourd&apos;hui, je joue divers instruments du monde (cordes, vent, percussions) et je chante dans de nombreux styles, allant du yodel au chant oriental, en passant par le chant de gorge et le joik, sans oublier le scat jazz et d&apos;autres chants occidentaux.
+                            J&apos;anime également des ateliers et des stages sur l&apos;exploration de la voix et la découverte des instruments du monde.
                         </p>
                         {/* <button className="mt-4 border border-blue-800 text-blue-800 font-semibold py-2 px-6 rounded-lg hover:bg-white">
                             Lire plus sur Philmar...
@@ -151,7 +152,7 @@ export default function Accueil() {
                             <div className="flex flex-col text-left">
                                 <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Spectacles</h3>
                                 <p className="text-sm md:text-base text-justify">
-                                    Dans mes spectacles, j'aime fusionner différentes formes d'art pour créer une expérience unique.
+                                    Dans mes spectacles, j&apos;aime fusionner différentes formes d&apos;art pour créer une expérience unique.
                                     Que ce soit à travers le théâtre, la danse ou des contes musicaux, chaque représentation est une aventure immersive...
                                 </p>
                                 <Link href="/spectacles">
@@ -180,7 +181,7 @@ export default function Accueil() {
                             <div className="flex flex-col text-left">
                                 <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Concerts</h3>
                                 <p className="text-sm md:text-base text-justify">
-                                    En concert, j'explore la profondeur de la musique, que ce soit en solo ou avec d'autres artistes.
+                                    En concert, j&apos;explore la profondeur de la musique, que ce soit en solo ou avec d&apos;autres artistes.
                                     Chaque performance est une occasion de partager des moments intimes et authentiques avec le public...
                                 </p>
                                 <Link href="/spectacles">
@@ -235,7 +236,7 @@ export default function Accueil() {
                     <p className="text-sm md:text-base text-justify">
                         La voix et le chant sont peu abordés techniquement, mais par des jeux musicaux, en partant du principe
                         que chanter est totalement naturel, que nous avons plus à lâcher nos barrières (tensions physiques,
-                        émotions cristallisées), qu'à développer des moyens (techniques) que nous avons déjà dès la naissance.
+                        émotions cristallisées), qu&apos;à développer des moyens (techniques) que nous avons déjà dès la naissance.
                     </p>
                     <Link href="/voix">
                         <button className="mt-2 md:mt-4 text-blue-700 font-semibold text-sm md:text-base py-1 md:py-2 rounded">
@@ -263,8 +264,8 @@ export default function Accueil() {
                 <div className="flex flex-col text-left">
                     <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Instruments du monde</h3>
                     <p className="text-sm md:text-base text-justify">
-                        Ce sont des ateliers qui présentent de manière interactive toutes les sortes d'instruments utilisés dans
-                        les traditions culturelles. S'adressant à différentes collectivités locales, il se décline en plusieurs
+                        Ce sont des ateliers qui présentent de manière interactive toutes les sortes d&apos;instruments utilisés dans
+                        les traditions culturelles. S&apos;adressant à différentes collectivités locales, il se décline en plusieurs
                         approches suivant le public concerné.
                     </p>
                     <Link href="/instruments">
@@ -280,17 +281,17 @@ export default function Accueil() {
 
 
     {/* Section 5: Autres Passions */}
-    <section id="projets" className="relative py-20 bg-fill bg-center text-white flex items-center min-h-screen w-full" style={{ backgroundImage: "url('/images/passion.png')" }}>
+    <section ref={sectionRef3} id="projets" className="relative py-20 bg-fill bg-center text-white flex items-center min-h-screen w-full" style={{ backgroundImage: "url('/images/passion.png')" }}>
     {/*<div className="absolute inset-0 bg-black bg-opacity-80"></div>*/}
     {/* Overlay */}
 
-    <div className="relative z-10 container mx-auto text-center">
+    <div className={`relative z-10 container mx-auto text-center ${isSectionVisible3 ? "animate-slideInFromTop" : "opacity-0"} `}>
         <h2 className="text-4xl font-bold mb-12">Autres Passions</h2>
         <p className="text-base sm:text-lg max-w-4xl mx-auto mb-12 px-6 sm:px-12">
         Au-delà des mélodies et des harmonies, j’ai également une passion pour l’écriture et la nature. En tant qu’auteur, j’aime partager des histoires qui résonnent avec la même intensité que ma musique. Mon amour pour la nature m’a aussi conduit à créer un éco-lieu, un projet qui reflète mon désir de vivre en harmonie avec notre environnement.
         </p>
 
-        <div className="flex flex-col md:flex-row justify-evenly gap-10">
+        <div ref={textRef2} className={`flex flex-col md:flex-row justify-evenly gap-10 ${isTextVisible2 ? "animate-slideInFromBottom" : "opacity-0"}`}>
         
         {/* Eco Lieu Card */}
         <div className="bg-transparent text-white text-left p-6 shadow-lg flex flex-col w-full md:w-1/3 relative">

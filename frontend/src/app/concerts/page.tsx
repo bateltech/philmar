@@ -4,11 +4,20 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+type Concert = {
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+};
+
 export default function Concerts() {
-  const [concerts, setConcerts] = useState([]);
-  const [galleryImages, setGalleryImages] = useState([]);
+  const [concerts, setConcerts] = useState<Concert[]>([]);
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [carouselIndex, setCarouselIndex] = useState(4);
+  const [isTransitioning, setIsTransitioning] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -46,6 +55,52 @@ export default function Concerts() {
     const recentsSection = document.getElementById('recents');
     if (recentsSection) {
       recentsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Créer les éléments dupliqués pour la boucle infinie
+  const getExtendedConcerts = () => {
+    if (concerts.length === 0) return [];
+    const lastFour = concerts.slice(-4);
+    const firstFour = concerts.slice(0, 4);
+    return [...lastFour, ...concerts, ...firstFour];
+  };
+
+  // Navigation du carrousel
+  const handlePrevConcert = () => {
+    if (!isTransitioning) return;
+    setCarouselIndex((prev) => prev - 1);
+  };
+
+  const handleNextConcert = () => {
+    if (!isTransitioning) return;
+    setCarouselIndex((prev) => prev + 1);
+  };
+
+  // Gestion de la boucle infinie après la transition
+  const handleTransitionEnd = () => {
+    if (concerts.length === 0) return;
+
+    if (carouselIndex <= 0) {
+      setIsTransitioning(false);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setCarouselIndex(concerts.length);
+          requestAnimationFrame(() => {
+            setIsTransitioning(true);
+          });
+        });
+      });
+    } else if (carouselIndex >= concerts.length + 4) {
+      setIsTransitioning(false);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setCarouselIndex(4);
+          requestAnimationFrame(() => {
+            setIsTransitioning(true);
+          });
+        });
+      });
     }
   };
 
@@ -120,34 +175,58 @@ export default function Concerts() {
             </Link>
           </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {concerts.map((concert, index) => (
-            <div key={index} className="relative bg-gray-900 rounded-lg overflow-hidden shadow-lg">
-              
-              {/* Image + Étiquette du titre */}
-              <div className="relative">
-                <Image src={concert.image} alt={concert.title} width={400} height={250} className="w-full h-52 object-cover" />
-                
-                {/* Étiquette du titre */}
-                <div className="absolute top-0 left-[-12] bg-[#621912] text-white px-4 py-2 text-lg font-bold uppercase">
-                  {concert.title}
+        <div className="relative flex items-center px-16">
+          {/* Bouton Précédent */}
+          <button
+            onClick={handlePrevConcert}
+            className="absolute -left-2 z-10 text-white text-4xl px-3 py-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-80 transition"
+          >
+            ‹
+          </button>
+
+          <div className="overflow-hidden w-full">
+            <div
+              className={`flex gap-6 ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`}
+              style={{ transform: `translateX(-${carouselIndex * (100 / 4 + 1.5)}%)` }}
+              onTransitionEnd={handleTransitionEnd}
+            >
+              {getExtendedConcerts().map((concert, index) => (
+                <div key={index} className="relative bg-gray-900 rounded-lg overflow-hidden shadow-lg flex-shrink-0 w-[calc(25%-18px)]">
+
+                  {/* Image + Étiquette du titre */}
+                  <div className="relative">
+                    <Image src={concert.image} alt={concert.title} width={400} height={250} className="w-full h-52 object-cover" />
+
+                    {/* Étiquette du titre */}
+                    <div className="absolute top-0 left-[-12] bg-[#621912] text-white px-4 py-2 text-lg font-bold uppercase">
+                      {concert.title}
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <div className="p-4">
+                    <p className="text-sm">{concert.description}</p>
+
+                    {/* Lien "En savoir plus" */}
+                    <div className="mt-4">
+                      <Link href={concert.link} className="text-blue-400 font-medium hover:text-blue-500 flex items-center">
+                        En savoir plus
+                        <span className="ml-2">→</span>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
-      
-              {/* Description */}
-              <div className="p-4">
-                <p className="text-sm">{concert.description}</p>
-                
-                {/* Lien "En savoir plus" */}
-                <div className="mt-4">
-                  <Link href={concert.link} className="text-blue-400 font-medium hover:text-blue-500 flex items-center">
-                    En savoir plus
-                    <span className="ml-2">→</span>
-                  </Link>
-                </div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Bouton Suivant */}
+          <button
+            onClick={handleNextConcert}
+            className="absolute -right-2 z-10 text-white text-4xl px-3 py-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-80 transition"
+          >
+            ›
+          </button>
         </div>
       
         

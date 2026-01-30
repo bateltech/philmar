@@ -115,7 +115,7 @@ export default function AvisSlider() {
           {avisData.map(({ texte, auteur, lieu }, i) => (
             <div key={i} className="min-w-0 flex-[0_0_100%] px-2">
               <div className="border p-6 bg-white/10 text-white transition-colors duration-300 rounded-2xl rounded-br-none text-center">
-                <p className="italic">"{texte}"</p>
+                <p className="italic">&quot;{texte}&quot;</p>
                 <p className="mt-4 font-bold">{auteur}</p>
                 {lieu ? <p className="text-sm italic">{lieu}</p> : null}
               </div>
