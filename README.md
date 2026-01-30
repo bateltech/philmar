@@ -33,13 +33,18 @@ Artist website developed with Next.js 14
 - [x] Mini lecteur customisé version mobile
 - [x] Drag & Drop le lecteur
 
+### Page Programmateurs
+- [ ] 
+- [ ] 
+- [ ] 
+
 ### Footer
 - [ ] Formulaire de contact
 
 ### Animation
 - [x] Page Accueil
 - [ ] Page Discographie
-- [ ] Page Biographie
+- [x] Page Biographie
 - [ ] Page Concerts
 - [ ] Page Spectacles
 - [ ] Page Instruments
@@ -52,8 +57,8 @@ Artist website developed with Next.js 14
 - [ ] Page Biographie
 - [ ] Page Concerts
 - [ ] Page Spectacles
-- [ ] Page Instruments
-- [ ] Page Voix
+- [x] Page Instruments
+- [x] Page Voix
 - [ ] Page Programmateurs
 
 ### SEO
