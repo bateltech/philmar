@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -16,8 +16,12 @@ export default function Concerts() {
   const [galleryImages, setGalleryImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [carouselIndex, setCarouselIndex] = useState(4);
-  const [isTransitioning, setIsTransitioning] = useState(true);
+
+  // Carrousel - utilise des refs pour éviter les problèmes de synchronisation React/DOM
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const indexRef = useRef(0);
+  const isAnimatingRef = useRef(false);
+  const cloneCount = 4;
 
   useEffect(() => {
     async function fetchData() {
@@ -39,7 +43,6 @@ export default function Concerts() {
 
     fetchData();
 
-    // Ajoute un eventListener pour fermer l'overlay avec la touche Échap
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setSelectedImage(null);
@@ -50,7 +53,6 @@ export default function Concerts() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Fonction pour scroller en douceur vers la section "Les plus récents"
   const handleScrollToRecents = () => {
     const recentsSection = document.getElementById('recents');
     if (recentsSection) {
@@ -58,51 +60,73 @@ export default function Concerts() {
     }
   };
 
-  // Créer les éléments dupliqués pour la boucle infinie
-  const getExtendedConcerts = () => {
+  const getExtendedConcerts = useCallback(() => {
     if (concerts.length === 0) return [];
-    const lastFour = concerts.slice(-4);
-    const firstFour = concerts.slice(0, 4);
-    return [...lastFour, ...concerts, ...firstFour];
-  };
+    const clonesBefore = concerts.slice(-cloneCount);
+    const clonesAfter = concerts.slice(0, cloneCount);
+    return [...clonesBefore, ...concerts, ...clonesAfter];
+  }, [concerts, cloneCount]);
 
-  // Navigation du carrousel
-  const handlePrevConcert = () => {
-    if (!isTransitioning) return;
-    setCarouselIndex((prev) => prev - 1);
-  };
+  // Calcule et applique directement le transform sur le DOM
+  const applyTransform = useCallback((index: number, animate: boolean) => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
 
-  const handleNextConcert = () => {
-    if (!isTransitioning) return;
-    setCarouselIndex((prev) => prev + 1);
-  };
+    const totalIndex = index + cloneCount;
+    const transform = `calc(-${totalIndex * 25}% - ${totalIndex * 6}px)`;
 
-  // Gestion de la boucle infinie après la transition
-  const handleTransitionEnd = () => {
+    if (!animate) {
+      carousel.style.transition = 'none';
+    }
+
+    carousel.style.transform = `translateX(${transform})`;
+
+    if (!animate) {
+      // Force reflow pour appliquer immédiatement
+      void carousel.offsetHeight;
+      carousel.style.transition = 'transform 500ms ease-in-out';
+    }
+  }, [cloneCount]);
+
+  // Navigation
+  const goToNext = useCallback(() => {
+    if (isAnimatingRef.current || concerts.length === 0) return;
+    isAnimatingRef.current = true;
+    indexRef.current += 1;
+    applyTransform(indexRef.current, true);
+  }, [concerts.length, applyTransform]);
+
+  const goToPrev = useCallback(() => {
+    if (isAnimatingRef.current || concerts.length === 0) return;
+    isAnimatingRef.current = true;
+    indexRef.current -= 1;
+    applyTransform(indexRef.current, true);
+  }, [concerts.length, applyTransform]);
+
+  // Gestion de la boucle infinie
+  const handleTransitionEnd = useCallback(() => {
+    isAnimatingRef.current = false;
+
     if (concerts.length === 0) return;
 
-    if (carouselIndex <= 0) {
-      setIsTransitioning(false);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setCarouselIndex(concerts.length);
-          requestAnimationFrame(() => {
-            setIsTransitioning(true);
-          });
-        });
-      });
-    } else if (carouselIndex >= concerts.length + 4) {
-      setIsTransitioning(false);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setCarouselIndex(4);
-          requestAnimationFrame(() => {
-            setIsTransitioning(true);
-          });
-        });
-      });
+    // Si on dépasse la fin, saut instantané au début
+    if (indexRef.current >= concerts.length) {
+      indexRef.current = indexRef.current - concerts.length;
+      applyTransform(indexRef.current, false);
     }
-  };
+    // Si on dépasse le début, saut instantané à la fin
+    else if (indexRef.current < 0) {
+      indexRef.current = indexRef.current + concerts.length;
+      applyTransform(indexRef.current, false);
+    }
+  }, [concerts.length, applyTransform]);
+
+  // Applique la position initiale après le chargement des concerts
+  useLayoutEffect(() => {
+    if (concerts.length > 0 && carouselRef.current) {
+      applyTransform(indexRef.current, false);
+    }
+  }, [concerts.length, applyTransform]);
 
   return (
     <div className="text-white bg-black">
@@ -178,7 +202,7 @@ export default function Concerts() {
         <div className="relative flex items-center px-16">
           {/* Bouton Précédent */}
           <button
-            onClick={handlePrevConcert}
+            onClick={goToPrev}
             className="absolute -left-2 z-10 text-white text-4xl px-3 py-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-80 transition"
           >
             ‹
@@ -186,8 +210,9 @@ export default function Concerts() {
 
           <div className="overflow-hidden w-full">
             <div
-              className={`flex gap-6 ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`}
-              style={{ transform: `translateX(-${carouselIndex * (100 / 4 + 1.5)}%)` }}
+              ref={carouselRef}
+              className="flex gap-6"
+              style={{ transition: 'transform 500ms ease-in-out' }}
               onTransitionEnd={handleTransitionEnd}
             >
               {getExtendedConcerts().map((concert, index) => (
@@ -222,7 +247,7 @@ export default function Concerts() {
 
           {/* Bouton Suivant */}
           <button
-            onClick={handleNextConcert}
+            onClick={goToNext}
             className="absolute -right-2 z-10 text-white text-4xl px-3 py-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-80 transition"
           >
             ›
