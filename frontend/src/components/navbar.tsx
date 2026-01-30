@@ -113,7 +113,7 @@ const Navbar = () => {
       <nav className="flex items-center justify-between navStyle bg-transparent px-4 md:px-6 py-3 md:py-4">
         {/* NE PAS TOUCHER ▼▼▼ (conformément à ta demande) */}
         <div className="flex items-center space-x-3">
-          <Image src="/images/logo.png" alt="Philmar Logo" width={50} height={50} />
+          <Image src="/images/logo.png" priority alt="Philmar Logo" width={50} height={50} />
           <span className="font-bold text-lg titre tracking-wider" style={{ fontFamily: '"Waiting for the Sunrise", cursive' }}>Philmar</span>
         </div>
         {/* NE PAS TOUCHER ▲▲▲ */}

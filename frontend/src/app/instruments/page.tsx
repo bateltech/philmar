@@ -14,7 +14,7 @@ export default function Instruments() {
         {/* <p className="text-center max-w-3xl mx-auto text-sm md:text-base mb-10"> */}
         <p className="text-center mt-8 mb-24 text-lg leading-relaxed px-4 md:px-0">
           
-          Animés par Philmar, ces ateliers interactifs mettent en valeur une grande diversité d'instruments du monde à travers une approche artistique vivante mêlant expressivité, jeu vocal et maîtrise multi instrumentale.
+          Animés par Philmar, ces ateliers interactifs mettent en valeur une grande diversité d&apos;instruments du monde à travers une approche artistique vivante mêlant expressivité, jeu vocal et maîtrise multi instrumentale.
         </p>
         <AtelierCarousel />
       </section>
@@ -24,7 +24,7 @@ export default function Instruments() {
           Liste des Instruments disponibles pour les Ateliers, Concerts, Expositions
         </h3>
         <p className="text-center italic mb-8">
-          Une centaine d'instruments acoustiques traditionnels de tous les continents...
+          Une centaine d&apos;instruments acoustiques traditionnels de tous les continents...
         </p>
         <InstrumentsGrid />
       </section>
