@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -16,8 +16,12 @@ export default function Spectacles() {
   const [galleryImages, setGalleryImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [carouselIndex, setCarouselIndex] = useState(4);
-  const [isTransitioning, setIsTransitioning] = useState(true);
+
+  // Carrousel - utilise des refs pour éviter les problèmes de synchronisation React/DOM
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const indexRef = useRef(0);
+  const isAnimatingRef = useRef(false);
+  const cloneCount = 4;
 
   useEffect(() => {
     async function fetchData() {
@@ -27,7 +31,7 @@ export default function Spectacles() {
 
         const galleryRes = await fetch('/data/galerie_spectacle.json');
         const galleryData = await galleryRes.json();
-        
+
         setSpectacles(spectaclesData);
         setGalleryImages(galleryData);
       } catch (error) {
@@ -39,7 +43,6 @@ export default function Spectacles() {
 
     fetchData();
 
-    // Ajoute un eventListener pour fermer l'overlay avec la touche Échap
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setSelectedImage(null);
@@ -50,7 +53,6 @@ export default function Spectacles() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Fonction pour scroller en douceur vers la section "Les plus récents"
   const handleScrollToRecents = () => {
     const recentsSection = document.getElementById('recents');
     if (recentsSection) {
@@ -58,51 +60,73 @@ export default function Spectacles() {
     }
   };
 
-  // Créer les éléments dupliqués pour la boucle infinie
-  const getExtendedSpectacles = () => {
+  const getExtendedSpectacles = useCallback(() => {
     if (spectacles.length === 0) return [];
-    const lastFour = spectacles.slice(-4);
-    const firstFour = spectacles.slice(0, 4);
-    return [...lastFour, ...spectacles, ...firstFour];
-  };
+    const clonesBefore = spectacles.slice(-cloneCount);
+    const clonesAfter = spectacles.slice(0, cloneCount);
+    return [...clonesBefore, ...spectacles, ...clonesAfter];
+  }, [spectacles, cloneCount]);
 
-  // Navigation du carrousel
-  const handlePrevSpectacle = () => {
-    if (!isTransitioning) return;
-    setCarouselIndex((prev) => prev - 1);
-  };
+  // Calcule et applique directement le transform sur le DOM
+  const applyTransform = useCallback((index: number, animate: boolean) => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
 
-  const handleNextSpectacle = () => {
-    if (!isTransitioning) return;
-    setCarouselIndex((prev) => prev + 1);
-  };
+    const totalIndex = index + cloneCount;
+    const transform = `calc(-${totalIndex * 25}% - ${totalIndex * 6}px)`;
 
-  // Gestion de la boucle infinie après la transition
-  const handleTransitionEnd = () => {
+    if (!animate) {
+      carousel.style.transition = 'none';
+    }
+
+    carousel.style.transform = `translateX(${transform})`;
+
+    if (!animate) {
+      // Force reflow pour appliquer immédiatement
+      void carousel.offsetHeight;
+      carousel.style.transition = 'transform 500ms ease-in-out';
+    }
+  }, [cloneCount]);
+
+  // Navigation
+  const goToNext = useCallback(() => {
+    if (isAnimatingRef.current || spectacles.length === 0) return;
+    isAnimatingRef.current = true;
+    indexRef.current += 1;
+    applyTransform(indexRef.current, true);
+  }, [spectacles.length, applyTransform]);
+
+  const goToPrev = useCallback(() => {
+    if (isAnimatingRef.current || spectacles.length === 0) return;
+    isAnimatingRef.current = true;
+    indexRef.current -= 1;
+    applyTransform(indexRef.current, true);
+  }, [spectacles.length, applyTransform]);
+
+  // Gestion de la boucle infinie
+  const handleTransitionEnd = useCallback(() => {
+    isAnimatingRef.current = false;
+
     if (spectacles.length === 0) return;
 
-    if (carouselIndex <= 0) {
-      setIsTransitioning(false);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setCarouselIndex(spectacles.length);
-          requestAnimationFrame(() => {
-            setIsTransitioning(true);
-          });
-        });
-      });
-    } else if (carouselIndex >= spectacles.length + 4) {
-      setIsTransitioning(false);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setCarouselIndex(4);
-          requestAnimationFrame(() => {
-            setIsTransitioning(true);
-          });
-        });
-      });
+    // Si on dépasse la fin, saut instantané au début
+    if (indexRef.current >= spectacles.length) {
+      indexRef.current = indexRef.current - spectacles.length;
+      applyTransform(indexRef.current, false);
     }
-  };
+    // Si on dépasse le début, saut instantané à la fin
+    else if (indexRef.current < 0) {
+      indexRef.current = indexRef.current + spectacles.length;
+      applyTransform(indexRef.current, false);
+    }
+  }, [spectacles.length, applyTransform]);
+
+  // Applique la position initiale après le chargement des spectacles
+  useLayoutEffect(() => {
+    if (spectacles.length > 0 && carouselRef.current) {
+      applyTransform(indexRef.current, false);
+    }
+  }, [spectacles.length, applyTransform]);
 
   return (
     <div className="text-white bg-black">
@@ -174,7 +198,7 @@ export default function Spectacles() {
         <div className="relative flex items-center px-16">
           {/* Bouton Précédent */}
           <button
-            onClick={handlePrevSpectacle}
+            onClick={goToPrev}
             className="absolute -left-2 z-10 text-white text-4xl px-3 py-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-80 transition"
           >
             ‹
@@ -182,8 +206,9 @@ export default function Spectacles() {
 
           <div className="overflow-hidden w-full">
             <div
-              className={`flex gap-6 ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`}
-              style={{ transform: `translateX(-${carouselIndex * (100 / 4 + 1.5)}%)` }}
+              ref={carouselRef}
+              className="flex gap-6"
+              style={{ transition: 'transform 500ms ease-in-out' }}
               onTransitionEnd={handleTransitionEnd}
             >
               {getExtendedSpectacles().map((spectacle, index) => (
@@ -218,7 +243,7 @@ export default function Spectacles() {
 
           {/* Bouton Suivant */}
           <button
-            onClick={handleNextSpectacle}
+            onClick={goToNext}
             className="absolute -right-2 z-10 text-white text-4xl px-3 py-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-80 transition"
           >
             ›
