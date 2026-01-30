@@ -4,11 +4,20 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+type Spectacle = {
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+};
+
 export default function Spectacles() {
-  const [spectacles, setSpectacles] = useState([]);
-  const [galleryImages, setGalleryImages] = useState([]);
+  const [spectacles, setSpectacles] = useState<Spectacle[]>([]);
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [carouselIndex, setCarouselIndex] = useState(4);
+  const [isTransitioning, setIsTransitioning] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -49,6 +58,52 @@ export default function Spectacles() {
     }
   };
 
+  // Créer les éléments dupliqués pour la boucle infinie
+  const getExtendedSpectacles = () => {
+    if (spectacles.length === 0) return [];
+    const lastFour = spectacles.slice(-4);
+    const firstFour = spectacles.slice(0, 4);
+    return [...lastFour, ...spectacles, ...firstFour];
+  };
+
+  // Navigation du carrousel
+  const handlePrevSpectacle = () => {
+    if (!isTransitioning) return;
+    setCarouselIndex((prev) => prev - 1);
+  };
+
+  const handleNextSpectacle = () => {
+    if (!isTransitioning) return;
+    setCarouselIndex((prev) => prev + 1);
+  };
+
+  // Gestion de la boucle infinie après la transition
+  const handleTransitionEnd = () => {
+    if (spectacles.length === 0) return;
+
+    if (carouselIndex <= 0) {
+      setIsTransitioning(false);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setCarouselIndex(spectacles.length);
+          requestAnimationFrame(() => {
+            setIsTransitioning(true);
+          });
+        });
+      });
+    } else if (carouselIndex >= spectacles.length + 4) {
+      setIsTransitioning(false);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setCarouselIndex(4);
+          requestAnimationFrame(() => {
+            setIsTransitioning(true);
+          });
+        });
+      });
+    }
+  };
+
   return (
     <div className="text-white bg-black">
       {/* Hero Section */} 
@@ -72,7 +127,7 @@ export default function Spectacles() {
 
           {/* Texte de description */}
           <p className="mt-8 mb-24 text-lg leading-relaxed px-4 md:px-0">
-          Dans ses spectacles, Philmar offre une expérience unique où la musique qu'il compose s'entrelace avec l'art du mouvement et du conte. Il collabore avec des danseurs talentueux qui interprètent des chorégraphies envoûtantes, ainsi qu'avec des conteurs qui partagent des histoires captivantes, créant ainsi un univers artistique où la musique et les arts se rencontrent et se complètent.
+          Dans ses spectacles, Philmar offre une expérience unique où la musique qu&apos;il compose s&apos;entrelace avec l&apos;art du mouvement et du conte. Il collabore avec des danseurs talentueux qui interprètent des chorégraphies envoûtantes, ainsi qu&apos;avec des conteurs qui partagent des histoires captivantes, créant ainsi un univers artistique où la musique et les arts se rencontrent et se complètent.
           </p>
 
           {/* Texte en gras */}
@@ -81,7 +136,7 @@ export default function Spectacles() {
           </h2>
 
           {/* Flèche cliquable pour scroller */}
-          <button onClick={handleScrollToRecents} className="mt-12 animate-bounce focus:outline-none">
+          <button onClick={handleScrollToRecents} className="mt-12 animate-bounce focus:outline-none" aria-label="Faire défiler vers la section suivante">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
@@ -116,34 +171,58 @@ export default function Spectacles() {
             </Link>
           </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {spectacles.map((spectacle, index) => (
-            <div key={index} className="relative bg-gray-900 rounded-lg overflow-hidden shadow-lg">
-              
-              {/* Image + Étiquette du titre */}
-              <div className="relative">
-                <Image src={spectacle.image} alt={spectacle.title} width={400} height={250} className="w-full h-52 object-cover" />
-                
-                {/* Étiquette du titre */}
-                <div className="absolute top-0 left-[-12] bg-[#621912] text-white px-4 py-2 text-lg font-bold uppercase">
-                  {spectacle.title}
+        <div className="relative flex items-center px-16">
+          {/* Bouton Précédent */}
+          <button
+            onClick={handlePrevSpectacle}
+            className="absolute -left-2 z-10 text-white text-4xl px-3 py-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-80 transition"
+          >
+            ‹
+          </button>
+
+          <div className="overflow-hidden w-full">
+            <div
+              className={`flex gap-6 ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`}
+              style={{ transform: `translateX(-${carouselIndex * (100 / 4 + 1.5)}%)` }}
+              onTransitionEnd={handleTransitionEnd}
+            >
+              {getExtendedSpectacles().map((spectacle, index) => (
+                <div key={index} className="relative bg-gray-900 rounded-lg overflow-hidden shadow-lg flex-shrink-0 w-[calc(25%-18px)]">
+
+                  {/* Image + Étiquette du titre */}
+                  <div className="relative">
+                    <Image src={spectacle.image} alt={spectacle.title} width={400} height={250} className="w-full h-52 object-cover" />
+
+                    {/* Étiquette du titre */}
+                    <div className="absolute top-0 left-[-12] bg-[#621912] text-white px-4 py-2 text-lg font-bold uppercase">
+                      {spectacle.title}
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <div className="p-4">
+                    <p className="text-sm">{spectacle.description}</p>
+
+                    {/* Lien "En savoir plus" */}
+                    <div className="mt-4">
+                      <Link href={spectacle.link} className="text-blue-400 font-medium hover:text-blue-500 flex items-center">
+                        En savoir plus
+                        <span className="ml-2">→</span>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
-      
-              {/* Description */}
-              <div className="p-4">
-                <p className="text-sm">{spectacle.description}</p>
-                
-                {/* Lien "En savoir plus" */}
-                <div className="mt-4">
-                  <Link href={spectacle.link} className="text-blue-400 font-medium hover:text-blue-500 flex items-center">
-                    En savoir plus
-                    <span className="ml-2">→</span>
-                  </Link>
-                </div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Bouton Suivant */}
+          <button
+            onClick={handleNextSpectacle}
+            className="absolute -right-2 z-10 text-white text-4xl px-3 py-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-80 transition"
+          >
+            ›
+          </button>
         </div>
       
         

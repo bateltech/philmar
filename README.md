@@ -1,5 +1,5 @@
 # philmar
-Artist website developed with Next.js
+Artist website developed with Next.js 14
 
 ## To Do
 
@@ -21,10 +21,12 @@ Artist website developed with Next.js
 - [x] Titre qui slide à gauche s'il est trop long
 
 ### Page Concerts
-- [ ] Carousel des concerts
+- [x] Carousel des concerts
+- [ ] Résoudre le glitch visuel
 
 ### Page Spectacles
-- [ ] Carousel de spectacles
+- [x] Carousel de spectacles
+- [ ] Résoudre le glitch visuel
 
 ### Page Accueil
 - [x] Lecteur SoundCloud customisé
@@ -35,23 +37,31 @@ Artist website developed with Next.js
 - [ ] Formulaire de contact
 
 ### Animation
-- [ ] Page Accueil
-- [ ] Page Discographie
-- [ ] Page Biographie
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-
-### Responsivity
 - [x] Page Accueil
 - [ ] Page Discographie
 - [ ] Page Biographie
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ] Page Concerts
+- [ ] Page Spectacles
+- [ ] Page Instruments
+- [ ] Page Voix
+- [ ] Page Programmateurs
+
+### Responsivity
+- [x] Page Accueil
+- [x] Page Discographie
+- [ ] Page Biographie
+- [ ] Page Concerts
+- [ ] Page Spectacles
+- [ ] Page Instruments
+- [ ] Page Voix
+- [ ] Page Programmateurs
 
 ### SEO
+- [ ] Page Accueil
+- [ ] Page Discographie
+- [ ] Page Biographie
+- [ ] Page Concerts
+- [ ] Page Spectacles
+- [ ] Page Instruments
+- [ ] Page Voix
+- [ ] Page Programmateurs
