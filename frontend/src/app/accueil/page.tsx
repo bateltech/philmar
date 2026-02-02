@@ -311,7 +311,7 @@ export default function Accueil() {
             objectif de lui donner une nouvelle vie axée spécifiquement sur la reconnexion à la nature et la création
             artistique.
             </p>
-            <Link href="/eco-lieu" className="text-blue-500 mt-4 inline-block">
+            <Link href="https://ecolieu-art-terre.fr" className="text-blue-500 mt-4 inline-block">
             En savoir plus →
             </Link>
         </div>
@@ -332,7 +332,7 @@ export default function Accueil() {
             déroulant avec moult couleurs, dialogues, descriptions et réflexions? Si vous êtes intrigués, vous serez
             conquis, envoûtés par Les Humains adorent les Histoires.
             </p>
-            <Link href="/ouvrages" className="text-blue-500 mt-4 inline-block">
+            <Link href="https://philmarbook.github.io/page/" className="text-blue-500 mt-4 inline-block">
             En savoir plus →
             </Link>
         </div>
