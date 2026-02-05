@@ -182,13 +182,13 @@ export default function Spectacles() {
         <section id="recents" className="py-16 px-6 md:px-12 h-screen">
           <div className="flex justify-between items-center mt-8 mb-12">
             {/* Titre à gauche */}
-            <h2 className="text-3xl md:text-4xl font-bold">Les plus récents</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">Les spectacles</h2>
 
             {/* Bouton à droite */}
             <Link href="/concerts" 
             onClick={(e) => {
               e.preventDefault();  // Empêcher le comportement Next.js par défaut
-              window.location.href = "/concerts"; // Forcer le reload
+              globalThis.location.href = "/concerts"; // Forcer le reload
             }}
             className="inline-block border border-white px-6 py-3 text-lg rounded-full hover:bg-white hover:text-black transition">
               Checkez les concerts de Philmar →

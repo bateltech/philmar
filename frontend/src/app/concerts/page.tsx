@@ -208,13 +208,13 @@ export default function Concerts() {
         <section id="recents" className="py-10 sm:py-16 px-3 sm:px-6 md:px-12 min-h-screen sm:h-auto lg:h-screen">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-4 sm:mt-8 mb-8 sm:mb-12 gap-4 sm:gap-0">
             {/* Titre à gauche */}
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Les plus récents</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Les concerts</h2>
 
             {/* Bouton à droite */}
             <Link href="/spectacles"
             onClick={(e) => {
               e.preventDefault();
-              window.location.href = "/spectacles";
+              globalThis.location.href = "/spectacles";
             }}
             className="inline-block border border-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-lg rounded-full hover:bg-white hover:text-black transition">
               Checkez les spectacles de Philmar →
