@@ -1,6 +1,7 @@
 import './globals.css';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
+import LayoutShell from '../components/layout-shell';
 
 export const metadata = {
     title: "Philmar - Site Officiel",
@@ -18,15 +19,15 @@ export const metadata = {
     },
     themeColor: "#ffffff",
   };
-  
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <html lang="fr">
       <body>
-      <Navbar />
-        {children}
-        <Footer />
+        <LayoutShell navbar={<Navbar />} footer={<Footer />}>
+          {children}
+        </LayoutShell>
       </body>
     </html>
   );

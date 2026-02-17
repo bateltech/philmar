@@ -132,3 +132,7 @@ dist
 
 frontend/yarn.lock
 frontend/package-lock.json
+
+# Admin temp files
+frontend/public/images/temp/
+frontend/public/images/thumbnails/

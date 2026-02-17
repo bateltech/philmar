@@ -1,0 +1,14 @@
+{
+  "name": "philmar",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"yarn dev:back\" \"yarn dev:front\"",
+    "dev:front": "cd frontend && yarn dev",
+    "dev:back": "cd backend && yarn start:dev",
+    "install:all": "cd frontend && yarn install && cd ../backend && yarn install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
