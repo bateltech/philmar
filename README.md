@@ -99,7 +99,7 @@ Le frontend sera accessible sur `http://localhost:3001` et le backend sur `http:
 - [ ] Formulaire de contact
 
 ### Pages Admin
-- [ ] 
+- [x] Ajouter/supprimer/modifier des enregistrements
 - [ ] 
 - [ ] 
 - [ ] 
