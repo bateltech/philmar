@@ -1,64 +1,75 @@
-# philmar
-Artist website developed with Next.js 14
+# 🎵 Philmar
 
-## Installation
+> Site web d'artiste développé avec **Next.js 14** & **NestJS**
 
-### Prérequis
+## 🌐 Déploiement
+
+| Service | Plateforme | URL |
+|---------|------------|-----|
+| 🖥️ Frontend | [Vercel](https://vercel.com) | [philmar.vercel.app](https://philmar.vercel.app) |
+| ⚙️ Backend | [Render](https://render.com) | [philmar-backend.onrender.com](https://philmar-backend.onrender.com) |
+
+## 🛠️ Stack technique
+
+- **Frontend** : Next.js 14 · React 18 · Tailwind CSS · Framer Motion
+- **Backend** : NestJS · Passport JWT · Sharp · Multer
+- **Monorepo** : Yarn Workspaces · Concurrently
+
+## 🚀 Installation
+
+### 📋 Prérequis
 
 - [Node.js](https://nodejs.org/) (v18 ou supérieur)
 - [Yarn](https://yarnpkg.com/) (v1.x)
 
-### Cloner le repo
+### 📥 Cloner le repo
 
 ```bash
-git clone <url-du-repo>
+git clone https://github.com/bateltech/philmar.git
 cd philmar
 ```
 
-### Installer les dépendances
-
-Depuis la racine du projet, installer toutes les dépendances (frontend + backend) en une seule commande :
+### 📦 Installer les dépendances
 
 ```bash
 yarn install          # dépendances racine (concurrently)
 yarn install:all      # dépendances frontend + backend
 ```
 
-### Configurer l'environnement
-
-Copier le fichier d'exemple et le compléter avec vos valeurs :
+### ⚙️ Configurer l'environnement
 
 ```bash
 cp backend/.env.example backend/.env
 ```
 
 Renseigner les variables dans `backend/.env` :
-- `ADMIN_PASSWORD_HASH` : hash bcrypt du mot de passe admin (générer avec `yarn hash-password` dans `/backend`)
-- `JWT_SECRET` : chaîne aléatoire de 64 caractères
 
-### Lancer le projet
+| Variable | Description |
+|----------|-------------|
+| `ADMIN_USERNAME` | Nom d'utilisateur admin |
+| `ADMIN_PASSWORD_HASH` | Hash bcrypt du mot de passe (générer avec `yarn hash-password` dans `/backend`) |
+| `JWT_SECRET` | Chaîne aléatoire de 64 caractères |
+| `JWT_EXPIRY` | Durée du token (ex: `24h`) |
+| `CORS_ORIGIN` | URL du frontend (ex: `http://localhost:3001`) |
 
-**Frontend + Backend en même temps** (depuis la racine) :
+### ▶️ Lancer le projet
 
 ```bash
+# 🔥 Frontend + Backend en même temps
 yarn dev
-```
 
-**Frontend uniquement** (port 3001) :
-
-```bash
+# 🖥️ Frontend uniquement (port 3001)
 yarn dev:front
-```
 
-**Backend uniquement** :
-
-```bash
+# ⚙️ Backend uniquement (port 3000)
 yarn dev:back
 ```
 
 Le frontend sera accessible sur `http://localhost:3001` et le backend sur `http://localhost:3000`.
 
-## To Do
+---
+
+## 📝 To Do
 
 ### Page Instruments
 - [x] Component Ateliers
@@ -91,18 +102,18 @@ Le frontend sera accessible sur `http://localhost:3001` et le backend sur `http:
 - [x] Drag & Drop le lecteur
 
 ### Page Programmateurs
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ]
+- [ ]
+- [ ]
 
 ### Footer
 - [ ] Formulaire de contact
 
 ### Pages Admin
 - [x] Ajouter/supprimer/modifier des enregistrements
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ]
+- [ ]
+- [ ]
 
 ### Animation
 - [x] Page Accueil
