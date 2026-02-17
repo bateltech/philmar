@@ -5,9 +5,9 @@
   "license": "UNLICENSED",
 
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "lint": "next lint"
   },
   "dependencies": {
@@ -21,6 +21,7 @@
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.22",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.544.0",
     "next": "14.2.5",
     "react": "^18",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@types/aos": "^3.0.7",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -40,4 +42,3 @@
     "typescript": "^5"
   }
 }
-
