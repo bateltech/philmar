@@ -87,9 +87,6 @@ web_modules/
 .next
 out
 
-# NestJS compiled output
-backend/dist/
-
 # Nuxt.js build / generate output
 .nuxt
 
