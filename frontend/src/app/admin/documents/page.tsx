@@ -67,7 +67,7 @@ export default function DocumentsPage() {
       )}
 
       {/* Header */}
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <p className="text-gray-600">{documents.length} document(s) PDF</p>
         <button
           onClick={() => setShowUploader(!showUploader)}
@@ -104,15 +104,15 @@ export default function DocumentsPage() {
             {documents.map((doc) => (
               <div
                 key={doc.path}
-                className="flex items-center justify-between p-4 hover:bg-gray-50"
+                className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 hover:bg-gray-50"
               >
-                <div className="flex items-center gap-4">
-                  <div className="rounded-lg bg-red-100 p-3">
-                    <FileText className="h-6 w-6 text-red-600" />
+                <div className="flex items-center gap-3 md:gap-4 min-w-0">
+                  <div className="shrink-0 rounded-lg bg-red-100 p-2 md:p-3">
+                    <FileText className="h-5 w-5 md:h-6 md:w-6 text-red-600" />
                   </div>
-                  <div>
-                    <p className="font-medium text-gray-900">{doc.name}</p>
-                    <p className="text-sm text-gray-500">
+                  <div className="min-w-0">
+                    <p className="font-medium text-gray-900 truncate">{doc.name}</p>
+                    <p className="text-sm text-gray-500 truncate">
                       {formatFileSize(doc.size)} - {doc.path}
                     </p>
                   </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import AdminSidebar from './AdminSidebar';
@@ -14,6 +14,7 @@ interface AdminLayoutProps {
 export default function AdminLayout({ children, title }: AdminLayoutProps) {
   const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -38,10 +39,10 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
-      <AdminSidebar />
-      <div className="ml-64">
-        <AdminHeader title={title} />
-        <main className="p-6">{children}</main>
+      <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <div className="md:ml-64">
+        <AdminHeader title={title} onMenuToggle={() => setSidebarOpen(true)} />
+        <main className="p-4 md:p-6">{children}</main>
       </div>
     </div>
   );

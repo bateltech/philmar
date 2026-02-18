@@ -62,26 +62,26 @@ export default function DataTable<T extends object>({
       )}
 
       {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full">
+      <div className="relative overflow-x-auto">
+        <table className="w-full min-w-[500px]">
           <thead className="bg-gray-50">
             <tr>
               {showIndex && (
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase text-gray-500 w-12">
+                <th className="px-2 md:px-4 py-3 text-left text-xs font-medium uppercase text-gray-500 w-12">
                   #
                 </th>
               )}
               {columns.map((column) => (
                 <th
                   key={String(column.key)}
-                  className="px-4 py-3 text-left text-xs font-medium uppercase text-gray-500"
+                  className="px-2 md:px-4 py-3 text-left text-xs font-medium uppercase text-gray-500"
                   style={{ width: column.width }}
                 >
                   {column.label}
                 </th>
               ))}
               {(onEdit || onDelete) && (
-                <th className="px-4 py-3 text-right text-xs font-medium uppercase text-gray-500 w-24">
+                <th className="px-2 md:px-4 py-3 text-right text-xs font-medium uppercase text-gray-500 w-24">
                   Actions
                 </th>
               )}
@@ -92,7 +92,7 @@ export default function DataTable<T extends object>({
               <tr>
                 <td
                   colSpan={columns.length + (showIndex ? 1 : 0) + (onEdit || onDelete ? 1 : 0)}
-                  className="px-4 py-8 text-center text-gray-500"
+                  className="px-2 md:px-4 py-8 text-center text-gray-500"
                 >
                   {emptyMessage}
                 </td>
@@ -101,7 +101,7 @@ export default function DataTable<T extends object>({
               data.map((item, index) => (
                 <tr key={index} className="hover:bg-gray-50">
                   {showIndex && (
-                    <td className="px-4 py-3 text-sm text-gray-500">
+                    <td className="px-2 md:px-4 py-3 text-sm text-gray-500">
                       <div className="flex items-center gap-2">
                         <GripVertical className="h-4 w-4 text-gray-300" />
                         {index + 1}
@@ -111,7 +111,7 @@ export default function DataTable<T extends object>({
                   {columns.map((column) => (
                     <td
                       key={String(column.key)}
-                      className="px-4 py-3 text-sm text-gray-700"
+                      className="px-2 md:px-4 py-3 text-sm text-gray-700"
                     >
                       {column.render
                         ? column.render(item, index)
@@ -119,7 +119,7 @@ export default function DataTable<T extends object>({
                     </td>
                   ))}
                   {(onEdit || onDelete) && (
-                    <td className="px-4 py-3 text-right">
+                    <td className="px-2 md:px-4 py-3 text-right">
                       <div className="flex items-center justify-end gap-2">
                         {onEdit && (
                           <button

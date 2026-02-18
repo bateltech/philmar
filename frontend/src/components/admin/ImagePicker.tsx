@@ -78,9 +78,9 @@ export default function ImagePicker({
       <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose} />
 
       {/* Modal */}
-      <div className="relative z-10 flex h-[80vh] w-full max-w-4xl flex-col rounded-lg bg-white shadow-xl">
+      <div className="relative z-10 mx-2 flex h-[90vh] md:h-[80vh] w-full max-w-full md:max-w-4xl flex-col rounded-lg bg-white shadow-xl">
         {/* Header */}
-        <div className="flex items-center justify-between border-b px-6 py-4">
+        <div className="flex items-center justify-between border-b px-4 md:px-6 py-4">
           <h2 className="text-xl font-semibold">Sélectionner une image</h2>
           <button
             onClick={onClose}
@@ -91,8 +91,8 @@ export default function ImagePicker({
         </div>
 
         {/* Toolbar */}
-        <div className="flex items-center gap-4 border-b px-6 py-3">
-          <div className="relative flex-1">
+        <div className="flex flex-wrap items-center gap-2 md:gap-4 border-b px-4 md:px-6 py-3">
+          <div className="relative flex-1 min-w-[150px]">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
@@ -106,7 +106,7 @@ export default function ImagePicker({
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none"
+            className="rounded-lg border border-gray-300 px-3 md:px-4 py-2 text-sm md:text-base focus:border-blue-500 focus:outline-none"
           >
             <option value="">Toutes les catégories</option>
             {categories.map((cat) => (
@@ -118,15 +118,16 @@ export default function ImagePicker({
 
           <button
             onClick={() => setShowUploader(!showUploader)}
-            className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+            className="flex items-center gap-2 rounded-lg bg-blue-600 px-3 md:px-4 py-2 text-sm md:text-base text-white hover:bg-blue-700"
           >
             <Upload className="h-4 w-4" />
-            Importer
+            <span className="hidden sm:inline">Importer</span>
+            <span className="sm:hidden">+</span>
           </button>
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-4 md:p-6">
           {showUploader ? (
             <div className="mb-6">
               <ImageUploader
@@ -152,7 +153,7 @@ export default function ImagePicker({
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
               {filteredImages.map((image) => (
                 <button
                   key={image.path}
