@@ -166,7 +166,7 @@ export default function AvisPage() {
       {editingItem && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black bg-opacity-50" onClick={() => setEditingItem(null)} />
-          <div className="relative z-10 w-full max-w-lg rounded-lg bg-white p-6 shadow-xl">
+          <div className="relative z-10 mx-2 w-full max-w-full md:max-w-lg max-h-[90vh] overflow-y-auto rounded-lg bg-white p-4 md:p-6 shadow-xl">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-lg font-semibold">
                 {editingIndex === -1 ? 'Ajouter un avis' : 'Modifier l\'avis'}

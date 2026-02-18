@@ -168,7 +168,7 @@ export default function DiscographiePage() {
       {editingItem && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black bg-opacity-50" onClick={() => setEditingItem(null)} />
-          <div className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg bg-white p-6 shadow-xl">
+          <div className="relative z-10 mx-2 w-full max-w-full md:max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg bg-white p-4 md:p-6 shadow-xl">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-lg font-semibold">
                 {editingIndex === -1 ? 'Ajouter un album' : 'Modifier l\'album'}
@@ -178,7 +178,7 @@ export default function DiscographiePage() {
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="col-span-2">
                 <FormField
                   label="Titre"

@@ -79,8 +79,8 @@ export default function GaleriePage() {
       )}
 
       {/* Tabs */}
-      <div className="mb-6 flex items-center justify-between">
-        <div className="border-b border-gray-200">
+      <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="border-b border-gray-200 w-full sm:w-auto">
           <nav className="-mb-px flex gap-4">
             <button
               onClick={() => setActiveTab('galerie')}
