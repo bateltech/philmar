@@ -1,5 +1,10 @@
-// Middleware disabled: cookie-based auth check doesn't work cross-domain
-// (backend on Render, frontend on Vercel). Auth protection is handled
-// client-side by AuthProvider + AdminLayout components.
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-export { };
+export function middleware(request: NextRequest) {
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: '/admin/:path*',
+};
