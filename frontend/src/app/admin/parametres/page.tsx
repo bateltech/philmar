@@ -9,6 +9,9 @@ interface DernierAlbum {
   soundcloud: {
     playlistUrl: string;
   };
+  vinyl?: {
+    playlistUrl: string;
+  };
 }
 
 export default function ParametresPage() {
@@ -69,9 +72,9 @@ export default function ParametresPage() {
       <div className="max-w-2xl">
         {/* Dernier Album Section */}
         <div className="rounded-lg border border-gray-200 bg-white p-6">
-          <h2 className="mb-4 text-lg font-semibold">Dernier Album (Page d'accueil)</h2>
+          <h2 className="mb-4 text-lg font-semibold">Dernier Album (Page d&apos;accueil)</h2>
           <p className="mb-6 text-sm text-gray-600">
-            Configurez le lecteur SoundCloud affiché sur la page d'accueil.
+            Configurez le lecteur SoundCloud affiché sur la page d&apos;accueil.
           </p>
 
           {dernierAlbum && (
@@ -90,31 +93,57 @@ export default function ParametresPage() {
               helpText="Copiez l'URL de votre playlist SoundCloud"
             />
           )}
+        </div>
 
-          <div className="mt-6 flex items-center gap-4">
-            <button
-              onClick={handleSave}
-              disabled={isSaving}
-              className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:bg-blue-400"
-            >
-              {isSaving ? (
-                <>
-                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-                  Enregistrement...
-                </>
-              ) : saved ? (
-                <>
-                  <Check className="h-4 w-4" />
-                  Enregistré
-                </>
-              ) : (
-                <>
-                  <Save className="h-4 w-4" />
-                  Enregistrer
-                </>
-              )}
-            </button>
-          </div>
+        {/* Lecteur Vinyle Section */}
+        <div className="mt-6 rounded-lg border border-gray-200 bg-white p-6">
+          <h2 className="mb-4 text-lg font-semibold">Lecteur Vinyle</h2>
+          <p className="mb-6 text-sm text-gray-600">
+            Configurez la playlist SoundCloud jouée par le disque vinyle (visible sur toutes les pages).
+          </p>
+
+          {dernierAlbum && (
+            <FormField
+              label="URL de la playlist SoundCloud (Vinyle)"
+              name="vinylPlaylistUrl"
+              type="url"
+              value={dernierAlbum.vinyl?.playlistUrl ?? ''}
+              onChange={(v) =>
+                setDernierAlbum({
+                  ...dernierAlbum,
+                  vinyl: { playlistUrl: v as string },
+                })
+              }
+              placeholder="https://soundcloud.com/username/sets/playlist-name"
+              helpText="Copiez l'URL de la playlist à jouer sur le lecteur vinyle"
+            />
+          )}
+        </div>
+
+        {/* Bouton Enregistrer */}
+        <div className="mt-6 flex items-center gap-4">
+          <button
+            onClick={handleSave}
+            disabled={isSaving}
+            className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:bg-blue-400"
+          >
+            {isSaving ? (
+              <>
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                Enregistrement...
+              </>
+            ) : saved ? (
+              <>
+                <Check className="h-4 w-4" />
+                Enregistré
+              </>
+            ) : (
+              <>
+                <Save className="h-4 w-4" />
+                Enregistrer
+              </>
+            )}
+          </button>
         </div>
 
         {/* Info Section */}
@@ -126,7 +155,7 @@ export default function ParametresPage() {
               Instruments, Voix, Ateliers, Avis, Galeries
             </li>
             <li>
-              <strong>Formats d'images :</strong> PNG, JPG, GIF, WebP (max 10MB)
+              <strong>Formats d&apos;images :</strong> PNG, JPG, GIF, WebP (max 10MB)
             </li>
             <li>
               <strong>Formats de documents :</strong> PDF (max 20MB)
@@ -139,10 +168,10 @@ export default function ParametresPage() {
           <h3 className="mb-2 font-medium text-yellow-800">Sécurité</h3>
           <p className="text-sm text-yellow-700">
             Pour modifier les identifiants de connexion, modifiez les variables
-            d'environnement dans le fichier <code className="rounded bg-yellow-100 px-1">.env</code> du backend :
+            d&apos;environnement dans le fichier <code className="rounded bg-yellow-100 px-1">.env</code> du backend :
           </p>
           <ul className="mt-2 space-y-1 text-sm text-yellow-700">
-            <li><code className="rounded bg-yellow-100 px-1">ADMIN_USERNAME</code> - Nom d'utilisateur</li>
+            <li><code className="rounded bg-yellow-100 px-1">ADMIN_USERNAME</code> - Nom d&apos;utilisateur</li>
             <li><code className="rounded bg-yellow-100 px-1">ADMIN_PASSWORD_HASH</code> - Hash bcrypt du mot de passe</li>
           </ul>
           <p className="mt-2 text-sm text-yellow-700">

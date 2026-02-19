@@ -134,7 +134,7 @@ Le frontend sera accessible sur `http://localhost:3001` et le backend sur `http:
 - [x] Page Instruments
 - [x] Page Voix
 - [ ] Page Programmateurs
-- [ ] Pages Admin
+- [x] Pages Admin
 
 ### SEO
 - [ ] Page Accueil

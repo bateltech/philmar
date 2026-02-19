@@ -28,11 +28,11 @@ export default function Biographie() {
         <div className="md:w-1/2">
           <h2 className="text-xl font-bold mb-8">Premières expériences musicales</h2>
           <p className="text-sm leading-relaxed ml-8">
-            Philmar est né en 1965 dans les montagnes de Haute-Savoie, où il découvre la grandeur et la vivacité enchanteresse de la nature et la foi liturgique celtique. Outre la randonnée en forêt, les cloches et la voix gutturale sont venues, culture non cultivée, constituer les bases et la passion pure de ses éveils musicaux.
+            Philmar est né en 1965 dans les montagnes de Haute-Savoie, où il a découvert la grandeur et la variété enchanteresse d'une nature à la fois tellurique et céleste. Quelques chansons en famille, des disques variés, et une guitare sont venus enrichir son quotidien, constituant les bases de sa passion pour la musique.
+          </p>
 
-            </p>
           <p className="text-sm leading-relaxed mt-8 ml-16">
-            Ayant commencé la guitare classique à l&apos;âge de 12 ans, Philmar est surtout joueur dans des groupes de rock à partir de l&apos;âge de 16 ans. Autodidacte dès le départ, il n’a jamais suivi de cours de musique. Sa soif d’aventure le pousse vers le monde, à propager et à faire propager les musiques du monde, guidé par ses rencontres et son évolution personnelle.
+            Ayant commencé la guitare classique à l'âge de 12 ans, Philmar s'est surtout illustré dans des groupes de rock à partir de 1980. Avec quelques bases de jazz, il a exploré divers styles musicaux dans des projets, allant de la variété au jazz-rock, en passant par le rock progressif et les musiques du monde, guidé par ses rencontres et son évolution personnelle.
           </p>
         </div>
       </section>
@@ -117,9 +117,10 @@ export default function Biographie() {
         <div className="md:w-1/2">
           <h2 className="text-xl font-bold mb-4">Nouvelles Orientations</h2>
           <p className="text-sm leading-relaxed">
-            À partir des années 2000 Philmar individualise son activité musicale tout en la diversifiant. Continuant à jouer dans des groupes musicaux, il fait aussi des concerts, en solo ou en co-création avec divers artistes de disciplines que la musique : le conte, le théâtre, les arts plastiques, la danse, le yoga, le clown. L’album Mille et une Graines (2006), de poésie et d’improvisation, l’associent tant à des artistes plasticiens qu’à des chercheurs scientifiques.
+            À partir des années 2000 Philmar individualise son activité musicale tout en la diversifiant. Continuant à jouer dans des groupes musicaux il fait aussi des concerts solo, et co-crée des spectacles avec divers artistes d'autres disciplines que la musique : le conte, le théâtre, les arts plastiques, la danse,... Ce peuvent être des spectacles élaborés comme des performance improvisées, l'essentiel étant la diversité et l'authenticité des expériences artistiques, la joie de la créativité.
             <br /><br />
-            En parallèle il commence à enseigner pour divers projets (notamment la musique et le soufî) et lors de l’été au Festival de Musiques du Réel, plus de 1000 participants, compositeurs et improvisateurs du monde entier. Il réalise également de nombreux projets dans le cadre de l’éducation nationale, des hôpitaux, ou en lien avec la parentalité et la petite enfance. Il développe également des projets dans les festivals, en colonie et en accompagnement d’autres disciplines (la danse notamment).
+            En parallèle il commence à enregistrer pour divers projets (notamment la musique et les voix off de la série de 7 albums Mathilde & Renardeau, des histoires pour enfants, produits par le label Rejoice). 
+            De même c'est aussi au début des années 2000 qu'il déploie ses compétences d'animation auprès de nombreux publics (ateliers, stages, musicothérapie dans des centres, des collectivités territoriales, des festivals, etc), en solo ou en accompagnement d'autres disciplines (la danse notamment).
           </p>
         </div>
       </section>
@@ -129,7 +130,7 @@ export default function Biographie() {
         <div className="flex flex-col gap-6">
           <h2 className="text-xl font-bold mb-4">Instruments et Chants du Monde - Improvisation</h2>
           <p className="text-sm leading-relaxed">
-            L’intérêt de Philmar pour les musiques traditionnelles dans le monde se développe en parallèle de ses questionnements sur l’humanité, l’anthropologie. Il voyage dans quelques pays et en rapporte des instruments de musique, s’appropriant ensuite leur pratique de manière autodidacte. D’autres instruments s’ajouteront par la suite à sa collection grandissante. Il ne néglige pas pour autant les instruments électriques selon les projets.
+            L'intérêt de Philmar pour les musiques traditionnelles dans le monde se développe en parallèle de ses questionnements sur l'humanité, l'anthropologie. Il voyage dans quelques pays et en rapporte des instruments de musique, s'appropriant ensuite leur pratique de manière autodidacte. D'autres instruments s'ajouteront par la suite à sa collection grandissante. Il n'en néglige pas pour autant les instruments électriques selon les projets.
           </p>
         </div>
         <div className="w-full">
@@ -169,7 +170,8 @@ export default function Biographie() {
         {/* Existing text on the right — unmodified */}
         <div>
           <p className="text-sm leading-relaxed">
-            De plus en plus l’improvisation prend une part importante dans sa démarche musicale, en recherche sur la présence scénique, un instrumentarium de plus en plus insolite. Nomadisme en concert et en médiation. Il va être comédien en utilisant autant son chant que le cri profond en résonance avec le projet de territoire Féminité Multi et aussi acteur et metteur en scène pour 1001 chants pour la paix programmé au festival IN d’Avignon (2011), repris en 2012. Ses animations concerneront notamment vers les stages de Chant ou la Découverte des Instruments du Monde.
+            De plus en plus l'improvisation prend une part importante dans sa démarche musicale, en jouant sur la palette sonore multi-instrumentiste et multi-vocaliste. Notamment la recherche et la maîtrise de la voix comme un instrument à part entière lui confèrent en concert cette originalité, sa touche personnelle dans un chant du coeur et des tripes.
+            Il finira par concevoir et programmer le festival multi et inter-artistique d'improvisation à 100% Rencontres de l'Instant entre 2009 et 2013, et qui reprendra en 2022. Ses animations s'orientent notamment vers les stages de Chant ou la Découverte des Instruments du Monde.
           </p>
           <div className="flex gap-4 mt-4 flex-wrap">
             <Link href="/instruments"
@@ -196,7 +198,8 @@ export default function Biographie() {
         <div className="md:w-1/2">
           <h2 className="text-xl font-bold mb-4">Un Parcours Vivant</h2>
           <p className="text-sm leading-relaxed">
-            Philmar allie son désir d’authenticité à un aspect ludique de la musique, explorant sans cesse de nouveaux langages à l’oreille et spontanément et à l’écoute. Ses collaborations diversifiées et son goût pour l’improvisation, militant éthique, inspiration et recherche sonore, ont marqué son parcours, toujours en évolution.
+            Philmar allie son désir d’authenticité à un aspect ludique de la musique, explorant sans cesse de nouveaux langages à travers la spontanéité et la découverte. Ses collaborations diversifiées et son goût pour l’improvisation, mêlant émotion, inspiration et recherche sonore, marquent son cheminement, toujours en évolution. 
+            Ainsi, dans la continuité de ce parcours il reste ouvert à la passion de la créativité et à de nouvelles collaborations.
           </p>
         </div>
         <div className="md:w-1/2">
