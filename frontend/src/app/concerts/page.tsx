@@ -173,11 +173,7 @@ export default function Concerts() {
 
           {/* Texte de description */}
           <p className="mt-6 sm:mt-8 mb-12 sm:mb-24 text-base sm:text-lg leading-relaxed px-2 sm:px-4 md:px-0">
-            Philmar participe à divers événements, concerts, mais aussi vernissages ou conférences, grâce à son expérience,
-            son talent d&apos;improvisation et son interactivité. En solo ou avec son collectif, il propose une musique festive ou
-            d&apos;ambiance, qui peut être liée à un thème ou une région du monde. Selon le projet, il peut s&apos;entourer de musiciens
-            expérimentés. En lien avec des réseaux d&apos;artistes, il est possible de donner des prestations artistiques complémentaires
-            à la musique de Philmar, telles que le théâtre, la danse ou les arts plastiques.
+            Philmar participe à divers événements, concerts, mais aussi vernissages ou conférences, grâce à son expérience, son talent d’improvisation et son interactivité. En solo ou avec son collectif, il propose une musique festive ou d'ambiance, qui peut être liée à un thème ou une région du monde. Selon le projet, il peut s'entourer de musiciens expérimentés. En lien avec des réseaux d’artistes, il est possible de donner des prestations artistiques complémentaires à la musique de Philmar, telles que le théâtre, la danse ou les arts plastiques.
           </p>
 
           {/* Texte en gras */}

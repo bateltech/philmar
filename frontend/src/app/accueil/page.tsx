@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import SoundCloudPlayer from '@/components/SoundCloudPlayer';
 import usePlayerConfig from '@/components/usePlayerConfig';
-
 export default function Accueil() {
     const [isPlayerOpen, setIsPlayerOpen] = useState(false);
     const { config } = usePlayerConfig();
@@ -35,9 +34,12 @@ export default function Accueil() {
             {/* Section 1: Hero */}
             <section
                 ref={heroRef}
-                className="relative min-h-screen bg-cover bg-left bg-no-repeat"
+                className="relative min-h-screen bg-cover bg-center md:bg-left bg-no-repeat"
                 style={{ backgroundImage: "url('/images/home_phil.png')",}}
             >
+                {/* Overlay léger pour lisibilité du texte */}
+                <div className="absolute inset-0 bg-black bg-opacity-25 backdrop-blur-[1.5px]"></div>
+
                 <div
 
                     className={`relative z-10 min-h-screen flex items-center justify-center md:justify-end text-white px-6 sm:px-10  ${isHeroVisible ? "animate-slideInFromRight" : "opacity-0"
@@ -48,10 +50,10 @@ export default function Accueil() {
                             Philmar - Philippe Martin
                         </h1>
                         <p className="max-w-lg text-lg mb-6 text-white">
-                            Musicien dans l&apos;âme et professionnel depuis plus de 30 ans, Philmar vibre et fait vibrer de ses chants et instruments, nous faisant ainsi voyager vers de lointains horizons et jusqu&apos;au cœur de nous-même.
+                            Musicien dans l'âme et professionnel Philmar inspire et fait vibrer de ses chants et instruments, nous faisant ainsi voyager vers de lointains horizons et jusqu'au coeur de nous-même.
                         </p>
-                        <button 
-                        onClick={() => setIsPlayerOpen(true)} 
+                        <button
+                        onClick={() => setIsPlayerOpen(true)}
                         className="bg-blue-950 hover:bg-blue-900 text-white font-semibold py-2 px-4 rounded-md flex items-center justify-between">
                             Écoutez mon dernier album
                             <svg className="ml-8" xmlns="http://www.w3.org/2000/svg" width="23" height="23" style={{ transform: "rotate(90deg)" }}>
@@ -67,20 +69,19 @@ export default function Accueil() {
                 </div>
             </section>
             {/* Section 2: Biographie */}
-            <section className="py-24 my-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/biographie.png')" }}>
+            <section className="py-8 my-8 md:py-24 md:my-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/biographie.png')" }}>
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col md:flex-row items-center justify-center">
                     {/* Text Section */}
                     <div ref={textRef}
                         className={`md:w-3/5 px-6 py-10 sm:px-10 lg:p-16 ${isTextVisible ? "animate-slideInFromLeft" : ""}`}>
                         <h2 className="text-4xl font-bold mb-8 text-white">Biographie</h2>
-                        <p className="text-lg text-white text-justify mb-4">
-                            Musicien depuis plus de 30 ans, j&apos;ai eu la chance de jouer dans de nombreux groupes, explorant des genres variés comme le rock, la variété, le jazz, l&apos;ethnique, l&apos;électro et le folk.
-                            J&apos;ai également enregistré plusieurs albums et collaboré avec des conteurs, des comédiens, des danseuses et des plasticiens pour des spectacles et des performances.
+                        <p className="text-lg text-white text-left md:text-justify mb-4">
+                            Musicien depuis plus de 40 ans, Philmar a joué dans de nombreux groupes, explorant des genres variés comme le rock, la variété, le jazz, l'ethnique, l'électro et le folk. Il a également enregistré plusieurs albums et collaboré avec des conteurs, des comédiens, des danseuses et des plasticiens pour des spectacles et des performances. Il a également animé et co-animé de nombreux ateliers et stages.
                         </p>
-                        <p className="text-lg text-white text-justify mb-4">
+                        {/* <p className="text-lg text-white text-left md:text-justify mb-4">
                             J&apos;ai commencé avec la guitare, tant acoustique qu&apos;électrique, mais je me suis rapidement tourné vers le chant, qui est devenu mon instrument de prédilection. Aujourd&apos;hui, je joue divers instruments du monde (cordes, vent, percussions) et je chante dans de nombreux styles, allant du yodel au chant oriental, en passant par le chant de gorge et le joik, sans oublier le scat jazz et d&apos;autres chants occidentaux.
                             J&apos;anime également des ateliers et des stages sur l&apos;exploration de la voix et la découverte des instruments du monde.
-                        </p>
+                        </p> */}
                         {/* <button className="mt-4 border border-blue-800 text-blue-800 font-semibold py-2 px-6 rounded-lg hover:bg-white">
                             Lire plus sur Philmar...
                         </button> */}
@@ -116,7 +117,7 @@ export default function Accueil() {
 
             <section
                 ref={sectionRef} // Attach the ref to the section
-                className="relative py-12 md:py-16 bg-cover bg-center bg-contain h-auto md:h-[50rem] w-full text-white flex items-center"
+                className="relative py-8 md:py-16 bg-cover bg-center bg-contain h-auto md:h-[50rem] w-full text-white flex items-center"
                 style={{ backgroundImage: "url('/images/performances-bg.jpg')" }}
             >
                 {/* Overlay */}
@@ -151,8 +152,8 @@ export default function Accueil() {
                             {/* Text Content */}
                             <div className="flex flex-col text-left">
                                 <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Spectacles</h3>
-                                <p className="text-sm md:text-base text-justify">
-                                    Dans mes spectacles, j&apos;aime fusionner différentes formes d&apos;art pour créer une expérience unique.
+                                <p className="text-sm md:text-base text-left md:text-justify">
+                                    Dans ses spectacles, Philmar aime fusionner différentes formes d'art pour créer une expérience unique. 
                                     Que ce soit à travers le théâtre, la danse ou des contes musicaux, chaque représentation est une aventure immersive...
                                 </p>
                                 <Link href="/spectacles">
@@ -180,11 +181,11 @@ export default function Accueil() {
                             {/* Text Content */}
                             <div className="flex flex-col text-left">
                                 <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Concerts</h3>
-                                <p className="text-sm md:text-base text-justify">
-                                    En concert, j&apos;explore la profondeur de la musique, que ce soit en solo ou avec d&apos;autres artistes.
+                                <p className="text-sm md:text-base text-left md:text-justify">
+                                    En concert, Philmar explore la profondeur de la musique, que ce soit en solo ou avec d'autres musiciens. 
                                     Chaque performance est une occasion de partager des moments intimes et authentiques avec le public...
                                 </p>
-                                <Link href="/spectacles">
+                                <Link href="/concerts">
                                     <button className="mt-2 md:mt-4 text-blue-700 font-semibold text-sm md:text-base py-1 md:py-2 rounded">
                                         En savoir plus →
                                     </button>
@@ -198,7 +199,7 @@ export default function Accueil() {
             {/* Section 4: Formations */}
             <section
     ref={sectionRef2} // Attach the ref to the section
-    className="relative py-12 md:py-16 bg-cover bg-center bg-contain h-auto md:h-[50rem] w-full text-white flex items-center"
+    className="relative py-8 md:py-16 bg-cover bg-center bg-contain h-auto md:h-[50rem] w-full text-white flex items-center"
     style={{ backgroundImage: "url('/images/formations-bg.jpg')" }}
 >
     {/* Overlay */}
@@ -213,6 +214,11 @@ export default function Accueil() {
         >
             Formations
         </h2>
+
+        <p className="text-base sm:text-lg max-w-4xl mx-auto mb-10 px-6 sm:px-12">
+            Philmar anime des ateliers, stages sur l'Exploration de la Voix et la Découverte des Instruments du Monde, accessibles à tous. 
+            Aucune connaissance musicale n'est requise pour y participer, il suffit simplement d'avoir envie de se faire plaisir, de découvrir et échanger avec des exercices ludiques.
+        </p>
 
         {/* Cards Container */}
         <div className="flex flex-col md:flex-row justify-center gap-6 md:gap-12 lg:gap-16 px-4 sm:px-8 lg:px-16 md:p-4 lg:p-16">
@@ -233,10 +239,8 @@ export default function Accueil() {
                 {/* Text Content */}
                 <div className="flex flex-col text-left">
                     <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Voix</h3>
-                    <p className="text-sm md:text-base text-justify">
-                        La voix et le chant sont peu abordés techniquement, mais par des jeux musicaux, en partant du principe
-                        que chanter est totalement naturel, que nous avons plus à lâcher nos barrières (tensions physiques,
-                        émotions cristallisées), qu&apos;à développer des moyens (techniques) que nous avons déjà dès la naissance.
+                    <p className="text-sm md:text-base text-left md:text-justify">
+                        Amateurs et professionnels apprécient autant ces stages conçus en une suite dynamique de jeux musicaux. L’approche pédagogique simple et innovante part du principe que chanter est totalement naturel, que nous avons plus à lâcher nos barrières (tensions physiques, émotions cristallisées), qu'à développer des moyens (techniques) que nous avons déjà dès la naissance.
                     </p>
                     <Link href="/voix">
                         <button className="mt-2 md:mt-4 text-blue-700 font-semibold text-sm md:text-base py-1 md:py-2 rounded">
@@ -263,10 +267,8 @@ export default function Accueil() {
                 {/* Text Content */}
                 <div className="flex flex-col text-left">
                     <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Instruments du monde</h3>
-                    <p className="text-sm md:text-base text-justify">
-                        Ce sont des ateliers qui présentent de manière interactive toutes les sortes d&apos;instruments utilisés dans
-                        les traditions culturelles. S&apos;adressant à différentes collectivités locales, il se décline en plusieurs
-                        approches suivant le public concerné.
+                    <p className="text-sm md:text-base text-left md:text-justify">
+                         Ce sont des ateliers qui présentent de manière interactive toutes les sortes d'instruments utilisés dans les traditions culturelles. S'adressant aux collectivités locales, festivals, particuliers, entreprises, il se décline en plusieurs approches suivant le public concerné.
                     </p>
                     <Link href="/instruments">
                         <button className="mt-2 md:mt-4 text-blue-700 font-semibold text-sm md:text-base py-1 md:py-2 rounded">
@@ -281,14 +283,14 @@ export default function Accueil() {
 
 
     {/* Section 5: Autres Passions */}
-    <section ref={sectionRef3} id="projets" className="relative py-20 bg-fill bg-center text-white flex items-center min-h-screen w-full" style={{ backgroundImage: "url('/images/passion.png')" }}>
+    <section ref={sectionRef3} id="projets" className="relative py-8 md:py-20 bg-fill bg-center text-white flex items-center min-h-screen w-full" style={{ backgroundImage: "url('/images/passion.png')" }}>
     {/*<div className="absolute inset-0 bg-black bg-opacity-80"></div>*/}
     {/* Overlay */}
 
     <div className={`relative z-10 container mx-auto text-center ${isSectionVisible3 ? "animate-slideInFromTop" : "opacity-0"} `}>
         <h2 className="text-4xl font-bold mb-12">Autres Passions</h2>
         <p className="text-base sm:text-lg max-w-4xl mx-auto mb-12 px-6 sm:px-12">
-        Au-delà des mélodies et des harmonies, j’ai également une passion pour l’écriture et la nature. En tant qu’auteur, j’aime partager des histoires qui résonnent avec la même intensité que ma musique. Mon amour pour la nature m’a aussi conduit à créer un éco-lieu, un projet qui reflète mon désir de vivre en harmonie avec notre environnement.
+            Au-delà des mélodies et des harmonies, j'ai également une passion pour l'écriture et la nature. En tant qu'auteur, j'aime partager des histoires ou des réflexions qui résonnent avec la même intensité que ma musique. Mon amour pour la nature m'a aussi conduit à co-créer un écolieu, un projet qui reflète mon désir de vivre en harmonie, où se réconcilier avec la nature et sa nature nous ouvre à un meilleur vivre-ensemble.
         </p>
 
         <div ref={textRef2} className={`flex flex-col md:flex-row justify-evenly gap-10 ${isTextVisible2 ? "animate-slideInFromBottom" : "opacity-0"}`}>
@@ -306,7 +308,7 @@ export default function Accueil() {
             {/* Text Content */}
             <p className="mt-4 text-sm">
             L’écolieu Art-Terre est situé au fort de Lestal dans la commune de Marthod en Savoie (vers Albertville).
-            A 700m d’altitude en montagne, avec 7ha de terrain et 3800m2 de salles. Un beau potentiel et beaucoup de
+            A 800m d’altitude en montagne, avec 7ha de terrain et 3800m2 de salles. Un beau potentiel et beaucoup de
             travaux en perspective! Le projet est de réhabiliter le lieu dans le respect du patrimoine. Nous avons pour
             objectif de lui donner une nouvelle vie axée spécifiquement sur la reconnexion à la nature et la création
             artistique.
