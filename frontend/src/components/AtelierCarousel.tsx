@@ -315,16 +315,16 @@ export default function AteliersCarousel() {
 
   return (
     <>
-      <div className="relative select-none">
-        {/* Header / Boutons */}
-        <div className="flex justify-between mb-4">
-          <button onClick={() => scrollByCards('left')} aria-label="Précédent" className="p-2 rounded hover:bg-white/10 transition" type="button">
-            <ChevronLeft className="w-6 h-6 text-white" />
-          </button>
-          <button onClick={() => scrollByCards('right')} aria-label="Suivant" className="p-2 rounded hover:bg-white/10 transition" type="button">
-            <ChevronRight className="w-6 h-6 text-white" />
-          </button>
-        </div>
+      <div className="flex items-center gap-2 sm:gap-3 select-none">
+        {/* Flèche gauche */}
+        <button
+          onClick={() => scrollByCards('left')}
+          aria-label="Précédent"
+          type="button"
+          className="flex-shrink-0 p-0 sm:w-12 sm:h-12 flex items-center justify-center sm:rounded-full sm:bg-black/60 sm:border sm:border-white/30 text-white/60 sm:text-white hover:text-white hover:sm:bg-black/80 hover:sm:border-white/60 hover:scale-110 transition-all sm:shadow-lg"
+        >
+          <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
+        </button>
 
         {/* Track */}
         <div
@@ -337,12 +337,12 @@ export default function AteliersCarousel() {
           onPointerLeave={endDrag}
           onDragStart={preventImgDrag}
           onClickCapture={onClickCapture}
-          className="flex overflow-x-auto space-x-4 scrollbar-hide scroll-smooth cursor-grab overscroll-x-contain"
+          className="flex-1 min-w-0 flex overflow-x-auto space-x-4 scrollbar-hide scroll-smooth cursor-grab overscroll-x-contain"
         >
           {items.map((atelier, index) => (
             <div
               key={`${atelier.nom}-${index}`}
-              className="flex-shrink-0 w-[300px] bg-black text-white rounded shadow border border-white/20 select-none"
+              className="flex-shrink-0 w-[calc(100vw-5.5rem)] sm:w-[300px] bg-black text-white rounded shadow border border-white/20 select-none"
             >
               <div className="relative">
                 <Image
@@ -359,7 +359,7 @@ export default function AteliersCarousel() {
                 </div>
               </div>
 
-              <div className="p-3 text-sm leading-snug">
+              <div className="p-2 sm:p-3 text-xs sm:text-sm leading-snug">
                 {atelier.description && (<p className="mb-2 text-justify">{atelier.description}</p>)}
                 {atelier.objectifs && (
                   <p className="mb-2 text-justify">
@@ -392,6 +392,16 @@ export default function AteliersCarousel() {
             </div>
           ))}
         </div>
+
+        {/* Flèche droite */}
+        <button
+          onClick={() => scrollByCards('right')}
+          aria-label="Suivant"
+          type="button"
+          className="flex-shrink-0 p-0 sm:w-12 sm:h-12 flex items-center justify-center sm:rounded-full sm:bg-black/60 sm:border sm:border-white/30 text-white/60 sm:text-white hover:text-white hover:sm:bg-black/80 hover:sm:border-white/60 hover:scale-110 transition-all sm:shadow-lg"
+        >
+          <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
+        </button>
       </div>
 
       {/* --- MODALE PDF (iframe sur blob:) --- */}

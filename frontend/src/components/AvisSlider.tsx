@@ -79,35 +79,24 @@ export default function AvisSlider() {
   const hasMultiple = avisData.length > 1;
 
   return (
-    <div className="relative max-w-xl mx-auto">
-      {/* Boutons extérieurs */}
+    <div className="flex items-center gap-1 sm:gap-3 max-w-xl mx-auto">
+      {/* Flèche gauche */}
       {hasMultiple && (
-        <>
-          <button
-            onClick={goPrev}
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-            aria-label="Avis précédent"
-            className="absolute -left-20 0 top-1/2 -translate-y-1/2 select-none text-white/80 hover:text-white p-1"
-          >
-            <ChevronLeft className="w-7 h-7" />
-          </button>
-          <button
-            onClick={goNext}
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-            aria-label="Avis suivant"
-            className="absolute -right-20 top-1/2 -translate-y-1/2 select-none text-white/80 hover:text-white p-1"
-          >
-            <ChevronRight className="w-7 h-7" />
-          </button>
-        </>
+        <button
+          onClick={goPrev}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          aria-label="Avis précédent"
+          className="flex-shrink-0 p-0 sm:p-1 select-none text-white/60 sm:text-white/80 hover:text-white transition"
+        >
+          <ChevronLeft className="w-4 h-4 sm:w-7 sm:h-7" />
+        </button>
       )}
 
       {/* Embla viewport (draggable horizontal) */}
       <div
         ref={emblaRef}
-        className="overflow-hidden"
+        className="flex-1 min-w-0 overflow-hidden"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
@@ -123,6 +112,19 @@ export default function AvisSlider() {
           ))}
         </div>
       </div>
+
+      {/* Flèche droite */}
+      {hasMultiple && (
+        <button
+          onClick={goNext}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          aria-label="Avis suivant"
+          className="flex-shrink-0 p-0 sm:p-1 select-none text-white/60 sm:text-white/80 hover:text-white transition"
+        >
+          <ChevronRight className="w-4 h-4 sm:w-7 sm:h-7" />
+        </button>
+      )}
     </div>
   );
 }

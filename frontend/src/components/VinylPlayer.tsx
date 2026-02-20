@@ -16,6 +16,31 @@ export default function VinylPlayer() {
   const widgetRef = useRef<any>(null);
   const [widgetReady, setWidgetReady] = useState(false);
 
+  /* ---- Mobile tuck (half-hidden to the right) ---- */
+  const [tucked, setTucked] = useState(true);
+  const tuckTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearTuckTimer = () => {
+    if (tuckTimer.current) { clearTimeout(tuckTimer.current); tuckTimer.current = null; }
+  };
+
+  const startTuckTimer = () => {
+    clearTuckTimer();
+    tuckTimer.current = setTimeout(() => setTucked(true), 5000);
+  };
+
+  const handleTap = () => {
+    if (tucked) {
+      setTucked(false);
+      startTuckTimer();
+    } else {
+      handleToggle();
+      startTuckTimer();
+    }
+  };
+
+  useEffect(() => () => clearTuckTimer(), []);
+
   const encoded = encodeURIComponent(playlistUrl);
   const iframeSrc = `https://w.soundcloud.com/player/?url=${encoded}&visual=false&auto_play=false`;
 
@@ -131,10 +156,12 @@ export default function VinylPlayer() {
         aria-hidden="true"
       />
 
-      <div className="fixed top-20 right-4 z-50 flex flex-col items-center gap-2">
+      <div
+        className={`fixed top-20 right-4 z-40 flex flex-col items-center gap-2 transition-transform duration-500 ease-in-out ${tucked ? 'translate-x-[52px] sm:translate-x-0' : 'translate-x-0'}`}
+      >
         {/* Vinyl disc */}
         <button
-          onClick={handleToggle}
+          onClick={handleTap}
           className={`relative w-20 h-20 rounded-full cursor-pointer focus:outline-none vinyl-spinning${isPlaying ? '' : ' vinyl-paused'}`}
           aria-label={isPlaying ? 'Pause' : 'Lecture'}
         >
@@ -164,9 +191,9 @@ export default function VinylPlayer() {
           min={0}
           max={100}
           value={volume}
-          onChange={(e) => setVolume(Number(e.target.value))}
+          onChange={(e) => { setVolume(Number(e.target.value)); startTuckTimer(); }}
           aria-label="Volume"
-          className="vinyl-volume-slider w-20"
+          className={`vinyl-volume-slider w-20 transition-opacity duration-500 ${tucked ? 'sm:opacity-100 opacity-0 pointer-events-none sm:pointer-events-auto' : 'opacity-100 pointer-events-auto'}`}
         />
       </div>
     </>
