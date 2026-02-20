@@ -89,8 +89,8 @@ export default function ParametresPage() {
                   soundcloud: { ...dernierAlbum.soundcloud, playlistUrl: v as string },
                 })
               }
-              placeholder="https://soundcloud.com/username/sets/playlist-name"
-              helpText="Copiez l'URL de votre playlist SoundCloud"
+              placeholder="https://soundcloud.com/... ou https://bandcamp.com/EmbeddedPlayer/album=..."
+              helpText="SoundCloud : collez l'URL de la playlist. Bandcamp : sur la page de l'album, cliquez Partager/Intégrer, copiez le code embed, et collez uniquement l'URL du src (celle qui commence par https://bandcamp.com/EmbeddedPlayer/album=...)"
             />
           )}
         </div>

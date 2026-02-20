@@ -17,16 +17,35 @@ type SoundCloudPlayerProps = {
   url?: string;
 };
 
+function isBandcampUrl(url: string) {
+  return url.includes('bandcamp');
+}
+
+function parseBandcampEmbed(input: string) {
+  const srcMatch = input.match(/src=["']([^"']+)["']/);
+  const widthMatch = input.match(/width:\s*(\d+)px/);
+  const heightMatch = input.match(/height:\s*(\d+)px/);
+
+  return {
+    src: srcMatch ? srcMatch[1] : input,
+    width: widthMatch ? parseInt(widthMatch[1]) : 350,
+    height: heightMatch ? parseInt(heightMatch[1]) : 786,
+  };
+}
+
 export default function SoundCloudPlayer({
   isOpen,
   onClose,
   url = 'https://soundcloud.com/philmarzic/sets/steppe-by-steppe',
 }: SoundCloudPlayerProps) {
-  /* ===================== DESKTOP VOLUME (from old component) ===================== */
+  const isBandcamp = isBandcampUrl(url);
+  const bcEmbed = isBandcamp ? parseBandcampEmbed(url) : null;
+
+  /* ===================== DESKTOP VOLUME (SoundCloud only) ===================== */
   const [volume, setVolume] = useState<number>(() => {
-    if (typeof window === 'undefined') return 80;
+    if (typeof window === 'undefined') return 100;
     const v = Number(localStorage.getItem('sc_volume'));
-    return Number.isFinite(v) ? Math.min(100, Math.max(0, v)) : 80;
+    return Number.isFinite(v) && v > 0 ? Math.min(100, v) : 100;
   });
 
   const toggleMute = () => {
@@ -54,6 +73,7 @@ export default function SoundCloudPlayer({
 
   /* ===================== SOUNDCLOUD DESKTOP INIT ===================== */
   useEffect(() => {
+    if (isBandcamp) return;
     const SC = (window as any)?.SC;
     if (!apiReady || !iframeRef.current || !SC?.Widget) return;
 
@@ -61,14 +81,15 @@ export default function SoundCloudPlayer({
     widgetRef.current.bind(SC.Widget.Events.READY, () => {
       widgetRef.current?.setVolume?.(volume);
     });
-  }, [apiReady]);
+  }, [apiReady, isBandcamp]);
 
   useEffect(() => {
+    if (isBandcamp) return;
     if (widgetRef.current?.setVolume) {
       widgetRef.current.setVolume(volume);
       localStorage.setItem('sc_volume', String(volume));
     }
-  }, [volume]);
+  }, [volume, isBandcamp]);
 
   /* ===================== DESKTOP SNAP ===================== */
   const handleDragEnd = () => {
@@ -118,14 +139,21 @@ export default function SoundCloudPlayer({
     'bottom-right': 'bottom-6 right-6',
   };
 
-  /* ===================== SOUNDCLOUD URLS ===================== */
+  /* ===================== IFRAME URLS ===================== */
   const encoded = encodeURIComponent(url);
 
-  const scDesktopSrc = `https://w.soundcloud.com/player/?url=${encoded}&visual=false`;
+  const desktopSrc = isBandcamp
+    ? bcEmbed!.src
+    : `https://w.soundcloud.com/player/?url=${encoded}&visual=false`;
 
-  const scMobileMiniSrc =
-    `https://w.soundcloud.com/player/?url=${encoded}` +
-    `&visual=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=false`;
+  const mobileSrc = isBandcamp
+    ? (() => {
+        let src = bcEmbed!.src.replace(/\/?$/, '/');
+        if (!src.includes('tracklist=')) src += 'tracklist=false/';
+        if (!src.includes('artwork=')) src += 'artwork=small/';
+        return src;
+      })()
+    : `https://w.soundcloud.com/player/?url=${encoded}&visual=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=false`;
 
   return (
     <AnimatePresence>
@@ -139,16 +167,20 @@ export default function SoundCloudPlayer({
             dragControls={dragControls}
             dragMomentum={false}
             onDragEnd={handleDragEnd}
-            style={{ x, y }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className={`
               hidden sm:block fixed z-50
               ${cornerClasses[corner]}
-              w-[360px] h-[460px]
+              ${isBandcamp ? '' : 'w-[360px] h-[460px]'}
               bg-white shadow-xl rounded-2xl border border-orange-300 overflow-hidden
             `}
+            style={
+              isBandcamp
+                ? { x, y, width: 400, height: 450 + 32 }
+                : { x, y }
+            }
           >
             {/* Drag bar */}
             <div
@@ -158,11 +190,13 @@ export default function SoundCloudPlayer({
               Drag & Drop Me
             </div>
 
-            <Script
-              src="https://w.soundcloud.com/player/api.js"
-              strategy="afterInteractive"
-              onLoad={() => setApiReady(true)}
-            />
+            {!isBandcamp && (
+              <Script
+                src="https://w.soundcloud.com/player/api.js"
+                strategy="afterInteractive"
+                onLoad={() => setApiReady(true)}
+              />
+            )}
 
             {/* Close */}
             <button
@@ -172,40 +206,44 @@ export default function SoundCloudPlayer({
               &times;
             </button>
 
-            {/* ===== VOLUME CONTROLS (FROM OLD COMPONENT) ===== */}
-            <div className="mt-2 px-3 pb-2 border-b bg-white/40 backdrop-blur-md relative z-10">
-              <div className="flex items-center gap-3 rounded-full px-3 py-2 bg-white/70 shadow-sm border">
-                <button
-                  onClick={toggleMute}
-                  className="text-base leading-none px-2 py-1 rounded-full hover:bg-white/60 transition"
-                  aria-label={volume === 0 ? 'Rétablir le son' : 'Couper le son'}
-                >
-                  {volumeIcon}
-                </button>
+            {/* ===== VOLUME CONTROLS (SoundCloud only) ===== */}
+            {!isBandcamp && (
+              <div className="mt-2 px-3 pb-2 border-b bg-white/40 backdrop-blur-md relative z-10">
+                <div className="flex items-center gap-3 rounded-full px-3 py-2 bg-white/70 shadow-sm border">
+                  <button
+                    onClick={toggleMute}
+                    className="text-base leading-none px-2 py-1 rounded-full hover:bg-white/60 transition"
+                    aria-label={volume === 0 ? 'Rétablir le son' : 'Couper le son'}
+                  >
+                    {volumeIcon}
+                  </button>
 
-                <div className="flex-1 flex items-center">
-                  <input
-                    type="range"
-                    min={0}
-                    max={100}
-                    value={volume}
-                    onChange={(e) => setVolume(Number(e.target.value))}
-                    aria-label="Volume"
-                    className="volume-slider w-full"
-                  />
+                  <div className="flex-1 flex items-center">
+                    <input
+                      type="range"
+                      min={0}
+                      max={100}
+                      value={volume}
+                      onChange={(e) => setVolume(Number(e.target.value))}
+                      aria-label="Volume"
+                      className="volume-slider w-full"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
-            {/* Desktop SoundCloud iframe */}
+            {/* Desktop iframe */}
             <iframe
-              ref={iframeRef}
-              width="100%"
-              height="100%"
-              allow="autoplay"
+              ref={isBandcamp ? undefined : iframeRef}
+              width={isBandcamp ? 400 : '100%'}
+              height={isBandcamp ? 450 : '100%'}
+              allow="autoplay; encrypted-media"
               scrolling="no"
               frameBorder="no"
-              src={scDesktopSrc}
+              src={desktopSrc}
+              style={isBandcamp ? { border: 0 } : undefined}
+              {...(isBandcamp ? { seamless: true } : {})}
             />
           </motion.div>
 
@@ -217,14 +255,16 @@ export default function SoundCloudPlayer({
             exit={{ y: 120 }}
           >
             <iframe
-              title="SoundCloud Mini Player"
+              title="Mini Player"
               className="pt-10 bg-white"
               width="100%"
-              height="150"
-              allow="autoplay"
+              height={isBandcamp ? '160' : '150'}
+              allow="autoplay; encrypted-media"
               scrolling="no"
               frameBorder="no"
-              src={scMobileMiniSrc}
+              src={mobileSrc}
+              style={isBandcamp ? { border: 0 } : undefined}
+              {...(isBandcamp ? { seamless: true } : {})}
             />
 
             <button
@@ -235,7 +275,7 @@ export default function SoundCloudPlayer({
             </button>
           </motion.div>
 
-          {/* ===== Slider styles from old component ===== */}
+          {/* ===== Slider styles ===== */}
           <style jsx global>{`
             .volume-slider {
               -webkit-appearance: none;
