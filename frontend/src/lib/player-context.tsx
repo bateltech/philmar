@@ -21,9 +21,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolumeState] = useState<number>(() => {
-    if (typeof window === 'undefined') return 80;
-    const v = Number(localStorage.getItem('vinyl_volume'));
-    return Number.isFinite(v) ? Math.min(100, Math.max(0, v)) : 80;
+    return 100;
   });
 
   const setVolume = useCallback((v: number) => {
