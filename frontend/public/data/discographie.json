@@ -146,7 +146,7 @@
     "year": 2007,
     "forSale": false,
     "purchaseLink": "https://example.com/buy/steppe",
-    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
+    "soundcloudLink": "<iframe style=\"border: 0; width: 120px; height: 160px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=159461943/size=large/bgcol=ffffff/linkcol=e99708/track=1543791865/transparent=true/\" seamless><a href=\"https://philmar.bandcamp.com/album/steppe-by-steppe\">Steppe by Steppe de Philmar</a></iframe>",
     "description": "Une Quête du Son primordial, d'une authentique Transe libératrice, en parcourant tambours et cordes, voix et vents, paysages et peuples, dans une géographie imaginaire qui nous en ramène au plus profond de nous-même. Instruments traditionnels et parfois électriques se répondent, et construisent l'architecture sonore éphémère propre à l'improvisation."
   },
   {

@@ -1,14 +1,22 @@
 import Image from 'next/image';
 
+interface VoixSection {
+  label: string;
+  content: string;
+}
+
 interface VoixCardProps {
   title: string;
   image: string;
-  description: string;
-  details?: string;
-  extra?: string;
+  description?: string;
+  objectifs?: string;
+  moyens?: string;
+  contenu?: string;
+  horaires?: string;
+  sections?: VoixSection[];
 }
 
-export default function VoixCard({ title, image, description, details, extra }: VoixCardProps) {
+export default function VoixCard({ title, image, description, objectifs, moyens, contenu, horaires, sections }: VoixCardProps) {
   return (
     <div className="flex-shrink-0 w-[320px] bg-black text-white rounded shadow border border-white">
       <div className="relative">
@@ -24,16 +32,31 @@ export default function VoixCard({ title, image, description, details, extra }: 
         </div>
       </div>
       <div className="p-3 text-sm leading-snug">
-        <p className="mb-2">{description}</p>
-        {details && (
+        {description && <p className="mb-2">{description}</p>}
+        {sections && sections.map((section, i) => (
+          <p key={i} className="mb-2 text-gray-300 text-xs">
+            <span className="font-bold text-white">{section.label} :</span> {section.content}
+          </p>
+        ))}
+        {objectifs && (
           <p className="mb-2 text-gray-300 text-xs">
-            <span className="font-bold text-white">Détails :</span> {details}
+            <span className="font-bold text-white">Objectifs :</span> {objectifs}
           </p>
         )}
-        {extra && (
-          <a href="#" className="text-blue-400 font-semibold underline text-sm">
-            {extra}
-          </a>
+        {moyens && (
+          <p className="mb-2 text-gray-300 text-xs">
+            <span className="font-bold text-white">Moyens :</span> {moyens}
+          </p>
+        )}
+        {contenu && (
+          <p className="mb-2 text-gray-300 text-xs">
+            <span className="font-bold text-white">Contenu :</span> {contenu}
+          </p>
+        )}
+        {horaires && (
+          <p className="mb-2 text-gray-300 text-xs">
+            <span className="font-bold text-white">Horaires :</span> {horaires}
+          </p>
         )}
       </div>
     </div>

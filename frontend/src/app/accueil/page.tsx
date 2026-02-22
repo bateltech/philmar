@@ -313,7 +313,7 @@ export default function Accueil() {
             objectif de lui donner une nouvelle vie axée spécifiquement sur la reconnexion à la nature et la création
             artistique.
             </p>
-            <Link href="https://ecolieu-art-terre.fr" className="text-blue-500 mt-4 inline-block">
+            <Link href="https://ecolieu-art-terre.fr" target="_blank" className="text-blue-500 mt-4 inline-block">
             En savoir plus →
             </Link>
         </div>
@@ -330,11 +330,9 @@ export default function Accueil() {
             </div>
             {/* Text Content */}
             <p className="mt-4 text-sm">
-            Êtes-vous prêts à voyager dans les contrées inconnues, les univers étranges et l’humour insolite d’un ouvrage
-            déroulant avec moult couleurs, dialogues, descriptions et réflexions? Si vous êtes intrigués, vous serez
-            conquis, envoûtés par Les Humains adorent les Histoires.
+            2 livres édités de nouvelles, essais et poèmes, et 2 en cours d'écriture sur la méthode de chant et sur la structure énergétique du corps.
             </p>
-            <Link href="https://philmarbook.github.io/page/" className="text-blue-500 mt-4 inline-block">
+            <Link href="https://philmarbook.github.io/page/" target="_blank" className="text-blue-500 mt-4 inline-block">
             En savoir plus →
             </Link>
         </div>

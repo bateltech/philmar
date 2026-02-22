@@ -2,18 +2,26 @@
 import { useEffect, useState } from 'react';
 import VoixCard from './VoixCard';
 
+interface VoixSection {
+  label: string;
+  content: string;
+}
+
 interface VoixItem {
   type: 'stage' | 'atelier' | 'cours';
   title: string;
   image: string;
-  description: string;
-  details?: string;
-  extra?: string;
+  description?: string;
+  objectifs?: string;
+  moyens?: string;
+  contenu?: string;
+  horaires?: string;
+  sections?: VoixSection[];
 }
 
 export default function VoixCardsGrid() {
   const [data, setData] = useState<VoixItem[]>([]);
-  const [filter, setFilter] = useState<'stage' | 'atelier' | 'cours'>('atelier');
+  const [filter, setFilter] = useState<'stage' | 'atelier' | 'cours'>('stage');
 
   useEffect(() => {
     fetch('/data/voix_data.json')

@@ -2,6 +2,7 @@
 import FilterDropdown from '../../components/FilterDropdown';
 import AlbumCard from '../../components/AlbumCard';
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 type SortMode = 'recent' | 'old' | 'alpha';
 
@@ -22,20 +23,34 @@ export default function Discographie () {
     const [activePlayerId, setActivePlayerId] = useState<string | null>(null);
 
     const [albums, setAlbums] = useState<Album[]>([]);
+    const [albumsLoaded, setAlbumsLoaded] = useState(false);
     useEffect(() => {
       fetch('/data/discographie.json')
         .then((res) => res.json())
-        .then(setAlbums);
+        .then((data) => {
+          setAlbums(data);
+          setAlbumsLoaded(true);
+        });
     }, []);
 
   return (
     <div className="min-h-screen bg-[length:100%_auto] bg-top bg-no-repeat" style={{ backgroundImage: "url('/images/sun_bg.png')" }}>
       <div className="container mx-auto py-20 sm:py-24 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-24 sm:mt-[8rem] mb-12 sm:mb-24 text-center sm:text-left sm:ml-12">Discographie</h1>
+        <motion.h1
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-24 sm:mt-[8rem] mb-12 sm:mb-24 text-center sm:text-left sm:ml-12"
+        >Discographie</motion.h1>
         
         {/* Filter Buttons */}
-        <div className="flex flex-col lg:flex-row lg:justify-between gap-6 lg:gap-0 px-0 sm:px-6 lg:px-24">
-            <div className="flex flex-wrap justify-center gap-3 mb-4 sm:mb-8">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+          className="flex flex-col lg:flex-row lg:justify-between gap-6 lg:gap-0 px-0 sm:px-6 lg:px-24"
+        >
+            <div className="flex flex-wrap justify-start sm:justify-center gap-3 mb-4 sm:mb-8">
                 <button
                 onClick={() => setSelectedGenre('all')}
                 className={`px-4 sm:px-6 py-2 ${selectedGenre === 'all' ? 'bg-blue-950 border border-blue-950' : 'border border-white'}  text-white cursor-pointer hover:bg-blue-950 border hover:border-blue-950`}
@@ -62,17 +77,28 @@ export default function Discographie () {
                 </button>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-3 mb-4 sm:mb-8">
+            <div className="flex flex-wrap justify-start sm:justify-center gap-3 mb-4 sm:mb-8">
                 {/* Dropdown */}
                 <FilterDropdown value={sortMode} onChange={setSortMode} />
             </div>
-        </div>
+        </motion.div>
 
         {/* Albums Grid */}
-        <div
+        <motion.div
+          key={selectedGenre}
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
           gap-6 sm:gap-8 mt-8
           px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32"
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.05,
+              },
+            },
+          }}
+          initial="hidden"
+          animate={albumsLoaded ? 'visible' : 'hidden'}
         >
           {albums
             .filter(
@@ -85,25 +111,32 @@ export default function Discographie () {
               if (sortMode === 'alpha') return a.title.localeCompare(b.title);
               return 0;
             })
-            .map((album, index) => (
-              <AlbumCard
-                key={index}
-                title={album.title}
-                imageSrc={album.imageSrc}
-                genre={album.genre}
-                forSale={album.forSale}
-                description={album.description} 
-                purchaseLink={album.purchaseLink}
-                soundcloudLink={album.soundcloudLink}
-                isPlayerActive={activePlayerId === album.title}
-                onTogglePlayer={() =>
-                  setActivePlayerId(
-                    activePlayerId === album.title ? null : album.title
-                  )
-                }
-              />
+            .map((album) => (
+              <motion.div
+                key={album.title}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.95 },
+                  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: 'easeOut' } },
+                }}
+              >
+                <AlbumCard
+                  title={album.title}
+                  imageSrc={album.imageSrc}
+                  genre={album.genre}
+                  forSale={album.forSale}
+                  description={album.description}
+                  purchaseLink={album.purchaseLink}
+                  soundcloudLink={album.soundcloudLink}
+                  isPlayerActive={activePlayerId === album.title}
+                  onTogglePlayer={() =>
+                    setActivePlayerId(
+                      activePlayerId === album.title ? null : album.title
+                    )
+                  }
+                />
+              </motion.div>
             ))}
-        </div>
+        </motion.div>
 
       </div>
     </div>
