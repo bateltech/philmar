@@ -3,18 +3,23 @@
 import { useState, useEffect } from 'react';
 import { AdminLayout, DataTable, ConfirmDialog, FormField, ImagePicker } from '@/components/admin';
 import { adminApi } from '@/lib/admin-api';
-import { X, Image as ImageIcon } from 'lucide-react';
+import { X, Plus, Trash2, Image as ImageIcon } from 'lucide-react';
+
+interface VoixSection {
+  label: string;
+  content: string;
+}
 
 interface VoixItem {
   type: string;
   title: string;
   image: string;
-  description: string;
-  details: string;
+  description?: string;
   objectifs?: string;
-  infos?: string;
-  infos2?: string;
-  link: string;
+  moyens?: string;
+  contenu?: string;
+  horaires?: string;
+  sections?: VoixSection[];
 }
 
 const typeOptions = [
@@ -54,10 +59,6 @@ export default function VoixPage() {
       title: '',
       image: '',
       description: '',
-      details: '',
-      objectifs: '',
-      infos: '',
-      link: '/contact',
     });
     setEditingIndex(-1);
   };
@@ -226,52 +227,120 @@ export default function VoixPage() {
                   label="Description"
                   name="description"
                   type="textarea"
-                  value={editingItem.description}
+                  value={editingItem.description || ''}
                   onChange={(v) => setEditingItem({ ...editingItem, description: v as string })}
                   rows={3}
                   required
                 />
               </div>
 
-              <div className="col-span-2">
-                <FormField
-                  label="Détails"
-                  name="details"
-                  type="textarea"
-                  value={editingItem.details}
-                  onChange={(v) => setEditingItem({ ...editingItem, details: v as string })}
-                  rows={3}
-                  required
-                />
-              </div>
+              {/* Cours & Ateliers : sections dynamiques */}
+              {(editingItem.type === 'atelier' || editingItem.type === 'cours') && (
+                <div className="col-span-2">
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-sm font-medium text-gray-700">Sections</label>
+                    <button
+                      type="button"
+                      onClick={() => setEditingItem({
+                        ...editingItem,
+                        sections: [...(editingItem.sections || []), { label: '', content: '' }],
+                      })}
+                      className="flex items-center gap-1 rounded-lg border border-gray-300 px-3 py-1 text-sm hover:bg-gray-50"
+                    >
+                      <Plus className="h-4 w-4" /> Ajouter
+                    </button>
+                  </div>
+                  {(editingItem.sections || []).map((section, i) => (
+                    <div key={i} className="mb-3 rounded-lg border border-gray-200 p-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs text-gray-500">Section {i + 1}</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = [...(editingItem.sections || [])];
+                            updated.splice(i, 1);
+                            setEditingItem({ ...editingItem, sections: updated });
+                          }}
+                          className="text-red-400 hover:text-red-600"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
+                      <FormField
+                        label="Label"
+                        name={`section-label-${i}`}
+                        value={section.label}
+                        onChange={(v) => {
+                          const updated = [...(editingItem.sections || [])];
+                          updated[i] = { ...updated[i], label: v as string };
+                          setEditingItem({ ...editingItem, sections: updated });
+                        }}
+                        required
+                      />
+                      <FormField
+                        label="Contenu"
+                        name={`section-content-${i}`}
+                        type="textarea"
+                        value={section.content}
+                        onChange={(v) => {
+                          const updated = [...(editingItem.sections || [])];
+                          updated[i] = { ...updated[i], content: v as string };
+                          setEditingItem({ ...editingItem, sections: updated });
+                        }}
+                        rows={2}
+                        required
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
 
-              <div className="col-span-2">
-                <FormField
-                  label="Objectifs"
-                  name="objectifs"
-                  type="textarea"
-                  value={editingItem.objectifs || ''}
-                  onChange={(v) => setEditingItem({ ...editingItem, objectifs: v as string })}
-                  rows={2}
-                  helpText="Optionnel"
-                />
-              </div>
+              {/* Stages : champs fixes */}
+              {editingItem.type === 'stage' && (
+                <>
+                  <div className="col-span-2">
+                    <FormField
+                      label="Objectifs"
+                      name="objectifs"
+                      type="textarea"
+                      value={editingItem.objectifs || ''}
+                      onChange={(v) => setEditingItem({ ...editingItem, objectifs: v as string })}
+                      rows={2}
+                    />
+                  </div>
 
-              <FormField
-                label="Infos"
-                name="infos"
-                value={editingItem.infos || ''}
-                onChange={(v) => setEditingItem({ ...editingItem, infos: v as string })}
-                helpText="Optionnel (ex: horaires)"
-              />
+                  <div className="col-span-2">
+                    <FormField
+                      label="Moyens"
+                      name="moyens"
+                      type="textarea"
+                      value={editingItem.moyens || ''}
+                      onChange={(v) => setEditingItem({ ...editingItem, moyens: v as string })}
+                      rows={2}
+                    />
+                  </div>
 
-              <FormField
-                label="Lien"
-                name="link"
-                value={editingItem.link}
-                onChange={(v) => setEditingItem({ ...editingItem, link: v as string })}
-                required
-              />
+                  <div className="col-span-2">
+                    <FormField
+                      label="Contenu"
+                      name="contenu"
+                      type="textarea"
+                      value={editingItem.contenu || ''}
+                      onChange={(v) => setEditingItem({ ...editingItem, contenu: v as string })}
+                      rows={3}
+                    />
+                  </div>
+
+                  <FormField
+                    label="Horaires"
+                    name="horaires"
+                    value={editingItem.horaires || ''}
+                    onChange={(v) => setEditingItem({ ...editingItem, horaires: v as string })}
+                    helpText="Ex: 10h-13h et 14h30-17h30"
+                  />
+                </>
+              )}
+
             </div>
 
             <div className="mt-6 flex justify-end gap-3">

@@ -3,54 +3,97 @@
     "type": "cours",
     "title": "CHANT/VOIX (généralement 1h)",
     "image": "/images/voix/CHANTVOIX (généralement 1h).jpg",
-    "description": "Redécouvrir que le chant est naturel, par le jeu, par le corps, par l’exploration, avec des approches créatives ou méditatives, corporelles ou énergétiques. Se mettre en voix, s’exprimer, improviser, s’accompagner en rythme et en musique. Ce temps individuel permet de s’offrir un temps d’écoute de soi, de libérer la voix, de chanter simplement ou d’approfondir sa pratique musicale.",
-    "details": "Cet espace individuel permet de s’approprier la place de la Voix, de prendre le temps d’être écouté·e et de renouer à son propre corps sonore. Selon les besoins de la personne, il permet de mettre au travail des techniques vocales ou rythmiques, de stimuler la créativité, de libérer le souffle, de travailler sur la détente ou l’énergie, ou encore d’explorer la voix et le rythme en lien avec la musique, le mouvement, la composition musicale, le solo ou la création de chansons (textes compris).",
-    "link": "/contact"
+    "description": "Redécouvrir que le chant est naturel, par le jeu, par le corps, par l'exploration, par des approches créatives ou méditatives, corporelles, énergétiques. Se sentir vibrant, vivant, et s'exprimer spontanément et avec plus de fluidité.\nCette méthode permet de découvrir ou d''approfondir le plaisir de \"donner de la voix\", de chanter plus librement et d'aller à la rencontre de son être profond.\nSur la base de cette approche il est possible aussi de travailler des techniques vocales, d'affiner l'oreille, de développer le sens du rythme, et d'appliquer ces résultats sur le travail vocal de chansons de tous styles, ou à la composition musicale, ou à la création de chansons (textes compris).",
+    "sections": []
   },
   {
     "type": "atelier",
     "title": "CHANT LIBRE (2h ou 3h)",
     "image": "/images/voix/Logo Philmar.jpg",
-    "description": "Exploration : Chant sans paroles, jeu avec les sons, surprise et découverte.",
-    "details": "Pratiques : Exercices avec le souffle, le corps et des instruments, sans prérequis musicaux.",
-    "objectifs": "Éveil du ressenti corporel et émotionnel, créativité libre, écoute mutuelle, fluidité vocale.",
-    "link": "/contact"
+    "description": "",
+    "sections": [
+      {
+        "label": "Exploration",
+        "content": "Chant sans parole, jeu avec les sons, surprise et découverte."
+      },
+      {
+        "label": "Pratique",
+        "content": "Exercices avec la voix, le corps et des instruments, sans prérequis musical."
+      },
+      {
+        "label": "Objectifs",
+        "content": "Éveil du ressenti corporel et émotionnel, créativité libre, écoute mutuelle, fluidité vocale."
+      }
+    ]
   },
   {
     "type": "atelier",
     "title": "Différentes thématiques (selon la demande, 1h à 4h)",
     "image": "/images/voix/Logo Philmar.jpg",
-    "description": "Sur la base du Chant Libre.",
-    "details": "Activités possibles associées : Danse libre, percussions corporelles, création vocale, chant de l’instant, travail sur l’écoute, expérimentation instrumentale.",
-    "objectifs": "Développement des perceptions, écoute, initiative, esprit d’équipe, communication et créativité.",
-    "link": "/contact"
+    "description": "",
+    "sections": [
+      {
+        "label": "Base",
+        "content": "Sur la base de Chant Libre."
+      },
+      {
+        "label": "Activités possibles associées",
+        "content": "Danse libre, percussions corporelles, création collective de chansons, travail sur l'élocution, expérimentation instrumentale."
+      },
+      {
+        "label": "Bénéfices",
+        "content": "Développement des perceptions, écoute, initiative, esprit d'équipe, communication et créativité."
+      }
+    ]
   },
   {
     "type": "stage",
     "title": "CHANTER LA VIE Best-of : jouer de la voix et vivre son chant",
     "image": "/images/voix/CHANTER LA VIE Best of - jouer de la voix et vivre son chant.jpg",
-    "description": "Objectifs : Les jeux vocaux permettent de retrouver ou développer le naturel de la voix, de se relier à son corps, d’expérimenter l’exploration du chant en se rendant disponible à l’instant. L’écoute de soi et de l’autre est essentielle pour vivre un chant authentique et fluide. Improvisation musicale, voix et rythme : la créativité vocale.",
-    "details": "Ce stage s’adresse à toute personne souhaitant explorer ou approfondir le lien entre corps, voix et créativité, avec un accompagnement corporel et vocal adapté. Les participants sont invités à explorer des moments ludiques autour de la voix. Le cadre permet différents approfondissements techniques autour de la voix.",
-    "infos": "Généralement 10h-13h et 14h30-17h30",
-    "link": "/contact"
+    "description": "",
+    "objectifs": "Les jeux vocaux permettent de retrouver ou développer le naturel de la voix, du corps et de l'être, d'expérimenter l'euphorie du chant en se rendant disponible à l'aventure de l'Instant, à la créativité interactive.",
+    "moyens": "Exploration de jeux musicaux par la voix et le corps. Venez avec votre plaisir de partager et d'éveiller la Vie en soi et avec les autres !",
+    "contenu": "L'exploration des voyelles fera suite aux échauffements corporels et vocaux, ainsi que différents thèmes d'exercices ludiques autour de la voix. Des cercles de chant seront accompagnés d'instruments par l'animateur.",
+    "horaires": "Généralement 10h-13h et 14h30-17h30"
   },
   {
     "type": "stage",
     "title": "CHANT DIPHONIQUE – la Voix Arc-en-Ciel",
     "image": "/images/voix/CHANT DIPHONIQUE – la Voix Arc-en-Ciel.jpg",
-    "description": "“Diphonique” signifie “2 sons”. Oui, on peut chanter 2 notes en même temps !",
-    "details": "Objectifs : Découvrir et pratiquer le chant diphonique (sélectionner les harmoniques naturelles de la voix, une méthode sifflée, ancrée dans des mouvements de l’énergie vitale).",
-    "infos": "Ce stage permet une expression vocale intense, une approche ludique, des expériences singulières à chacun·e, en groupe ou individuellement.",
-    "infos2": "Horaires : Généralement 10h-13h et 14h30-17h30",
-    "link": "/contact"
+    "description": "\"Diphonique\" signifie \"2 sons\". Oui, on peut chanter 2 notes en même temps ! → des Voyelles au Chant Mongol",
+    "objectifs": "Découvrir et pratiquer le chant diphonique (sélectionner les harmoniques ou fréquences de la voix), cette mélodie sifflée, danse arc-en-ciel des voyelles.",
+    "moyens": "Une attention au ressenti, une approche ludique, indications techniques précises adaptées à chacun, en groupes et individuellement.",
+    "contenu": "Echauffements, jeux vocaux, voyelles, travail de la voix, notions musicales, techniques spécifiques et diverses au chant harmonique, au chant diphonique.",
+    "horaires": "Généralement 10h-13h et 14h30-18h30"
   },
   {
     "type": "stage",
     "title": "EXPLORATION VOCALE (Chanter la Vie - Série de 3 stages)",
     "image": "/images/voix/EXPLORATION VOCALE (Chanter la Vie 1 - Série de 3 stages).jpg",
-    "description": "Objectifs : Pour un retour à l’essentiel de l’expérience de chanter, il s’agit de redécouvrir que chacun·e a une voix, un chant et des rythmes propres.",
-    "details": "Le premier stage est axé sur la respiration, l’écoute, et l’être corporel. Le deuxième développe une relation créative à la voix, et la liberté d’improviser. Le troisième approfondit la richesse musicale de la voix, la composition intuitive et collective. Les sessions peuvent inclure exercices corporels, vocalises, rythmes, chants intuitifs, partages vocaux, improvisations collectives, jeu rythmique et musical.",
-    "infos": "Généralement 10h-13h et 14h30-17h30. Plus →",
-    "link": "/contact"
+    "description": "Stage ouvert à tous, musiciens professionnels ou non. 1er de la série de 3 stages Chanter la Vie : Ils peuvent être suivis de manière indépendante, mais il est préférable de suivre le cursus dans l'ordre.",
+    "objectifs": "Pour un retour à l'essentiel de l'expérience de chanter, il s'agit de retrouver ou développer le naturel de la voix, du corps et de l'être, d'expérimenter l'euphorie du chant en se rendant disponible à l'aventure de l'Instant.",
+    "moyens": "Différents jeux musicaux sont abordés avec la voix, le corps, par l'exploration vocale, les exercices  thématiques et la création.",
+    "contenu": "Exploration des phonèmes dans leur ressenti, leur écoute et leur gestuelle, différents thèmes d'exercices ludiques, échauffements, relaxations musicales, Qi Cong, accompagnement d'instruments par l'animateur.",
+    "horaires": "Généralement 10h-13h et 14h30-17h30"
+  },
+  {
+    "type": "stage",
+    "title": "MUSIQUE DE LA VOIX (Chanter la Vie 2 - Série de 3 stages)",
+    "image": "/images/voix/MUSIQUE DE LA VOIX (Chanter la Vie 2 - Série de 3 stages).jpg",
+    "description": "Stage ouvert à tous, musiciens professionnels ou non. 2e de la série de 3 stages Chanter la Vie : Ils peuvent être suivis de manière indépendante, mais il est préférable de suivre le cursus dans l'ordre. ",
+    "objectifs": "Il s'agit d'aborder par le chant les éléments fondamentaux de la musique. Après la richesse unique de l'expression vocale abordée dans le stage Chanter la Vie 1, c'est une palette d'outils musicaux qui enrichira votre créativité et inventivité.",
+    "moyens": "On jouera par la voix avec les paramètres sonores que sont les durées, les hauteurs, les intensités, les timbres,… et notre inspiration collective.",
+    "contenu": "Exploration du rythme, de la mélodie, de l'harmonie avec différents thèmes d'exercices ludique, des échauffements corporels, relaxations musicales, danse libre, accompagnement d'instruments par l'animateur.",
+    "horaires": "Généralement 10h-13h et 14h30-17h30"
+  },
+  {
+    "type": "stage",
+    "title": "VOIX DU MONDE (Chanter la Vie 3 - Série de 3 stages)",
+    "image": "/images/voix/VOIX DU MONDE (Chanter la Vie 3 - Série de 3 stages).jpg",
+    "description": "Stage ouvert à tous, musiciens professionnels ou non. 3e de la série de 3 stages Chanter la Vie. Ils peuvent être suivis de manière indépendante, mais il est préférable de suivre le cursus dans l'ordre. ",
+    "objectifs": "Nous aborderons dans ce stage la diversité des couleurs et des stylistiques vocales. On ira vers plus de profondeur et de vie dans notre chant pour une meilleure expressivité personnelle et un partage plus riche. Après le chant spontané abordé dans le stage Chanter la Vie 1, les éléments musicaux de Chanter la Vie 2, ce 3e ouvre aux chants du monde et à votre imaginaire sonore.",
+    "moyens": "On découvrira les postures et zones de vibration qui permettent certaines sonorités typiques ou originales, la puissance du souffle qui soutient et projette la voix. Éveiller les sens, et s'amuser avec des effets de style, échanger, confronter, accompagner le groupe.",
+    "contenu": "Exploration du timbre vocal et des voix du monde avec différents thèmes d'exercices ludiques, des échauffements corporels, relaxations musicales, danse libre, accompagnement d'instruments par l'animateur.",
+    "horaires": "Généralement 10h-13h et 14h30-17h30"
   }
 ]

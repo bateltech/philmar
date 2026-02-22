@@ -13,7 +13,7 @@ interface FormFieldProps {
   options?: { value: string; label: string }[];
   rows?: number;
   error?: string;
-  helpText?: string;
+  helpText?: React.ReactNode;
 }
 
 export default function FormField({

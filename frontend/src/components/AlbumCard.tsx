@@ -42,10 +42,24 @@ const AlbumCard = ({
     }
   }, [overlayVisible, title]);
 
-  const soundcloudEmbedUrl = soundcloudLink
-    ? `https://w.soundcloud.com/player/?url=${encodeURIComponent(
-        soundcloudLink
-      )}&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false`
+  const isBandcamp = soundcloudLink?.includes('bandcamp') ?? false;
+
+  // Parse Bandcamp: accepte un code <iframe> complet ou juste l'URL embed
+  const parseBandcampSrc = (input: string) => {
+    const srcMatch = input.match(/src=["']([^"']+)["']/);
+    let src = srcMatch ? srcMatch[1] : input;
+    // Forcer size=large
+    src = src.replace(/\/size=[^/]*\//, '/size=large/');
+    if (!src.includes('size=')) src = src.replace(/\/?$/, '/size=large/');
+    return src;
+  };
+
+  const embedUrl = soundcloudLink
+    ? isBandcamp
+      ? parseBandcampSrc(soundcloudLink)
+      : `https://w.soundcloud.com/player/?url=${encodeURIComponent(
+          soundcloudLink
+        )}&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false`
     : null;
 
   return (
@@ -83,7 +97,7 @@ const AlbumCard = ({
             </div>
 
             {/* Description */}
-            <p className="text-xs sm:text-[0.875em] max-h-[7em] overflow-y-auto pr-1 scrollbar-transparent">
+            <p className="text-xs sm:text-[0.875em] max-h-[7.5em] overflow-y-auto pr-1 scrollbar-transparent">
               {description}
             </p>
           </div>
@@ -125,9 +139,9 @@ const AlbumCard = ({
           </div>
 
           {/* Player */}
-          {isPlayerActive && soundcloudEmbedUrl && (
+          {isPlayerActive && embedUrl && (
             <div className="absolute inset-0 bg-black bg-opacity-90 flex items-center justify-center z-20">
-              <div className="relative w-[90%] max-w-md">
+              <div className="relative w-[95%] max-w-md">
                 <button
                   onClick={onTogglePlayer}
                   className="absolute -top-8 right-0 text-white text-sm opacity-70 hover:opacity-100"
@@ -136,11 +150,13 @@ const AlbumCard = ({
                 </button>
 
                 <iframe
-                  width="100%"
-                  height="120"
-                  allow="autoplay"
-                  src={soundcloudEmbedUrl}
+                  width={isBandcamp ? '80%' : '100%'}
+                  height={isBandcamp ? '150' : '120'}
+                  allow="autoplay; encrypted-media"
+                  src={embedUrl}
                   className="rounded"
+                  style={isBandcamp ? { border: 0, display: 'block', margin: '0 auto' } : undefined}
+                  {...(isBandcamp ? { seamless: true } : {})}
                 />
               </div>
             </div>

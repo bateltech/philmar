@@ -15,7 +15,7 @@ const Footer = () => {
        
             {/* Contact Form */}
             <div className="flex flex-col items-center space-y-4">
-                <h2 className="text-lg text-right">Pour toute proposition de travail, vous pouvez me contacter</h2>
+                <h2 className="text-lg text-right">Pour toute proposition, vous pouvez me contacter</h2>
           
                 <input 
                     type="email" 
@@ -36,7 +36,7 @@ const Footer = () => {
                 <div className="flex space-x-8 justify-center text-white">
                     <div className="flex items-center justify-center  space-x-2">
                         <FontAwesomeIcon icon={faEnvelope} />
-                        <Link href="mailto:philmarzic@lilo.org" className="hover:underline">philmarzic@lilo.org</Link>
+                        <span>philmar @ lilo.org</span>
                     </div>
 
                     <div className="flex items-center justify-center space-x-2">

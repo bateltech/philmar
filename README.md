@@ -117,7 +117,7 @@ Le frontend sera accessible sur `http://localhost:3001` et le backend sur `http:
 
 ### Animation
 - [x] Page Accueil
-- [ ] Page Discographie
+- [x] Page Discographie
 - [x] Page Biographie
 - [ ] Page Concerts
 - [ ] Page Spectacles

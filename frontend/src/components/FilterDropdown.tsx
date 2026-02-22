@@ -34,7 +34,7 @@ const FilterDropdown = ({  value, onChange }: FilterDropdownProps) => {
       {/* Dropdown Button */}
       <button
         onClick={toggleDropdown}
-        className="flex items-center justify-between px-4 py-2 border border-white w-48 space-x-2 transition-colors duration-200 hover:bg-blue-950 hover:border-blue-950"
+        className="flex items-center px-4 py-2 border border-white whitespace-nowrap space-x-2 transition-colors duration-200 hover:bg-blue-950 hover:border-blue-950"
       >
         <FontAwesomeIcon icon={faSortAmountDownAlt} />
         <span className="ml-2">{currentLabel}</span>
@@ -46,7 +46,7 @@ const FilterDropdown = ({  value, onChange }: FilterDropdownProps) => {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-700 shadow-lg z-20">
+        <div className="absolute right-0 mt-2 w-full min-w-max bg-white border border-gray-700 shadow-lg z-20">
           <ul className="text-black text-left">
             <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer" onClick={() => { onChange('recent'); setIsOpen(false); }} > Les plus récents </li>
             <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer" onClick={() => { onChange('old'); setIsOpen(false); }} > Les plus anciens </li>

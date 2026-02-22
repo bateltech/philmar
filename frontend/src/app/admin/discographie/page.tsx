@@ -260,12 +260,13 @@ export default function DiscographiePage() {
 
               <div className="col-span-2">
                 <FormField
-                  label="Lien SoundCloud"
+                  label="Lien SoundCloud ou Bandcamp"
                   name="soundcloudLink"
                   type="url"
                   value={editingItem.soundcloudLink || ''}
                   onChange={(v) => setEditingItem({ ...editingItem, soundcloudLink: v as string })}
-                  placeholder="https://soundcloud.com/..."
+                  placeholder="https://soundcloud.com/... ou code iframe Bandcamp"
+                  helpText={<>SoundCloud : collez l&apos;URL de la playlist ou du morceau.<br />Bandcamp : sur la page de l&apos;album, cliquez Partager/Intégrer, copiez le code embed complet (&lt;iframe ...&gt;) et collez-le ici.</>}
                 />
               </div>
             </div>
