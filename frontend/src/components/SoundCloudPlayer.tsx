@@ -21,6 +21,10 @@ function isBandcampUrl(url: string) {
   return url.includes('bandcamp');
 }
 
+function isSpotifyUrl(url: string) {
+  return url.includes('spotify');
+}
+
 function parseBandcampEmbed(input: string) {
   const srcMatch = input.match(/src=["']([^"']+)["']/);
   const widthMatch = input.match(/width:\s*(\d+)px/);
@@ -33,13 +37,38 @@ function parseBandcampEmbed(input: string) {
   };
 }
 
+function parseSpotifyEmbed(input: string) {
+  // Accepte une URL de partage OU un code iframe collé.
+  const srcMatch = input.match(/src=["']([^"']+)["']/);
+  let raw = (srcMatch ? srcMatch[1] : input).trim();
+
+  // Retire un éventuel préfixe de langue (ex: /intl-fr/)
+  raw = raw.replace(/open\.spotify\.com\/intl-[a-z]+\//, 'open.spotify.com/');
+
+  // Transforme l'URL de partage en URL d'intégration
+  if (!raw.includes('/embed/')) {
+    raw = raw.replace('open.spotify.com/', 'open.spotify.com/embed/');
+  }
+
+  // Retire les paramètres de requête (ex: ?si=...)
+  return raw.split('?')[0];
+}
+
 export default function SoundCloudPlayer({
   isOpen,
   onClose,
   url = 'https://soundcloud.com/philmarzic/sets/steppe-by-steppe',
 }: SoundCloudPlayerProps) {
   const isBandcamp = isBandcampUrl(url);
+  const isSpotify = isSpotifyUrl(url);
+  // "widget" = lecteur SoundCloud natif (API volume, script SC).
+  const isWidget = !isBandcamp && !isSpotify;
   const bcEmbed = isBandcamp ? parseBandcampEmbed(url) : null;
+  const spotifySrc = isSpotify ? parseSpotifyEmbed(url) : '';
+
+  // Dimensions du cadre desktop pour les lecteurs à taille fixe (Bandcamp/Spotify)
+  const extWidth = 400;
+  const extHeight = isBandcamp ? 450 : 352; // Spotify : 352px
 
   /* ===================== DESKTOP VOLUME (SoundCloud only) ===================== */
   const [volume, setVolume] = useState<number>(() => {
@@ -73,7 +102,7 @@ export default function SoundCloudPlayer({
 
   /* ===================== SOUNDCLOUD DESKTOP INIT ===================== */
   useEffect(() => {
-    if (isBandcamp) return;
+    if (!isWidget) return;
     const SC = (window as any)?.SC;
     if (!apiReady || !iframeRef.current || !SC?.Widget) return;
 
@@ -81,15 +110,15 @@ export default function SoundCloudPlayer({
     widgetRef.current.bind(SC.Widget.Events.READY, () => {
       widgetRef.current?.setVolume?.(volume);
     });
-  }, [apiReady, isBandcamp]);
+  }, [apiReady, isWidget]);
 
   useEffect(() => {
-    if (isBandcamp) return;
+    if (!isWidget) return;
     if (widgetRef.current?.setVolume) {
       widgetRef.current.setVolume(volume);
       localStorage.setItem('sc_volume', String(volume));
     }
-  }, [volume, isBandcamp]);
+  }, [volume, isWidget]);
 
   /* ===================== DESKTOP SNAP ===================== */
   const handleDragEnd = () => {
@@ -144,6 +173,8 @@ export default function SoundCloudPlayer({
 
   const desktopSrc = isBandcamp
     ? bcEmbed!.src
+    : isSpotify
+    ? spotifySrc
     : `https://w.soundcloud.com/player/?url=${encoded}&visual=false`;
 
   const mobileSrc = isBandcamp
@@ -153,6 +184,8 @@ export default function SoundCloudPlayer({
         if (!src.includes('artwork=')) src += 'artwork=small/';
         return src;
       })()
+    : isSpotify
+    ? spotifySrc
     : `https://w.soundcloud.com/player/?url=${encoded}&visual=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=false`;
 
   return (
@@ -173,13 +206,13 @@ export default function SoundCloudPlayer({
             className={`
               hidden sm:block fixed z-50
               ${cornerClasses[corner]}
-              ${isBandcamp ? '' : 'w-[360px] h-[460px]'}
+              ${isWidget ? 'w-[360px] h-[460px]' : ''}
               bg-white shadow-xl rounded-2xl border border-orange-300 overflow-hidden
             `}
             style={
-              isBandcamp
-                ? { x, y, width: 400, height: 450 + 32 }
-                : { x, y }
+              isWidget
+                ? { x, y }
+                : { x, y, width: extWidth, height: extHeight + 32 }
             }
           >
             {/* Drag bar */}
@@ -190,7 +223,7 @@ export default function SoundCloudPlayer({
               Drag & Drop Me
             </div>
 
-            {!isBandcamp && (
+            {isWidget && (
               <Script
                 src="https://w.soundcloud.com/player/api.js"
                 strategy="afterInteractive"
@@ -207,7 +240,7 @@ export default function SoundCloudPlayer({
             </button>
 
             {/* ===== VOLUME CONTROLS (SoundCloud only) ===== */}
-            {!isBandcamp && (
+            {isWidget && (
               <div className="mt-2 px-3 pb-2 border-b bg-white/40 backdrop-blur-md relative z-10">
                 <div className="flex items-center gap-3 rounded-full px-3 py-2 bg-white/70 shadow-sm border">
                   <button
@@ -235,14 +268,14 @@ export default function SoundCloudPlayer({
 
             {/* Desktop iframe */}
             <iframe
-              ref={isBandcamp ? undefined : iframeRef}
-              width={isBandcamp ? 400 : '100%'}
-              height={isBandcamp ? 450 : '100%'}
+              ref={isWidget ? iframeRef : undefined}
+              width={isWidget ? '100%' : extWidth}
+              height={isWidget ? '100%' : extHeight}
               allow="autoplay; encrypted-media"
               scrolling="no"
               frameBorder="no"
               src={desktopSrc}
-              style={isBandcamp ? { border: 0 } : undefined}
+              style={isWidget ? undefined : { border: 0 }}
               {...(isBandcamp ? { seamless: true } : {})}
             />
           </motion.div>
@@ -258,12 +291,12 @@ export default function SoundCloudPlayer({
               title="Mini Player"
               className="pt-10 bg-white"
               width="100%"
-              height={isBandcamp ? '160' : '150'}
+              height={isBandcamp ? '160' : isSpotify ? '152' : '150'}
               allow="autoplay; encrypted-media"
               scrolling="no"
               frameBorder="no"
               src={mobileSrc}
-              style={isBandcamp ? { border: 0 } : undefined}
+              style={isWidget ? undefined : { border: 0 }}
               {...(isBandcamp ? { seamless: true } : {})}
             />
 

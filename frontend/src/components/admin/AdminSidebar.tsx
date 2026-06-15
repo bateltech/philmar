@@ -13,6 +13,8 @@ import {
   MessageSquare,
   Image,
   FileText,
+  Share2,
+  Compass,
   Settings,
   LogOut,
   X,
@@ -30,6 +32,8 @@ const menuItems = [
   { href: '/admin/avis', icon: MessageSquare, label: 'Avis' },
   { href: '/admin/galerie', icon: Image, label: 'Galerie' },
   { href: '/admin/documents', icon: FileText, label: 'Documents' },
+  { href: '/admin/reseaux', icon: Share2, label: 'Réseaux' },
+  { href: '/admin/page-404', icon: Compass, label: 'Page introuvable' },
   { href: '/admin/parametres', icon: Settings, label: 'Paramètres' },
 ];
 

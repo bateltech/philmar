@@ -1,5 +1,6 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { X } from 'lucide-react';
 import VoixCard from './VoixCard';
 
 interface VoixSection {
@@ -17,11 +18,13 @@ interface VoixItem {
   contenu?: string;
   horaires?: string;
   sections?: VoixSection[];
+  link?: string;
 }
 
 export default function VoixCardsGrid() {
   const [data, setData] = useState<VoixItem[]>([]);
   const [filter, setFilter] = useState<'stage' | 'atelier' | 'cours'>('stage');
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/data/voix_data.json')
@@ -30,6 +33,36 @@ export default function VoixCardsGrid() {
   }, []);
 
   const filtered = data.filter((item) => item.type === filter);
+
+  const buildViewerUrl = (raw: string) => {
+    const addParams = (u: string) =>
+      u.includes('#') ? u : `${u}#toolbar=1&navpanes=0&view=FitH`;
+    if (raw.startsWith('/')) return addParams(raw);
+    const absolute = new URL(raw, window.location.origin).toString();
+    return addParams(`/api/pdf-proxy?url=${encodeURIComponent(absolute)}`);
+  };
+
+  const openPdf = (url: string) => {
+    try {
+      setPdfUrl(buildViewerUrl(url));
+    } catch {
+      setPdfUrl(null);
+    }
+  };
+
+  const closePdf = useCallback(() => setPdfUrl(null), []);
+
+  useEffect(() => {
+    if (!pdfUrl) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (ev: KeyboardEvent) => { if (ev.key === 'Escape') closePdf(); };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [pdfUrl, closePdf]);
 
   return (
     <div className="w-full overflow-hidden">
@@ -58,9 +91,32 @@ export default function VoixCardsGrid() {
       {/* Cards */}
       <div className="flex flex-wrap justify-start ml-0 sm:ml-6 gap-4 sm:gap-6 px-0 sm:px-6">
         {filtered.map((item, index) => (
-          <VoixCard key={index} {...item} />
+          <VoixCard key={index} {...item} onOpenPdf={openPdf} />
         ))}
       </div>
+
+      {/* Modale PDF */}
+      {!!pdfUrl && (
+        <div role="dialog" aria-modal="true" className="fixed inset-0 z-[999] flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/70" onClick={closePdf} />
+          <div className="relative z-10 w-[92vw] h-[88vh] max-w-5xl rounded-2xl overflow-hidden shadow-2xl border border-white/20 bg-black">
+            <div className="flex items-center justify-between p-3 border-b border-white/10">
+              <span className="text-white text-xs sm:text-sm opacity-80 truncate pr-2">{pdfUrl}</span>
+              <div className="flex items-center gap-2">
+                <a href={pdfUrl} target="_blank" rel="noopener" className="text-xs px-2 py-1 rounded bg-white/10 hover:bg-white/20 text-white">
+                  Ouvrir dans un nouvel onglet
+                </a>
+                <button onClick={closePdf} aria-label="Fermer" className="p-2 rounded hover:bg-white/10 active:scale-95 transition" type="button">
+                  <X className="w-5 h-5 text-white" />
+                </button>
+              </div>
+            </div>
+            <div className="w-full h-[calc(88vh-44px)] bg-neutral-900 flex items-center justify-center">
+              <iframe src={pdfUrl} title="PDF" className="w-full h-full bg-white" />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

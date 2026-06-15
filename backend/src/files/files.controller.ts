@@ -14,9 +14,10 @@ import {
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname, join } from 'path';
+import { mkdir } from 'fs/promises';
 import { FilesService } from './files.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { imageFileFilter, documentFileFilter } from './multer.config';
+import { imageFileFilter, documentFileFilter, audioFileFilter } from './multer.config';
 import { ConfigService } from '@nestjs/config';
 
 @Controller('api/files')
@@ -155,5 +156,51 @@ export class FilesController {
   async deleteDocument(@Param('name') name: string) {
     await this.filesService.deleteDocument(name);
     return { success: true, message: 'Document deleted' };
+  }
+
+  @Post('audio')
+  @UseInterceptors(
+    FilesInterceptor('files', 20, {
+      storage: diskStorage({
+        destination: (_req, _file, cb) => {
+          const dir = join(process.cwd(), '../frontend/public/audio/temp');
+          mkdir(dir, { recursive: true })
+            .then(() => cb(null, dir))
+            .catch((err) => cb(err, dir));
+        },
+        filename: (_req, file, cb) => {
+          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+          const ext = extname(file.originalname) || '.mp3';
+          cb(null, `audio-${uniqueSuffix}${ext}`);
+        },
+      }),
+      fileFilter: audioFileFilter,
+      limits: { fileSize: 30 * 1024 * 1024 }, // 30MB
+    }),
+  )
+  async uploadAudio(
+    @UploadedFiles() files: Express.Multer.File[],
+    @Query('category') category: string,
+  ) {
+    if (!category) {
+      throw new BadRequestException('Category is required');
+    }
+
+    if (!files || files.length === 0) {
+      throw new BadRequestException('No files uploaded');
+    }
+
+    const results = await Promise.all(
+      files.map((file) => this.filesService.uploadAudio(file, category)),
+    );
+
+    return { audio: results };
+  }
+
+  @Delete('audio/*')
+  async deleteAudio(@Param() params: { 0: string }) {
+    const audioPath = '/' + params[0];
+    await this.filesService.deleteAudio(audioPath);
+    return { success: true, message: 'Audio deleted' };
   }
 }

@@ -14,7 +14,9 @@ export type ContentType =
   | 'avis_voix'
   | 'dernier_album'
   | 'galerie'
-  | 'galerie_spectacle';
+  | 'galerie_spectacle'
+  | 'social_links'
+  | 'page_404';
 
 const CONTENT_FILES: Record<ContentType, string> = {
   concerts: 'concerts.json',
@@ -28,6 +30,8 @@ const CONTENT_FILES: Record<ContentType, string> = {
   dernier_album: 'dernier_album.json',
   galerie: 'galerie.json',
   galerie_spectacle: 'galerie_spectacle.json',
+  social_links: 'social_links.json',
+  page_404: 'page_404.json',
 };
 
 @Injectable()

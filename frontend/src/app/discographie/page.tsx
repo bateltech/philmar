@@ -6,6 +6,11 @@ import { motion } from 'framer-motion';
 
 type SortMode = 'recent' | 'old' | 'alpha';
 
+type AudioTrack = {
+  src: string;
+  title: string;
+};
+
 type Album = {
   title: string;
   imageSrc: string;
@@ -15,6 +20,7 @@ type Album = {
   description: string;
   purchaseLink: string;
   soundcloudLink: string;
+  audioTracks?: AudioTrack[];
 };
 
 export default function Discographie () {
@@ -127,6 +133,7 @@ export default function Discographie () {
                   description={album.description}
                   purchaseLink={album.purchaseLink}
                   soundcloudLink={album.soundcloudLink}
+                  audioTracks={album.audioTracks}
                   isPlayerActive={activePlayerId === album.title}
                   onTogglePlayer={() =>
                     setActivePlayerId(

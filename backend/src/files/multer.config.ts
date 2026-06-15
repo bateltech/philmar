@@ -28,6 +28,19 @@ export const documentFileFilter = (
   }
 };
 
+export const audioFileFilter = (
+  _req: Express.Request,
+  file: Express.Multer.File,
+  callback: (error: Error | null, acceptFile: boolean) => void,
+) => {
+  const allowedMimes = ['audio/mpeg', 'audio/mp3'];
+  if (allowedMimes.includes(file.mimetype)) {
+    callback(null, true);
+  } else {
+    callback(new BadRequestException('Only MP3 files are allowed'), false);
+  }
+};
+
 export const createImageStorage = (basePath: string) =>
   diskStorage({
     destination: (_req, _file, cb) => {

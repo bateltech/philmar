@@ -74,12 +74,12 @@ export default function ParametresPage() {
         <div className="rounded-lg border border-gray-200 bg-white p-6">
           <h2 className="mb-4 text-lg font-semibold">Dernier Album (Page d&apos;accueil)</h2>
           <p className="mb-6 text-sm text-gray-600">
-            Configurez le lecteur SoundCloud affiché sur la page d&apos;accueil.
+            Configurez le lecteur affiché sur la page d&apos;accueil (SoundCloud, Bandcamp ou Spotify).
           </p>
 
           {dernierAlbum && (
             <FormField
-              label="URL de la playlist SoundCloud"
+              label="Lien d'écoute (SoundCloud, Bandcamp ou Spotify)"
               name="playlistUrl"
               type="url"
               value={dernierAlbum.soundcloud.playlistUrl}
@@ -89,8 +89,8 @@ export default function ParametresPage() {
                   soundcloud: { ...dernierAlbum.soundcloud, playlistUrl: v as string },
                 })
               }
-              placeholder="https://soundcloud.com/... ou https://bandcamp.com/EmbeddedPlayer/album=..."
-              helpText="SoundCloud : collez l'URL de la playlist. Bandcamp : sur la page de l'album, cliquez Partager/Intégrer, copiez le code embed, et collez uniquement l'URL du src (celle qui commence par https://bandcamp.com/EmbeddedPlayer/album=...)"
+              placeholder="https://soundcloud.com/... · https://open.spotify.com/... · code iframe Bandcamp"
+              helpText="SoundCloud : collez l'URL de la playlist. Spotify : collez l'URL de partage de l'album/playlist/titre (ex : https://open.spotify.com/album/...). Bandcamp : cliquez Partager/Intégrer sur la page de l'album, puis collez l'URL du src (celle qui commence par https://bandcamp.com/EmbeddedPlayer/album=...)"
             />
           )}
         </div>

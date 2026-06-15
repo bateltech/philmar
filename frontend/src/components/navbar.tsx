@@ -5,11 +5,11 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faYoutube, faFacebookF, faInstagram, faSoundcloud, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { useSocialLinks } from '@/lib/useSocialLinks';
 
 const Navbar = () => {
   const pathname = usePathname();
+  const { links: socialLinks } = useSocialLinks();
 
   // état d’animation d’entrée (liens + icônes)
   const [navIn, setNavIn] = useState(false);
@@ -111,12 +111,12 @@ const Navbar = () => {
   return (
     <header className="fixed top-0 right-0 left-0 z-50 transition-colors w-full">
       <nav className="flex items-center justify-between navStyle bg-transparent px-4 md:px-6 py-3 md:py-4">
-        {/* NE PAS TOUCHER ▼▼▼ (conformément à ta demande) */}
+        
         <div className="flex items-center space-x-3">
           <Image src="/images/logo.png" priority alt="Philmar Logo" width={50} height={50} />
           <span className="font-bold text-lg titre tracking-wider" style={{ fontFamily: '"Waiting for the Sunrise", cursive' }}>Philmar</span>
         </div>
-        {/* NE PAS TOUCHER ▲▲▲ */}
+        
 
         {/* Hamburger mobile (icône plus robuste) */}
         <button
@@ -191,12 +191,11 @@ const Navbar = () => {
 
           {/* Icônes sociales */}
           <div className="flex gap-4 text-white icons">
-            <Link href="mailto:philmarzic@lilo.org" aria-label="Gmail" className="hover:text-amber-500" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faEnvelope} size="lg" /></Link>
-            <Link href="https://www.youtube.com/@PhilmarZic" aria-label="YouTube" className="hover:text-amber-500" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faYoutube} size="lg" /></Link>
-            <Link href="https://www.facebook.com/philmarzic/" aria-label="Facebook" className="hover:text-amber-500" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faFacebookF} size="lg" /></Link>
-            <Link href="https://www.instagram.com/philmarzic/" aria-label="Instagram" className="hover:text-amber-500" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faInstagram} size="lg" /></Link>
-            <Link href="https://soundcloud.com/philmarzic" aria-label="SoundCloud" className="hover:text-amber-500" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faSoundcloud} size="lg" /></Link>
-            <Link href="https://fr.linkedin.com/in/philmar" aria-label="LinkedIn" className="hover:text-amber-500" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedinIn} size="lg" /></Link>
+            {socialLinks.map((link) => (
+              <Link key={link.id} href={link.url} aria-label={link.label} className="hover:text-amber-500" target="_blank" rel="noopener noreferrer">
+                {link.icon ? <FontAwesomeIcon icon={link.icon} size="lg" /> : link.renderIcon('w-[1.25em] h-[1.25em]')}
+              </Link>
+            ))}
           </div>
         </div>
       </nav>
@@ -247,12 +246,11 @@ const Navbar = () => {
               {/* Réseaux sociaux */}
               <li>
                 <div className="flex items-center gap-4 py-3 px-3 text-white/90">
-                  <Link href="mailto:philmarzic@lilo.org" aria-label="Gmail" className="hover:text-amber-400" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faEnvelope} /></Link>
-                  <Link href="https://www.youtube.com/@PhilmarZic" aria-label="YouTube" className="hover:text-amber-400" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faYoutube} /></Link>
-                  <Link href="https://www.facebook.com/philmarzic/" aria-label="Facebook" className="hover:text-amber-400" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faFacebookF} /></Link>
-                  <Link href="https://www.instagram.com/philmarzic/" aria-label="Instagram" className="hover:text-amber-400" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faInstagram} /></Link>
-                  <Link href="https://soundcloud.com/philmarzic" aria-label="SoundCloud" className="hover:text-amber-400" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faSoundcloud} /></Link>
-                  <Link href="https://fr.linkedin.com/in/philmar" aria-label="LinkedIn" className="hover:text-amber-400" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedinIn} /></Link>
+                  {socialLinks.map((link) => (
+                    <Link key={link.id} href={link.url} aria-label={link.label} className="hover:text-amber-400" target="_blank" rel="noopener noreferrer">
+                      {link.icon ? <FontAwesomeIcon icon={link.icon} /> : link.renderIcon('w-[1em] h-[1em]')}
+                    </Link>
+                  ))}
                 </div>
               </li>
             </ul>

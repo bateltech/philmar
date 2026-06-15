@@ -2,6 +2,12 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+
+interface AudioTrack {
+  src: string;
+  title: string;
+}
 
 interface AlbumCardProps {
   title: string;
@@ -11,6 +17,7 @@ interface AlbumCardProps {
   forSale: boolean;
   purchaseLink: string;
   soundcloudLink: string;
+  audioTracks?: AudioTrack[];
 
   isPlayerActive: boolean;
   onTogglePlayer: () => void;
@@ -23,6 +30,7 @@ const AlbumCard = ({
   forSale,
   purchaseLink,
   soundcloudLink,
+  audioTracks,
   isPlayerActive,
   onTogglePlayer,
 }: AlbumCardProps) => {
@@ -43,6 +51,10 @@ const AlbumCard = ({
   }, [overlayVisible, title]);
 
   const isBandcamp = soundcloudLink?.includes('bandcamp') ?? false;
+  const isSpotify = soundcloudLink?.includes('spotify') ?? false;
+  const hasAudio = (audioTracks?.length ?? 0) > 0;
+  // Le lecteur MP3 sert de secours uniquement si aucun lien d'écoute n'est renseigné
+  const useMp3Player = !soundcloudLink && hasAudio;
 
   // Parse Bandcamp: accepte un code <iframe> complet ou juste l'URL embed
   const parseBandcampSrc = (input: string) => {
@@ -54,9 +66,22 @@ const AlbumCard = ({
     return src;
   };
 
+  // Parse Spotify: accepte une URL de partage ou un code <iframe> collé
+  const parseSpotifySrc = (input: string) => {
+    const srcMatch = input.match(/src=["']([^"']+)["']/);
+    let src = (srcMatch ? srcMatch[1] : input).trim();
+    src = src.replace(/open\.spotify\.com\/intl-[a-z]+\//, 'open.spotify.com/');
+    if (!src.includes('/embed/')) {
+      src = src.replace('open.spotify.com/', 'open.spotify.com/embed/');
+    }
+    return src.split('?')[0];
+  };
+
   const embedUrl = soundcloudLink
     ? isBandcamp
       ? parseBandcampSrc(soundcloudLink)
+      : isSpotify
+      ? parseSpotifySrc(soundcloudLink)
       : `https://w.soundcloud.com/player/?url=${encodeURIComponent(
           soundcloudLink
         )}&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false`
@@ -97,7 +122,7 @@ const AlbumCard = ({
             </div>
 
             {/* Description */}
-            <p className="text-xs sm:text-[0.875em] max-h-[7.5em] overflow-y-auto pr-1 scrollbar-transparent">
+            <p className="text-xs sm:text-[0.875em] max-h-[7.5em] overflow-y-auto pr-1 scrollbar-transparent whitespace-pre-line">
               {description}
             </p>
           </div>
@@ -121,7 +146,7 @@ const AlbumCard = ({
             )}
 
             {/* Play */}
-            {soundcloudLink && (
+            {(soundcloudLink || hasAudio) && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -138,8 +163,8 @@ const AlbumCard = ({
             )}
           </div>
 
-          {/* Player */}
-          {isPlayerActive && embedUrl && (
+          {/* Player SoundCloud / Bandcamp : mini-lecteur dans la carte */}
+          {isPlayerActive && embedUrl && !isSpotify && (
             <div className="absolute inset-0 bg-black bg-opacity-90 flex items-center justify-center z-20">
               <div className="relative w-[95%] max-w-md">
                 <button
@@ -161,8 +186,242 @@ const AlbumCard = ({
               </div>
             </div>
           )}
+
+          {/* Lecteur MP3 (fallback sans lien d'écoute) */}
+          {isPlayerActive && useMp3Player && (
+            <div className="absolute inset-0 bg-black bg-opacity-90 flex items-center justify-center z-20 p-4">
+              <div className="relative w-full">
+                <button
+                  onClick={onTogglePlayer}
+                  className="absolute -top-6 right-0 text-white text-sm opacity-70 hover:opacity-100"
+                >
+                  ✕ fermer
+                </button>
+                <Mp3Player tracks={audioTracks!} />
+              </div>
+            </div>
+          )}
         </div>
       )}
+
+      {/* Player Spotify : fenêtre modale centrée (taille naturelle ~352px) */}
+      {isPlayerActive &&
+        embedUrl &&
+        isSpotify &&
+        typeof document !== 'undefined' &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4"
+            onClick={onTogglePlayer}
+          >
+            <div
+              className="relative w-full max-w-md"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={onTogglePlayer}
+                className="absolute -top-8 right-0 text-white text-sm opacity-70 hover:opacity-100"
+              >
+                ✕ fermer
+              </button>
+
+              <iframe
+                width="100%"
+                height="352"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                src={embedUrl}
+                className="rounded-xl"
+                style={{ border: 0 }}
+              />
+            </div>
+          </div>,
+          document.body
+        )}
+    </div>
+  );
+};
+
+/* ===================== LECTEUR MP3 SÉQUENTIEL ===================== */
+const formatTime = (s: number) => {
+  if (!Number.isFinite(s)) return '0:00';
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${sec.toString().padStart(2, '0')}`;
+};
+
+const Mp3Player = ({ tracks }: { tracks: AudioTrack[] }) => {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [index, setIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState<number>(() => {
+    if (typeof window === 'undefined') return 50;
+    const stored = localStorage.getItem('mp3_volume');
+    const v = Number(stored);
+    return stored !== null && Number.isFinite(v) && v >= 0 ? Math.min(100, v) : 50;
+  });
+
+  const current = tracks[index];
+
+  // Charge et lance le morceau courant à chaque changement d'index
+  useEffect(() => {
+    const a = audioRef.current;
+    if (!a) return;
+    a.play().catch(() => setIsPlaying(false));
+  }, [index]);
+
+  // Applique le volume à l'élément audio et mémorise le réglage
+  useEffect(() => {
+    const a = audioRef.current;
+    if (a) a.volume = volume / 100;
+    localStorage.setItem('mp3_volume', String(volume));
+  }, [volume, index]);
+
+  const toggleMute = () => setVolume((v) => (v === 0 ? 60 : 0));
+  const volumeIcon = volume === 0 ? '🔇' : volume < 35 ? '🔈' : volume < 70 ? '🔉' : '🔊';
+
+  const handleEnded = () => {
+    // Passe au morceau suivant ; s'arrête après le dernier
+    setIndex((i) => (i < tracks.length - 1 ? i + 1 : i));
+    if (index >= tracks.length - 1) setIsPlaying(false);
+  };
+
+  const togglePlay = () => {
+    const a = audioRef.current;
+    if (!a) return;
+    if (a.paused) a.play().catch(() => {});
+    else a.pause();
+  };
+
+  const goTo = (i: number) => {
+    if (i < 0 || i >= tracks.length) return;
+    setIndex(i);
+  };
+
+  const seek = (value: number) => {
+    const a = audioRef.current;
+    if (!a || !Number.isFinite(a.duration)) return;
+    a.currentTime = (value / 100) * a.duration;
+  };
+
+  return (
+    <div className="w-full rounded-xl bg-neutral-900/90 p-4 text-white shadow-lg">
+      <audio
+        ref={audioRef}
+        src={current.src}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        onEnded={handleEnded}
+        onTimeUpdate={(e) => {
+          const a = e.currentTarget;
+          setProgress(a.duration ? (a.currentTime / a.duration) * 100 : 0);
+          setDuration(a.duration || 0);
+        }}
+        onLoadedMetadata={(e) => setDuration(e.currentTarget.duration || 0)}
+      />
+
+      {/* Titre + n° de piste */}
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <p className="truncate text-sm font-semibold" title={current.title}>
+          {current.title || `Piste ${index + 1}`}
+        </p>
+        {tracks.length > 1 && (
+          <span className="shrink-0 text-xs text-white/60">
+            {index + 1} / {tracks.length}
+          </span>
+        )}
+      </div>
+
+      {/* Barre de progression */}
+      <input
+        type="range"
+        min={0}
+        max={100}
+        value={progress}
+        onChange={(e) => seek(Number(e.target.value))}
+        aria-label="Progression"
+        className="mp3-progress w-full"
+      />
+      <div className="mt-1 flex justify-between text-[11px] text-white/60">
+        <span>{formatTime((progress / 100) * duration)}</span>
+        <span>{formatTime(duration)}</span>
+      </div>
+
+      {/* Contrôles */}
+      <div className="mt-2 flex items-center justify-center gap-6">
+        <button
+          onClick={() => goTo(index - 1)}
+          disabled={index === 0}
+          className="text-2xl disabled:opacity-30"
+          aria-label="Précédent"
+        >
+          ⏮
+        </button>
+        <button
+          onClick={togglePlay}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-lg text-black"
+          aria-label={isPlaying ? 'Pause' : 'Lecture'}
+        >
+          {isPlaying ? '❚❚' : '►'}
+        </button>
+        <button
+          onClick={() => goTo(index + 1)}
+          disabled={index === tracks.length - 1}
+          className="text-2xl disabled:opacity-30"
+          aria-label="Suivant"
+        >
+          ⏭
+        </button>
+      </div>
+
+      {/* Volume */}
+      <div className="mt-3 flex items-center gap-2">
+        <button
+          onClick={toggleMute}
+          className="text-base leading-none"
+          aria-label={volume === 0 ? 'Rétablir le son' : 'Couper le son'}
+        >
+          {volumeIcon}
+        </button>
+        <input
+          type="range"
+          min={0}
+          max={100}
+          value={volume}
+          onChange={(e) => setVolume(Number(e.target.value))}
+          aria-label="Volume"
+          className="mp3-progress flex-1"
+        />
+      </div>
+
+      <style jsx>{`
+        .mp3-progress {
+          -webkit-appearance: none;
+          appearance: none;
+          height: 5px;
+          border-radius: 9999px;
+          background: rgba(255, 255, 255, 0.25);
+          outline: none;
+          cursor: pointer;
+        }
+        .mp3-progress::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 13px;
+          height: 13px;
+          border-radius: 9999px;
+          background: #fff;
+        }
+        .mp3-progress::-moz-range-thumb {
+          width: 13px;
+          height: 13px;
+          border: 0;
+          border-radius: 9999px;
+          background: #fff;
+        }
+      `}</style>
     </div>
   );
 };

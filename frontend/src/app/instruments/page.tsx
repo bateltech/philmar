@@ -12,7 +12,7 @@ export default function Instruments() {
           Ateliers découverte des instruments du monde
         </h2>
         <p className="text-center mt-6 sm:mt-8 mb-12 sm:mb-24 text-base sm:text-lg leading-relaxed px-2 sm:px-4 md:px-0">
-          Animés par Philmar, ces ateliers interactifs mettent en valeur une grande diversité d&apos;instruments du monde à travers une approche artistique vivante mêlant expressivité, jeu vocal et maîtrise multi instrumentale.
+          Animés par Philmar, ces ateliers interactifs mettent en valeur une grande diversité d&apos;instruments du monde à travers une approche artistique vivante mêlant expressivité, jeu vocal et maîtrise multi instrumentale. Ateliers adaptables à différents contextes.
         </p>
         <AtelierCarousel />
       </section>
