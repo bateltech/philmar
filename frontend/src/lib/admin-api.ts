@@ -156,6 +156,31 @@ class AdminApi {
       method: 'DELETE',
     });
   }
+
+  async uploadAudio(files: File[], category: string): Promise<{ audio: AudioMetadata[] }> {
+    const formData = new FormData();
+    files.forEach((file) => formData.append('files', file));
+
+    const url = `${API_URL}/files/audio?category=${encodeURIComponent(category)}`;
+    const response = await fetch(url, {
+      method: 'POST',
+      credentials: 'include',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ message: 'Upload failed' }));
+      throw new Error(error.message);
+    }
+
+    return response.json();
+  }
+
+  async deleteAudio(audioPath: string) {
+    return this.request<{ success: boolean }>(`/files${audioPath}`, {
+      method: 'DELETE',
+    });
+  }
 }
 
 export interface ImageMetadata {
@@ -170,6 +195,13 @@ export interface ImageMetadata {
 export interface DocumentMetadata {
   path: string;
   name: string;
+  size: number;
+}
+
+export interface AudioMetadata {
+  path: string;
+  name: string;
+  title: string;
   size: number;
 }
 

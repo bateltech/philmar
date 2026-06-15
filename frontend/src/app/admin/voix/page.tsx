@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { AdminLayout, DataTable, ConfirmDialog, FormField, ImagePicker } from '@/components/admin';
+import { AdminLayout, DataTable, ConfirmDialog, FormField, ImagePicker, DocumentPicker } from '@/components/admin';
 import { adminApi } from '@/lib/admin-api';
 import { X, Plus, Trash2, Image as ImageIcon } from 'lucide-react';
 
@@ -20,6 +20,7 @@ interface VoixItem {
   contenu?: string;
   horaires?: string;
   sections?: VoixSection[];
+  link?: string;
 }
 
 const typeOptions = [
@@ -341,6 +342,14 @@ export default function VoixPage() {
                 </>
               )}
 
+              <div className="col-span-2">
+                <DocumentPicker
+                  label="Document PDF (En savoir plus)"
+                  value={editingItem.link || ''}
+                  onChange={(v) => setEditingItem({ ...editingItem, link: v })}
+                  helpText="Sélectionnez un document parmi ceux uploadés"
+                />
+              </div>
             </div>
 
             <div className="mt-6 flex justify-end gap-3">

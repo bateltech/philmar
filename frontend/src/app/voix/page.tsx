@@ -208,11 +208,17 @@ export default function Voix() {
 
       <section className="pt-12 sm:pt-20 px-3 sm:px-4 md:px-20 pb-6 sm:pb-10 text-center">
         <h2 className="text-xl sm:text-2xl font-semibold pb-4 sm:pb-8 leading-tight">
-          Vous seriez intéressé-e d&apos;expérimenter le Chant?
+          Vous seriez intéressé-e d&apos;expérimenter le Chant ?
         </h2>
         <p className="text-base sm:text-lg italic px-2 sm:px-0">
           Accompagné·e par un professionnel de la voix, découvrez les Stages, les Ateliers, les Cours !
         </p>
+        <a
+          href="#contact"
+          className="inline-block mt-5 sm:mt-6 px-6 py-2 border border-yellow-500 text-yellow-500 font-semibold rounded-xs transition-colors hover:bg-yellow-500 hover:text-black"
+        >
+          Me contacter
+        </a>
       </section>
 
       <section className="px-3 sm:px-4 md:px-20">

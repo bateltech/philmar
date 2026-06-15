@@ -222,7 +222,7 @@ export default function Spectacles() {
                 </div>
               </div>
               <div className="p-3">
-                <p className="text-xs line-clamp-3">{spectacle.description}</p>
+                <p className="text-xs line-clamp-3 whitespace-pre-line">{spectacle.description}</p>
                 <div className="mt-3">
                   <Link href={spectacle.link} className="text-blue-400 font-medium hover:text-blue-500 flex items-center text-sm">
                     En savoir plus
@@ -259,7 +259,7 @@ export default function Spectacles() {
                     </div>
                   </div>
                   <div className="p-4">
-                    <p className="text-sm">{spectacle.description}</p>
+                    <p className="text-sm whitespace-pre-line">{spectacle.description}</p>
                     <div className="mt-4">
                       <Link href={spectacle.link} className="text-blue-400 font-medium hover:text-blue-500 flex items-center">
                         En savoir plus

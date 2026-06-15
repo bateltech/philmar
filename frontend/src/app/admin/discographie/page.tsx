@@ -3,7 +3,12 @@
 import { useState, useEffect } from 'react';
 import { AdminLayout, DataTable, ConfirmDialog, FormField, ImagePicker } from '@/components/admin';
 import { adminApi } from '@/lib/admin-api';
-import { X, Image as ImageIcon, ExternalLink } from 'lucide-react';
+import { X, Image as ImageIcon, ExternalLink, Music, Trash2, ArrowUp, ArrowDown, Loader2 } from 'lucide-react';
+
+interface AudioTrack {
+  src: string;
+  title: string;
+}
 
 interface Album {
   title: string;
@@ -13,6 +18,7 @@ interface Album {
   forSale: boolean;
   purchaseLink?: string;
   soundcloudLink?: string;
+  audioTracks?: AudioTrack[];
   description: string;
 }
 
@@ -31,6 +37,7 @@ export default function DiscographiePage() {
   const [showImagePicker, setShowImagePicker] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isUploadingAudio, setIsUploadingAudio] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -56,6 +63,7 @@ export default function DiscographiePage() {
       forSale: false,
       purchaseLink: '',
       soundcloudLink: '',
+      audioTracks: [],
       description: '',
     });
     setEditingIndex(-1);
@@ -76,6 +84,64 @@ export default function DiscographiePage() {
     } catch (err) {
       setError('Erreur lors de la suppression');
     }
+  };
+
+  const handleAudioUpload = async (files: FileList | null) => {
+    if (!files || files.length === 0 || !editingItem) return;
+
+    setIsUploadingAudio(true);
+    setError(null);
+
+    try {
+      const { audio } = await adminApi.uploadAudio(Array.from(files), 'discographie');
+      const newTracks: AudioTrack[] = audio.map((a) => ({ src: a.path, title: a.title }));
+      setEditingItem((prev) =>
+        prev ? { ...prev, audioTracks: [...(prev.audioTracks || []), ...newTracks] } : prev
+      );
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erreur lors de l\'upload du fichier audio');
+    } finally {
+      setIsUploadingAudio(false);
+    }
+  };
+
+  const updateTrack = (index: number, patch: Partial<AudioTrack>) => {
+    setEditingItem((prev) => {
+      if (!prev) return prev;
+      const tracks = [...(prev.audioTracks || [])];
+      tracks[index] = { ...tracks[index], ...patch };
+      return { ...prev, audioTracks: tracks };
+    });
+  };
+
+  const removeTrack = async (index: number) => {
+    if (!editingItem) return;
+    const track = editingItem.audioTracks?.[index];
+    setEditingItem((prev) => {
+      if (!prev) return prev;
+      const tracks = [...(prev.audioTracks || [])];
+      tracks.splice(index, 1);
+      return { ...prev, audioTracks: tracks };
+    });
+    // Best-effort: supprime le fichier côté serveur
+    if (track?.src) {
+      try {
+        await adminApi.deleteAudio(track.src);
+      } catch {
+        // Le fichier sera retiré de l'album à l'enregistrement même si la suppression échoue
+      }
+    }
+  };
+
+  const moveTrack = (index: number, direction: -1 | 1) => {
+    setEditingItem((prev) => {
+      if (!prev) return prev;
+      const tracks = [...(prev.audioTracks || [])];
+      const target = index + direction;
+      if (target < 0 || target >= tracks.length) return prev;
+      [tracks[index], tracks[target]] = [tracks[target], tracks[index]];
+      return { ...prev, audioTracks: tracks };
+    });
   };
 
   const handleSave = async () => {
@@ -260,14 +326,91 @@ export default function DiscographiePage() {
 
               <div className="col-span-2">
                 <FormField
-                  label="Lien SoundCloud ou Bandcamp"
+                  label="Lien d'écoute (SoundCloud, Bandcamp ou Spotify)"
                   name="soundcloudLink"
                   type="url"
                   value={editingItem.soundcloudLink || ''}
                   onChange={(v) => setEditingItem({ ...editingItem, soundcloudLink: v as string })}
-                  placeholder="https://soundcloud.com/... ou code iframe Bandcamp"
-                  helpText={<>SoundCloud : collez l&apos;URL de la playlist ou du morceau.<br />Bandcamp : sur la page de l&apos;album, cliquez Partager/Intégrer, copiez le code embed complet (&lt;iframe ...&gt;) et collez-le ici.</>}
+                  placeholder="https://soundcloud.com/... · https://open.spotify.com/... · code iframe Bandcamp"
+                  helpText={<>SoundCloud : collez l&apos;URL de la playlist ou du morceau.<br />Spotify : collez l&apos;URL de partage de l&apos;album/playlist/titre (ex : https://open.spotify.com/album/...).<br />Bandcamp : sur la page de l&apos;album, cliquez Partager/Intégrer, copiez le code embed complet (&lt;iframe ...&gt;) et collez-le ici.</>}
                 />
+              </div>
+
+              {/* Fichiers MP3 */}
+              <div className="col-span-2">
+                <label className="mb-1 block text-sm font-medium text-gray-700">
+                  Fichiers MP3
+                </label>
+                <p className="mb-2 text-xs text-gray-500">
+                  Utilisés comme lecteur de secours quand aucun lien d&apos;écoute n&apos;est renseigné.
+                  Plusieurs fichiers sont lus à la suite, dans l&apos;ordre de la liste.
+                </p>
+
+                {editingItem.audioTracks && editingItem.audioTracks.length > 0 && (
+                  <ul className="mb-3 space-y-2">
+                    {editingItem.audioTracks.map((track, i) => (
+                      <li
+                        key={track.src}
+                        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 p-2"
+                      >
+                        <Music className="h-4 w-4 shrink-0 text-gray-400" />
+                        <input
+                          type="text"
+                          value={track.title}
+                          onChange={(e) => updateTrack(i, { title: e.target.value })}
+                          placeholder="Titre du morceau"
+                          className="min-w-0 flex-1 rounded border border-gray-300 px-2 py-1 text-sm"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => moveTrack(i, -1)}
+                          disabled={i === 0}
+                          className="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
+                          title="Monter"
+                        >
+                          <ArrowUp className="h-4 w-4" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => moveTrack(i, 1)}
+                          disabled={i === editingItem.audioTracks!.length - 1}
+                          className="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
+                          title="Descendre"
+                        >
+                          <ArrowDown className="h-4 w-4" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => removeTrack(i)}
+                          className="rounded p-1 text-red-500 hover:bg-red-50"
+                          title="Supprimer"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 hover:bg-gray-50">
+                  {isUploadingAudio ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Music className="h-4 w-4" />
+                  )}
+                  {isUploadingAudio ? 'Envoi en cours...' : 'Ajouter des MP3'}
+                  <input
+                    type="file"
+                    accept="audio/mpeg,.mp3"
+                    multiple
+                    disabled={isUploadingAudio}
+                    onChange={(e) => {
+                      handleAudioUpload(e.target.files);
+                      e.target.value = '';
+                    }}
+                    className="hidden"
+                  />
+                </label>
               </div>
             </div>
 

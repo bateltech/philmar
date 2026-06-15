@@ -360,24 +360,24 @@ export default function AteliersCarousel() {
               </div>
 
               <div className="p-2 sm:p-3 text-xs sm:text-sm leading-snug">
-                {atelier.description && (<p className="mb-2 text-justify">{atelier.description}</p>)}
+                {atelier.description && (<p className="mb-2 text-justify whitespace-pre-line">{atelier.description}</p>)}
                 {atelier.objectifs && (
-                  <p className="mb-2 text-justify">
+                  <p className="mb-2 text-justify whitespace-pre-line">
                     <span className="font-bold">Objectifs :</span> {atelier.objectifs}
                   </p>
                 )}
                 {atelier.approche && (
-                  <p className="mb-2 text-justify">
+                  <p className="mb-2 text-justify whitespace-pre-line">
                     <span className="font-bold">Approche :</span> {atelier.approche}
                   </p>
                 )}
                 {atelier.deroulement && (
-                  <p className="mb-2 text-justify">
+                  <p className="mb-2 text-justify whitespace-pre-line">
                     <span className="font-bold">Possibilités de déroulement :</span> {atelier.deroulement}
                   </p>
                 )}
 
-                {atelier.pdf && (
+                {atelier.pdf?.trim() && (
                   <a
                     href={atelier.pdf}
                     onClick={(e) => { e.stopPropagation(); openPdf(e, atelier.pdf); }}

@@ -186,7 +186,7 @@ export default function Concerts() {
 
           {/* Texte de description */}
           <p className="mt-6 sm:mt-8 mb-12 sm:mb-24 text-base sm:text-lg leading-relaxed px-2 sm:px-4 md:px-0">
-            Philmar participe à divers événements, concerts, mais aussi vernissages ou conférences, grâce à son expérience, son talent d’improvisation et son interactivité. En solo ou avec son collectif, il propose une musique festive ou d'ambiance, qui peut être liée à un thème ou une région du monde. Selon le projet, il peut s'entourer de musiciens expérimentés. En lien avec des réseaux d’artistes, il est possible de donner des prestations artistiques complémentaires à la musique de Philmar, telles que le théâtre, la danse ou les arts plastiques.
+            Philmar participe à divers événements, concerts, mais aussi vernissages ou conférences, grâce à son expérience, son talent d’improvisation et son interactivité. En solo ou avec les musiciens de son collectif, il propose une musique festive ou d'ambiance, qui peut être liée à un thème ou une région du monde. Selon le projet, il peut s'entourer de musiciens expérimentés. En lien avec des réseaux d’artistes, il est possible de donner des prestations artistiques complémentaires à la musique de Philmar, telles que le théâtre, la danse ou les arts plastiques.
           </p>
 
           {/* Texte en gras */}
@@ -244,7 +244,7 @@ export default function Concerts() {
                 </div>
               </div>
               <div className="p-3">
-                <p className="text-xs line-clamp-3">{concert.description}</p>
+                <p className="text-xs line-clamp-3 whitespace-pre-line">{concert.description}</p>
                 <div className="mt-3">
                   <Link href={concert.link} className="text-blue-400 font-medium hover:text-blue-500 flex items-center text-sm">
                     En savoir plus
@@ -285,7 +285,7 @@ export default function Concerts() {
                     </div>
                   </div>
                   <div className="p-4">
-                    <p className="text-sm">{concert.description}</p>
+                    <p className="text-sm whitespace-pre-line">{concert.description}</p>
                     <div className="mt-4">
                       <Link href={concert.link} className="text-blue-400 font-medium hover:text-blue-500 flex items-center">
                         En savoir plus

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "youtube",
+    "label": "YouTube",
+    "url": "https://www.youtube.com/@PhilmarZic",
+    "active": true
+  },
+  {
+    "id": "facebook",
+    "label": "Facebook",
+    "url": "https://www.facebook.com/philmarzic/",
+    "active": true
+  },
+  {
+    "id": "instagram",
+    "label": "Instagram",
+    "url": "https://www.instagram.com/philmarzic/",
+    "active": true
+  },
+  {
+    "id": "soundcloud",
+    "label": "SoundCloud",
+    "url": "https://soundcloud.com/philmarzic",
+    "active": true
+  },
+  {
+    "id": "bandcamp",
+    "label": "Bandcamp",
+    "url": "https://philmar.bandcamp.com",
+    "active": true
+  },
+  {
+    "id": "linkedin",
+    "label": "LinkedIn",
+    "url": "https://fr.linkedin.com/in/philmar",
+    "active": true
+  },
+  {
+    "id": "linktree",
+    "label": "Linktree",
+    "url": "https://linktr.ee/philmarlinks",
+    "active": true
+  },
+  {
+    "id": "email",
+    "label": "Email",
+    "url": "mailto:philmarzic@lilo.org",
+    "active": false
+  }
+]

@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="relative bg-cover bg-center text-white py-16 px-4" style={{ backgroundImage: "url('/images/footer.webp')" }} >
+    <footer id="contact" className="relative bg-cover bg-center text-white py-16 px-4 scroll-mt-24" style={{ backgroundImage: "url('/images/footer.webp')" }} >
 
         {/* Shadow Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-65 pointer-events-none z-0"></div>

@@ -1,12 +1,12 @@
 [
   {
-    "title": "Steppe by Steppe",
+    "title": "Steppe by Steppe - Philmar",
     "imageSrc": "/images/discographie/steppe_by_steppe.png",
     "genre": "album",
     "year": 2016,
     "forSale": true,
-    "purchaseLink": "https://example.com/buy/steppe",
-    "soundcloudLink": "https://soundcloud.com/philmarzic/sets/steppe-by-steppe?si=4c83bdaea9e34b2d90ce60fc5d4e2a0d&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
+    "purchaseLink": "https://philmar.bandcamp.com/album/steppe-by-steppe",
+    "soundcloudLink": "<iframe style=\"border: 0; width: 120px; height: 160px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=159461943/size=large/bgcol=ffffff/linkcol=e99708/track=1543791865/transparent=true/\" seamless><a href=\"https://philmar.bandcamp.com/album/steppe-by-steppe\">Steppe by Steppe de Philmar</a></iframe>",
     "description": "Un album ethno ou world par son appel au voyage et les instruments du monde, mais avec des sons bien rock, des inspirations classiques, des synthés aériens ou electro, des rythmes hip-hop, des harmonies jazz-funk, des chants gutturaux ou planants"
   },
   {
@@ -15,12 +15,12 @@
     "genre": "enregistrement",
     "year": 2005,
     "forSale": false,
-    "purchaseLink": "https://example.com/buy/steppe",
-    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
-    "description": "Un duo d'improvisation piano-voix constitué par Matthieu Roussineau et Philippe Martin. C'est une musique spontanée, originale qui crée en temps réel ses mélodies et ses harmonies. Riches de leurs expériences musicales antérieures (classique, jazz, world,...), les 2 musiciens célèbrent en une écoute mutuelle et en empathie avec le public, la Musique de l'Instant."
+    "purchaseLink": "",
+    "soundcloudLink": "",
+    "description": "Un duo d'improvisation piano-voix constitué par Matthieu Roussineau et Philmar. C'est une musique spontanée, originale qui crée en temps réel ses mélodies et ses harmonies. Riches de leurs expériences musicales antérieures (classique, jazz, world,...), les 2 musiciens célèbrent en une écoute mutuelle et en empathie avec le public, la Musique de l'Instant."
   },
   {
-    "title": "Sur le Chemin",
+    "title": "Sur le Chemin - Philmar",
     "imageSrc": "/images/discographie/sur_le_chemin.png",
     "genre": "album",
     "year": 2005,
@@ -31,7 +31,7 @@
   },
   {
     "title": "ABRAXAS PROJEKT \"COSMIK\"",
-    "imageSrc": "/images/discographie/cosmik.jpg",
+    "imageSrc": "/images/discographie/image-1781392210747-219960032.png",
     "genre": "album",
     "year": 2005,
     "forSale": false,
@@ -41,7 +41,7 @@
   },
   {
     "title": "Le Rêve d'Husky",
-    "imageSrc": "/images/discographie/le_reve_dhusky.png",
+    "imageSrc": "/images/discographie/image-1781379268881-173172519.png",
     "genre": "conte",
     "year": 2002,
     "forSale": false,
@@ -61,21 +61,21 @@
   },
   {
     "title": "GENRE HUMAIN - single \"LES PRETENDANTS\"",
-    "imageSrc": "/images/discographie/les_pretendants.png",
+    "imageSrc": "/images/discographie/image-1781380593440-129807718.png",
     "genre": "enregistrement",
     "year": 1994,
-    "forSale": true,
+    "forSale": false,
     "purchaseLink": "https://example.com/buy/steppe",
     "soundcloudLink": "https://soundcloud.com/philmarzic/homo_mutabilis-genre_humain?si=eab1524de6994ff8b256572b6ee5b06f&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
     "description": "Un single collector! Un marchand, un guerrier et un alchimiste prétendent chacun à leur manière conquérir la princesse… Avec des paroles d'inspiration médiévale, une voix théâtrale et une musique progressive, c'est une expression à la fois épique et humoristique de notre imaginaire d'une époque."
   },
   {
     "title": "PHILMAR L'instant",
-    "imageSrc": "/images/discographie/linstant.png",
+    "imageSrc": "/images/discographie/image-1781379358443-327146965.png",
     "genre": "enregistrement",
     "year": 2003,
     "forSale": false,
-    "purchaseLink": "https://example.com/buy/steppe",
+    "purchaseLink": "",
     "soundcloudLink": "https://soundcloud.com/philmarzic/linstant-philmar?si=1166bc4f3cfb4d5dae989de19dec51be&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
     "description": "concert en solo \"free ethno ambiant\" Axée sur des improvisatons vocales sans paroles, une musique de l'instant nous enmène en voyage, nous fait danser. Sur le vif de l'inspiration, guitare, mix d'échantillonneur, percussions ou flûtes accompagnent les psalmodies mystiques, les mélopées chamaniques."
   },
@@ -85,7 +85,7 @@
     "genre": "conte",
     "year": 2002,
     "forSale": true,
-    "purchaseLink": "https://example.com/buy/steppe",
+    "purchaseLink": "https://www.livresenfamille.fr/6850_soleil-et-compagnie",
     "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 6 chansons (Philmar a arrangé et interprété des musiques traditionnelles, et des chansons ont été interprétées par des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Une ambiance d'hiver et de Noël pour cet album."
   },
@@ -95,8 +95,8 @@
     "genre": "conte",
     "year": 2003,
     "forSale": true,
-    "purchaseLink": "https://example.com/buy/steppe",
-    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
+    "purchaseLink": "https://www.livresenfamille.fr/6850_soleil-et-compagnie",
+    "soundcloudLink": "https://open.spotify.com/intl-fr/album/5KrPqkA5o6Z0NHtGGpjxrs?si=rjq_e4_kQJShbkl8PR_w3w",
     "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 6 chansons (Philmar a arrangé et interprété des musiques traditionnelles, et des chansons ont été interprétées par des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Une ambiance légère et printanière pour cet album."
   },
   {
@@ -105,8 +105,8 @@
     "genre": "conte",
     "year": 2004,
     "forSale": true,
-    "purchaseLink": "https://example.com/buy/steppe",
-    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
+    "purchaseLink": "https://www.livresenfamille.fr/6850_soleil-et-compagnie",
+    "soundcloudLink": "https://open.spotify.com/intl-fr/album/3ZhG6lHonbuaxhV3At3AvR?si=p7hYUhOrQVOpwo0kM2Lvwg",
     "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 6 chansons (Philmar a arrangé et interprété des musiques traditionnelles, et des chansons ont été interprétées par des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Aventures et fêtes amusantes dans cet album."
   },
   {
@@ -115,7 +115,7 @@
     "genre": "conte",
     "year": 2005,
     "forSale": true,
-    "purchaseLink": "https://example.com/buy/steppe",
+    "purchaseLink": "https://www.livresenfamille.fr/6850_soleil-et-compagnie",
     "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
     "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 6 chansons (Philmar a arrangé et interprété des musiques traditionnelles, et des chansons ont été interprétées par des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Dans l'ambiance des Fêtes de fin d'année pour cet album, toujours de l'humour et de l'aventure avec Mathilde et Renardeau et leurs amis."
   },
@@ -125,8 +125,18 @@
     "genre": "conte",
     "year": 2006,
     "forSale": true,
-    "purchaseLink": "https://example.com/buy/steppe",
+    "purchaseLink": "https://www.livresenfamille.fr/6850_soleil-et-compagnie",
     "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
+    "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 4 chansons (des musiques des chansons traditionnelles interprétées par Philmar et d'autres musiciens, et des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Pour cet album, un regard humoristique sur le sport de compétition autour de l'équipe du sensationnel crapaud Scipio. Et bien sûr aventures et chansons qui attendent nos amis Mathilde et Renardeau."
+  },
+  {
+    "title": "Mathilde et Renardeau et le trésor caché (N°6)",
+    "imageSrc": "/images/discographie/image-1781364804725-915763172.jpg",
+    "genre": "conte",
+    "year": 2004,
+    "forSale": true,
+    "purchaseLink": "https://www.livresenfamille.fr/6850_soleil-et-compagnie",
+    "soundcloudLink": "https://open.spotify.com/intl-fr/album/2LvtVjY0tWAXKH47AuLgIF?si=kHP5__wNTA2I-2f8MCwkHA",
     "description": "Ce sont 6 histoires (4 conteurs dont Philmar font les voix des personnages) et 4 chansons (des musiques des chansons traditionnelles interprétées par Philmar et d'autres musiciens, et des chorales d'enfants). Mathilde et Renardeau vivent en paroles et en musiques de multiples aventures avec leurs amis. Tour à tour drôles, inquiétantes et poétiques, ces histoires font plonger les enfants dans le monde enchanteur de la Vallée. Pour cet album, un regard humoristique sur le sport de compétition autour de l'équipe du sensationnel crapaud Scipio. Et bien sûr aventures et chansons qui attendent nos amis Mathilde et Renardeau."
   },
   {
@@ -134,29 +144,87 @@
     "imageSrc": "/images/discographie/the_shamanic_groove.jpg",
     "genre": "enregistrement",
     "year": 2002,
-    "forSale": true,
+    "forSale": false,
     "purchaseLink": "https://example.com/buy/steppe",
     "soundcloudLink": "https://soundcloud.com/philmarzic/homo_mutabilis-genre_humain?si=eab1524de6994ff8b256572b6ee5b06f&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
     "description": "A l'écoute des courants qui coulent dans le monde et au fond d'eux, ces \"humains\" expriment la Terre de l'humanité et de la nature. Ajoutant quelques enregistrements inédits de répétition à ceux de studio, ces divers morceaux offrent une palette large des inspirations du groupe... (chansons rock, groove, quelques envolées lyriques ou rock progressif, et des ambiances world, des percussions...)"
   },
   {
     "title": "ZIA \"ATMAN / TCHAÏ\"",
-    "imageSrc": "/images/discographie/zia.png",
+    "imageSrc": "/images/discographie/image-1781379190973-592176101.png",
     "genre": "enregistrement",
     "year": 2007,
     "forSale": false,
     "purchaseLink": "https://example.com/buy/steppe",
-    "soundcloudLink": "<iframe style=\"border: 0; width: 120px; height: 160px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=159461943/size=large/bgcol=ffffff/linkcol=e99708/track=1543791865/transparent=true/\" seamless><a href=\"https://philmar.bandcamp.com/album/steppe-by-steppe\">Steppe by Steppe de Philmar</a></iframe>",
-    "description": "Une Quête du Son primordial, d'une authentique Transe libératrice, en parcourant tambours et cordes, voix et vents, paysages et peuples, dans une géographie imaginaire qui nous en ramène au plus profond de nous-même. Instruments traditionnels et parfois électriques se répondent, et construisent l'architecture sonore éphémère propre à l'improvisation."
+    "soundcloudLink": "",
+    "description": "Une Quête du Son primordial, d'une authentique Transe libératrice, en parcourant tambours et cordes, voix et vents, paysages et peuples, dans une géographie imaginaire qui nous en ramène au plus profond de nous-même. Instruments traditionnels et parfois électriques se répondent, et construisent l'architecture sonore éphémère propre à l'improvisation.",
+    "audioTracks": [
+      {
+        "src": "/audio/discographie/audio-1781393746960-413977638.mp3",
+        "title": "01-Aewesia--Zia"
+      },
+      {
+        "src": "/audio/discographie/audio-1781393746951-891738434.mp3",
+        "title": "02-Terre_Rouge_1--Zia"
+      },
+      {
+        "src": "/audio/discographie/audio-1781393746946-676334774.mp3",
+        "title": "03-Esprits_de_la_Foret_1--Zia"
+      },
+      {
+        "src": "/audio/discographie/audio-1781393746931-388258719.mp3",
+        "title": "04-Uzak--Zia"
+      },
+      {
+        "src": "/audio/discographie/audio-1781393746922-517807604.mp3",
+        "title": "05-Djembe_Intro--Zia"
+      },
+      {
+        "src": "/audio/discographie/audio-1781393746876-833295717.mp3",
+        "title": "06-Mendjani--Zia"
+      },
+      {
+        "src": "/audio/discographie/audio-1781393746720-879273490.mp3",
+        "title": "07-Ouanahir--Zia"
+      },
+      {
+        "src": "/audio/discographie/audio-1781393746830-314188619.mp3",
+        "title": "08-Mandalay--Zia"
+      },
+      {
+        "src": "/audio/discographie/audio-1781393746795-595357949.mp3",
+        "title": "09-Arjuna_part2--Zia"
+      },
+      {
+        "src": "/audio/discographie/audio-1781393746686-51276110.mp3",
+        "title": "10-Azur_&_Jade--Zia"
+      },
+      {
+        "src": "/audio/discographie/audio-1781393746620-302718207.mp3",
+        "title": "11-Esprits_de_la_Foret_2--Zia"
+      },
+      {
+        "src": "/audio/discographie/audio-1781393746586-440857267.mp3",
+        "title": "12-Lope-Okanda--Zia"
+      },
+      {
+        "src": "/audio/discographie/audio-1781393746524-384474231.mp3",
+        "title": "13-Guaguanco--Zia"
+      },
+      {
+        "src": "/audio/discographie/audio-1781393746454-867889729.mp3",
+        "title": "14-Terre_Rouge_2--Zia"
+      }
+    ]
   },
   {
     "title": "PHILMAR / FLUCTUS \"RENCONTRE\"",
-    "imageSrc": "/images/discographie/rencontre.png",
+    "imageSrc": "/images/discographie/image-1781379456911-385495557.png",
     "genre": "enregistrement",
     "year": 2002,
-    "forSale": true,
-    "purchaseLink": "https://example.com/buy/steppe",
-    "soundcloudLink": "https://soundcloud.com/artist/steppe-by-steppe",
+    "forSale": false,
+    "purchaseLink": "",
+    "soundcloudLink": "",
     "description": "C’est un mélange d'instruments ethniques et de machines électro, dans une approche plutôt planante même s’il y a souvent des rythmes. Les voix de ce duo prennent aussi une place importante au coeur de ces voyages sonores vivants. Car tout cela est mené par des improvisations (en enregistrement, sur scène) sur la base de quelques échantillons ou séquences choisis sur le vif."
   }
 ]

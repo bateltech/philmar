@@ -1,30 +1,21 @@
 [
   {
-    "nom": "ATELIERS DÉCOUVERTE DES INSTRUMENTS DU MONDE",
-    "image": "/images/ateliers/no_atelier.png",
-    "description": "Animés par Philmar, ces ateliers interactifs mettent en valeur une grande diversité d’instruments du monde à travers une approche artistique vivante mêlant expressivité, jeu vocal et maîtrise multi instrumentale. Ateliers adaptables à différents contextes.",
-    "objectifs": "",
-    "approche": "",
-    "deroulement": "",
-    "pdf": "/documents/ateliers-decouverte-des-instruments-du-monde.pdf"
-  },
-  {
     "nom": "ATELIER ÉVEIL SONORE 0-6 ans (Crèches, Maternelles,...)",
     "image": "/images/ateliers/no_atelier.png",
     "description": "",
     "objectifs": "Une ouverture aux perceptions sonore, visuelle et tactile, Une sensibilisation à différents genres de musicalités",
-    "approche": "L'animateur est à l'écoute des enfants tout en déroulant le petit concert, intercalé par un temps de manipulation d'instruments simples.\nUne découverte sonore diversifiée et adaptée sur le vif aux réactions des touts petits.\nPossibilités de déroulement :\nA partir d'un atelier d'1/2h à une série d'ateliers toutes les semaines ou tous les mois, l'offre est adaptable à tous budgets et projets.",
-    "deroulement": "",
-    "pdf": "/documents/atelier-eveil-sonore-0-6-ans-creches-maternelles.pdf"
+    "approche": "L'animateur est à l'écoute des enfants tout en déroulant le petit concert, intercalé par un temps de manipulation d'instruments simples.\nUne découverte sonore diversifiée et adaptée sur le vif aux réactions des touts petits.\n",
+    "deroulement": "À partir d'un atelier d'1/2h à une série d'ateliers toutes les semaines ou tous les mois, l'offre est adaptable à tous budgets et projets.",
+    "pdf": ""
   },
   {
     "nom": "ATELIER pour PERSONNES ÂGÉES ou PERSONNES HANDICAPÉES",
     "image": "/images/ateliers/atelier-pour-personnes-agees-ou-personnes-handicapees.png",
     "description": "",
     "objectifs": "Découvrir des musiques et des instruments du monde, éveiller les imaginaires, susciter les mémoires.",
-    "approche": "Abordée comme un concert, la démarche de présentation des instruments et des chants par différentes musiques est très conviviale et interactive. Les personnes atteintes de la maladie d'alzheimer comme celles handicapées physiquement peuvent participer à ces ateliers.\nPossibilités de déroulement :\nA partir d'un atelier d'1h à une série d'ateliers toutes les semaines ou tous les mois, l'offre est adaptable à tous budgets et projets. Possibilité d'associer avec d'autres thématiques musicales.",
-    "deroulement": "",
-    "pdf": "/documents/atelier-pour-personnes-agees-ou-personnes-handicapees.pdf"
+    "approche": "Abordée comme un concert, la démarche de présentation des instruments et des chants par différentes musiques est très conviviale et interactive. Les personnes atteintes de la maladie d'alzheimer comme celles handicapées physiquement peuvent participer à ces ateliers.",
+    "deroulement": "À partir d'un atelier d'1h à une série d'ateliers toutes les semaines ou tous les mois, l'offre est adaptable à tous budgets et projets. Possibilité d'associer avec d'autres thématiques musicales.",
+    "pdf": ""
   },
   {
     "nom": "ATELIER PÉDAGOGIQUE (Primaire, Collège, Lycée, Centre de Loisirs,...)",
@@ -33,6 +24,15 @@
     "objectifs": "Intégrer des connaissances de base en musicologie et en musique. Inspirer curiosité et tolérance envers les cultures traditionnelles du monde (y compris la nôtre). Développer l’attention, l’écoute, l’expression et l’esprit de participation.",
     "approche": "Diversité des sonorités et des formes, démonstration vivante et interactive.\nPratique ludique avec des instruments, la voix et des éléments musicaux de base (rythmes, sons, etc.).\nUn support pédagogique peut être fourni à l’enseignant pour préparer ou prolonger l’atelier en classe.",
     "deroulement": "",
-    "pdf": "/documents/Stage Chanter la Vie - jouer de la voix et vivre son chant - Philmar - Générique.pdf"
+    "pdf": ""
+  },
+  {
+    "nom": "DÉCLINAISONS POSSIBLES de l'ATELIER",
+    "image": "/images/ateliers/no_atelier.png",
+    "description": "Ces déclinaisons répondent à vos demandes spécifiques, et peuvent être axées sur le ludique, le culturel, la cohésion d'équipe (team building) ou la créativité.\nIl est possible d'axer par exemple sur les percussions et rythmes, ou bien d'associer le chant (cf page Chant), ou autres projet que l'on mettra en place ensemble.\nInterventions possibles en écoles de musique, festivals, centres de détention, MJC, centres de vacances, en famille, lors d'une fête, en entreprise, en collectif, EMS, centres de loisirs, EPSM,...",
+    "objectifs": "",
+    "approche": "",
+    "deroulement": "",
+    "pdf": ""
   }
 ]

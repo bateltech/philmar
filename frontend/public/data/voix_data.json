@@ -4,7 +4,8 @@
     "title": "CHANT/VOIX (généralement 1h)",
     "image": "/images/voix/CHANTVOIX (généralement 1h).jpg",
     "description": "Redécouvrir que le chant est naturel, par le jeu, par le corps, par l'exploration, par des approches créatives ou méditatives, corporelles, énergétiques. Se sentir vibrant, vivant, et s'exprimer spontanément et avec plus de fluidité.\nCette méthode permet de découvrir ou d''approfondir le plaisir de \"donner de la voix\", de chanter plus librement et d'aller à la rencontre de son être profond.\nSur la base de cette approche il est possible aussi de travailler des techniques vocales, d'affiner l'oreille, de développer le sens du rythme, et d'appliquer ces résultats sur le travail vocal de chansons de tous styles, ou à la composition musicale, ou à la création de chansons (textes compris).",
-    "sections": []
+    "sections": [],
+    "link": ""
   },
   {
     "type": "atelier",
@@ -24,7 +25,8 @@
         "label": "Objectifs",
         "content": "Éveil du ressenti corporel et émotionnel, créativité libre, écoute mutuelle, fluidité vocale."
       }
-    ]
+    ],
+    "link": ""
   },
   {
     "type": "atelier",
@@ -44,7 +46,8 @@
         "label": "Bénéfices",
         "content": "Développement des perceptions, écoute, initiative, esprit d'équipe, communication et créativité."
       }
-    ]
+    ],
+    "link": ""
   },
   {
     "type": "stage",
@@ -54,7 +57,8 @@
     "objectifs": "Les jeux vocaux permettent de retrouver ou développer le naturel de la voix, du corps et de l'être, d'expérimenter l'euphorie du chant en se rendant disponible à l'aventure de l'Instant, à la créativité interactive.",
     "moyens": "Exploration de jeux musicaux par la voix et le corps. Venez avec votre plaisir de partager et d'éveiller la Vie en soi et avec les autres !",
     "contenu": "L'exploration des voyelles fera suite aux échauffements corporels et vocaux, ainsi que différents thèmes d'exercices ludiques autour de la voix. Des cercles de chant seront accompagnés d'instruments par l'animateur.",
-    "horaires": "Généralement 10h-13h et 14h30-17h30"
+    "horaires": "Généralement 10h-13h et 14h30-17h30",
+    "link": "/documents/Stage Chanter la Vie - jouer de la voix et vivre son chant - Philmar - Générique.pdf"
   },
   {
     "type": "stage",
@@ -64,17 +68,19 @@
     "objectifs": "Découvrir et pratiquer le chant diphonique (sélectionner les harmoniques ou fréquences de la voix), cette mélodie sifflée, danse arc-en-ciel des voyelles.",
     "moyens": "Une attention au ressenti, une approche ludique, indications techniques précises adaptées à chacun, en groupes et individuellement.",
     "contenu": "Echauffements, jeux vocaux, voyelles, travail de la voix, notions musicales, techniques spécifiques et diverses au chant harmonique, au chant diphonique.",
-    "horaires": "Généralement 10h-13h et 14h30-18h30"
+    "horaires": "Généralement 10h-13h et 14h30-18h30",
+    "link": "/documents/Stage Chant Diphonique – Arc-en-Ciel Vocal - Philmar - Générique.pdf"
   },
   {
     "type": "stage",
-    "title": "EXPLORATION VOCALE (Chanter la Vie - Série de 3 stages)",
+    "title": "EXPLORATION VOCALE (Chanter la Vie 1 - Série de 3 stages)",
     "image": "/images/voix/EXPLORATION VOCALE (Chanter la Vie 1 - Série de 3 stages).jpg",
     "description": "Stage ouvert à tous, musiciens professionnels ou non. 1er de la série de 3 stages Chanter la Vie : Ils peuvent être suivis de manière indépendante, mais il est préférable de suivre le cursus dans l'ordre.",
     "objectifs": "Pour un retour à l'essentiel de l'expérience de chanter, il s'agit de retrouver ou développer le naturel de la voix, du corps et de l'être, d'expérimenter l'euphorie du chant en se rendant disponible à l'aventure de l'Instant.",
     "moyens": "Différents jeux musicaux sont abordés avec la voix, le corps, par l'exploration vocale, les exercices  thématiques et la création.",
     "contenu": "Exploration des phonèmes dans leur ressenti, leur écoute et leur gestuelle, différents thèmes d'exercices ludiques, échauffements, relaxations musicales, Qi Cong, accompagnement d'instruments par l'animateur.",
-    "horaires": "Généralement 10h-13h et 14h30-17h30"
+    "horaires": "Généralement 10h-13h et 14h30-17h30",
+    "link": ""
   },
   {
     "type": "stage",
@@ -84,7 +90,8 @@
     "objectifs": "Il s'agit d'aborder par le chant les éléments fondamentaux de la musique. Après la richesse unique de l'expression vocale abordée dans le stage Chanter la Vie 1, c'est une palette d'outils musicaux qui enrichira votre créativité et inventivité.",
     "moyens": "On jouera par la voix avec les paramètres sonores que sont les durées, les hauteurs, les intensités, les timbres,… et notre inspiration collective.",
     "contenu": "Exploration du rythme, de la mélodie, de l'harmonie avec différents thèmes d'exercices ludique, des échauffements corporels, relaxations musicales, danse libre, accompagnement d'instruments par l'animateur.",
-    "horaires": "Généralement 10h-13h et 14h30-17h30"
+    "horaires": "Généralement 10h-13h et 14h30-17h30",
+    "link": ""
   },
   {
     "type": "stage",
@@ -94,6 +101,7 @@
     "objectifs": "Nous aborderons dans ce stage la diversité des couleurs et des stylistiques vocales. On ira vers plus de profondeur et de vie dans notre chant pour une meilleure expressivité personnelle et un partage plus riche. Après le chant spontané abordé dans le stage Chanter la Vie 1, les éléments musicaux de Chanter la Vie 2, ce 3e ouvre aux chants du monde et à votre imaginaire sonore.",
     "moyens": "On découvrira les postures et zones de vibration qui permettent certaines sonorités typiques ou originales, la puissance du souffle qui soutient et projette la voix. Éveiller les sens, et s'amuser avec des effets de style, échanger, confronter, accompagner le groupe.",
     "contenu": "Exploration du timbre vocal et des voix du monde avec différents thèmes d'exercices ludiques, des échauffements corporels, relaxations musicales, danse libre, accompagnement d'instruments par l'animateur.",
-    "horaires": "Généralement 10h-13h et 14h30-17h30"
+    "horaires": "Généralement 10h-13h et 14h30-17h30",
+    "link": ""
   }
 ]

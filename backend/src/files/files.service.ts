@@ -19,12 +19,20 @@ export interface DocumentMetadata {
   size: number;
 }
 
+export interface AudioMetadata {
+  path: string;
+  name: string;
+  title: string;
+  size: number;
+}
+
 @Injectable()
 export class FilesService {
   private publicPath: string;
   private imagesPath: string;
   private documentsPath: string;
   private thumbnailsPath: string;
+  private audioPath: string;
 
   constructor(private configService: ConfigService) {
     const frontendPath = this.configService.get<string>('paths.frontend');
@@ -32,11 +40,13 @@ export class FilesService {
     this.imagesPath = path.join(this.publicPath, 'images');
     this.documentsPath = path.join(this.publicPath, 'documents');
     this.thumbnailsPath = path.join(this.imagesPath, 'thumbnails');
+    this.audioPath = path.join(this.publicPath, 'audio');
   }
 
   async ensureDirectories() {
     await fs.mkdir(this.thumbnailsPath, { recursive: true });
     await fs.mkdir(this.documentsPath, { recursive: true });
+    await fs.mkdir(this.audioPath, { recursive: true });
   }
 
   async listImages(category?: string): Promise<ImageMetadata[]> {
@@ -202,6 +212,46 @@ export class FilesService {
       await fs.access(fullPath);
     } catch {
       throw new NotFoundException(`Document not found: ${name}`);
+    }
+
+    await fs.unlink(fullPath);
+  }
+
+  async uploadAudio(
+    file: Express.Multer.File,
+    category: string,
+  ): Promise<AudioMetadata> {
+    await this.ensureDirectories();
+
+    const categoryPath = path.join(this.audioPath, category);
+    await fs.mkdir(categoryPath, { recursive: true });
+
+    const finalPath = path.join(categoryPath, file.filename);
+
+    // Move file to final location if not already there
+    if (file.path !== finalPath) {
+      await fs.rename(file.path, finalPath);
+    }
+
+    const stats = await fs.stat(finalPath);
+
+    return {
+      path: `/audio/${category}/${file.filename}`,
+      name: file.filename,
+      title: path.parse(file.originalname).name,
+      size: stats.size,
+    };
+  }
+
+  async deleteAudio(audioPath: string): Promise<void> {
+    // audioPath is like /audio/category/filename.mp3
+    const relativePath = audioPath.replace(/^\/audio\//, '');
+    const fullPath = path.join(this.audioPath, relativePath);
+
+    try {
+      await fs.access(fullPath);
+    } catch {
+      throw new NotFoundException(`Audio not found: ${audioPath}`);
     }
 
     await fs.unlink(fullPath);

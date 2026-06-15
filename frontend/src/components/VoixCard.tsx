@@ -14,9 +14,11 @@ interface VoixCardProps {
   contenu?: string;
   horaires?: string;
   sections?: VoixSection[];
+  link?: string;
+  onOpenPdf?: (url: string) => void;
 }
 
-export default function VoixCard({ title, image, description, objectifs, moyens, contenu, horaires, sections }: VoixCardProps) {
+export default function VoixCard({ title, image, description, objectifs, moyens, contenu, horaires, sections, link, onOpenPdf }: VoixCardProps) {
   return (
     <div className="flex-shrink-0 w-[320px] bg-black text-white rounded shadow border border-white">
       <div className="relative">
@@ -32,7 +34,7 @@ export default function VoixCard({ title, image, description, objectifs, moyens,
         </div>
       </div>
       <div className="p-3 text-sm leading-snug">
-        {description && <p className="mb-2">{description}</p>}
+        {description && <p className="mb-2 whitespace-pre-line">{description}</p>}
         {sections && sections.map((section, i) => (
           <p key={i} className="mb-2 text-gray-300 text-xs">
             <span className="font-bold text-white">{section.label} :</span> {section.content}
@@ -57,6 +59,16 @@ export default function VoixCard({ title, image, description, objectifs, moyens,
           <p className="mb-2 text-gray-300 text-xs">
             <span className="font-bold text-white">Horaires :</span> {horaires}
           </p>
+        )}
+        {link?.trim() && (
+          <a
+            href={link}
+            onClick={(e) => { e.preventDefault(); onOpenPdf?.(link); }}
+            rel="noopener"
+            className="text-blue-300 font-semibold underline text-sm pt-4 pb-4 inline-block cursor-pointer"
+          >
+            En savoir plus →
+          </a>
         )}
       </div>
     </div>
