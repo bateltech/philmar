@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
-
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
@@ -15,6 +14,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@supabase/supabase-js": "^2.108.2",
     "aos": "^2.3.4",
     "carousel": "^0.0.3",
     "embla-carousel": "^8.6.0",

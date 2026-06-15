@@ -14,6 +14,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { getContent } from './content';
 
 export interface SocialLink {
   id: string;
@@ -58,8 +59,7 @@ export function useSocialLinks() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/data/social_links.json')
-      .then((res) => res.json())
+    getContent<SocialLink[]>('social_links')
       .then((data: SocialLink[]) => {
         const active = data
           .filter((link) => link.active)

@@ -2,6 +2,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { X } from 'lucide-react';
 import VoixCard from './VoixCard';
+import { getContent } from '../lib/content';
 
 interface VoixSection {
   label: string;
@@ -27,9 +28,9 @@ export default function VoixCardsGrid() {
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/data/voix_data.json')
-      .then(res => res.json())
-      .then(setData);
+    getContent<VoixItem[]>('voix_data')
+      .then(setData)
+      .catch(() => setData([]));
   }, []);
 
   const filtered = data.filter((item) => item.type === filter);

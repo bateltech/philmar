@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef, useCallback, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getContent } from '../../lib/content';
 
 type Spectacle = {
   title: string;
@@ -39,11 +40,8 @@ export default function Spectacles() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const spectaclesRes = await fetch('/data/spectacles.json');
-        const spectaclesData = await spectaclesRes.json();
-
-        const galleryRes = await fetch('/data/galerie_spectacle.json');
-        const galleryData = await galleryRes.json();
+        const spectaclesData = await getContent<Spectacle[]>('spectacles');
+        const galleryData = await getContent<string[]>('galerie_spectacle');
 
         setSpectacles(spectaclesData);
         setGalleryImages(galleryData);

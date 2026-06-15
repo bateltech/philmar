@@ -123,9 +123,10 @@ class AdminApi {
   }
 
   async deleteImage(imagePath: string) {
-    return this.request<{ success: boolean }>(`/files${imagePath}`, {
-      method: 'DELETE',
-    });
+    return this.request<{ success: boolean }>(
+      `/files/images?path=${encodeURIComponent(imagePath)}`,
+      { method: 'DELETE' },
+    );
   }
 
   async getDocuments() {
@@ -177,9 +178,10 @@ class AdminApi {
   }
 
   async deleteAudio(audioPath: string) {
-    return this.request<{ success: boolean }>(`/files${audioPath}`, {
-      method: 'DELETE',
-    });
+    return this.request<{ success: boolean }>(
+      `/files/audio?path=${encodeURIComponent(audioPath)}`,
+      { method: 'DELETE' },
+    );
   }
 }
 

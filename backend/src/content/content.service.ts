@@ -1,7 +1,5 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import * as fs from 'fs/promises';
-import * as path from 'path';
+import { SupabaseService } from '../supabase/supabase.service';
 
 export type ContentType =
   | 'concerts'
@@ -18,55 +16,69 @@ export type ContentType =
   | 'social_links'
   | 'page_404';
 
-const CONTENT_FILES: Record<ContentType, string> = {
-  concerts: 'concerts.json',
-  spectacles: 'spectacles.json',
-  discographie: 'discographie.json',
-  instruments: 'instruments.json',
-  voix_data: 'voix_data.json',
-  ateliers_instruments: 'ateliers_instruments.json',
-  avis_instruments: 'avis_instruments.json',
-  avis_voix: 'avis_voix.json',
-  dernier_album: 'dernier_album.json',
-  galerie: 'galerie.json',
-  galerie_spectacle: 'galerie_spectacle.json',
-  social_links: 'social_links.json',
-  page_404: 'page_404.json',
-};
+const CONTENT_TYPES: ContentType[] = [
+  'concerts',
+  'spectacles',
+  'discographie',
+  'instruments',
+  'voix_data',
+  'ateliers_instruments',
+  'avis_instruments',
+  'avis_voix',
+  'dernier_album',
+  'galerie',
+  'galerie_spectacle',
+  'social_links',
+  'page_404',
+];
+
+const CONTENT_TABLE = 'content';
 
 @Injectable()
 export class ContentService {
-  private dataPath: string;
+  constructor(private supabaseService: SupabaseService) {}
 
-  constructor(private configService: ConfigService) {
-    const frontendPath = this.configService.get<string>('paths.frontend');
-    this.dataPath = path.join(process.cwd(), frontendPath, 'data');
-  }
-
-  private getFilePath(type: ContentType): string {
-    const filename = CONTENT_FILES[type];
-    if (!filename) {
+  private assertValidType(type: ContentType): void {
+    if (!CONTENT_TYPES.includes(type)) {
       throw new BadRequestException(`Invalid content type: ${type}`);
     }
-    return path.join(this.dataPath, filename);
   }
 
   async getContent(type: ContentType): Promise<unknown> {
-    const filePath = this.getFilePath(type);
-    try {
-      const data = await fs.readFile(filePath, 'utf-8');
-      return JSON.parse(data);
-    } catch (error) {
-      if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-        throw new NotFoundException(`Content file not found: ${type}`);
-      }
-      throw error;
+    this.assertValidType(type);
+
+    const { data, error } = await this.supabaseService
+      .getClient()
+      .from(CONTENT_TABLE)
+      .select('data')
+      .eq('type', type)
+      .maybeSingle();
+
+    if (error) {
+      throw new BadRequestException(`Failed to read content "${type}": ${error.message}`);
     }
+    if (!data) {
+      throw new NotFoundException(`Content not found: ${type}`);
+    }
+
+    return data.data;
   }
 
   async updateContent(type: ContentType, data: unknown): Promise<unknown> {
-    const filePath = this.getFilePath(type);
-    await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
+    this.assertValidType(type);
+
+    const { error } = await this.supabaseService
+      .getClient()
+      .from(CONTENT_TABLE)
+      .upsert(
+        { type, data, updated_at: new Date().toISOString() },
+        { onConflict: 'type' },
+      );
+
+    if (error) {
+      throw new BadRequestException(`Failed to save content "${type}": ${error.message}`);
+    }
+
     return data;
   }
 
@@ -107,6 +119,6 @@ export class ContentService {
   }
 
   getValidContentTypes(): ContentType[] {
-    return Object.keys(CONTENT_FILES) as ContentType[];
+    return [...CONTENT_TYPES];
   }
 }

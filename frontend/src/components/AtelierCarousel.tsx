@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { getContent } from '../lib/content';
 
 interface Atelier {
   nom: string;
@@ -53,8 +54,7 @@ export default function AteliersCarousel() {
   // ---------- DATA ----------
   useEffect(() => {
     let cancelled = false;
-    fetch('/data/ateliers_instruments.json', { cache: 'no-store' })
-      .then((r) => r.json())
+    getContent<Atelier[]>('ateliers_instruments')
       .then((arr: Atelier[]) => {
         if (cancelled) return;
         const safe = (arr || []).filter(Boolean);

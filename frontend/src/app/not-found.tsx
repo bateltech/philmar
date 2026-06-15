@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone, faMusic } from '@fortawesome/free-solid-svg-icons';
 import SocialLinksRow from '@/components/SocialLinksRow';
+import { getContent } from '@/lib/content';
 
 const DEFAULTS = {
   title: 'Vous voilà sur un horizon lointain',
@@ -16,8 +17,7 @@ export default function NotFound() {
   const [content, setContent] = useState(DEFAULTS);
 
   useEffect(() => {
-    fetch('/data/page_404.json')
-      .then((res) => (res.ok ? res.json() : null))
+    getContent<Partial<typeof DEFAULTS>>('page_404')
       .then((data) => {
         if (data) setContent({ ...DEFAULTS, ...data });
       })

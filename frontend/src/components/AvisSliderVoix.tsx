@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import type { EmblaOptionsType } from 'embla-carousel';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { getContent } from '../lib/content';
 
 type Avis = { texte: string; auteur: string; lieu?: string };
 
@@ -24,11 +25,7 @@ export default function AvisSliderVoix() {
   // Charger depuis /public/data
   useEffect(() => {
     let alive = true;
-    fetch('/data/avis_voix.json', { cache: 'no-store' })
-      .then((r) => {
-        if (!r.ok) throw new Error('Impossible de charger /data/avis_voix.json');
-        return r.json();
-      })
+    getContent<Avis[]>('avis_voix')
       .then((data: Avis[]) => { if (alive) setAvisData(Array.isArray(data) ? data : []); })
       .catch(console.error)
       .finally(() => { if (alive) setLoading(false); });

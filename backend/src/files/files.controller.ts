@@ -12,26 +12,19 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { extname, join } from 'path';
-import { mkdir } from 'fs/promises';
 import { FilesService } from './files.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { imageFileFilter, documentFileFilter, audioFileFilter } from './multer.config';
-import { ConfigService } from '@nestjs/config';
+import {
+  imageFileFilter,
+  documentFileFilter,
+  audioFileFilter,
+  uploadStorage,
+} from './multer.config';
 
 @Controller('api/files')
 @UseGuards(JwtAuthGuard)
 export class FilesController {
-  private uploadPath: string;
-
-  constructor(
-    private filesService: FilesService,
-    private configService: ConfigService,
-  ) {
-    const frontendPath = this.configService.get<string>('paths.frontend');
-    this.uploadPath = join(process.cwd(), frontendPath);
-  }
+  constructor(private filesService: FilesService) {}
 
   @Get('images')
   async listImages(@Query('category') category?: string) {
@@ -48,16 +41,7 @@ export class FilesController {
   @Post('images')
   @UseInterceptors(
     FilesInterceptor('files', 10, {
-      storage: diskStorage({
-        destination: (_req, _file, cb) => {
-          cb(null, join(process.cwd(), '../frontend/public/images/temp'));
-        },
-        filename: (_req, file, cb) => {
-          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-          const ext = extname(file.originalname);
-          cb(null, `image-${uniqueSuffix}${ext}`);
-        },
-      }),
+      storage: uploadStorage(),
       fileFilter: imageFileFilter,
       limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
     }),
@@ -84,16 +68,7 @@ export class FilesController {
   @Post('images/single')
   @UseInterceptors(
     FileInterceptor('file', {
-      storage: diskStorage({
-        destination: (_req, _file, cb) => {
-          cb(null, join(process.cwd(), '../frontend/public/images/temp'));
-        },
-        filename: (_req, file, cb) => {
-          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-          const ext = extname(file.originalname);
-          cb(null, `image-${uniqueSuffix}${ext}`);
-        },
-      }),
+      storage: uploadStorage(),
       fileFilter: imageFileFilter,
       limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
     }),
@@ -114,10 +89,12 @@ export class FilesController {
     return { image: result };
   }
 
-  @Delete('images/*')
-  async deleteImage(@Param() params: { 0: string }) {
-    const imagePath = '/' + params[0];
-    await this.filesService.deleteImage(imagePath);
+  @Delete('images')
+  async deleteImage(@Query('path') path: string) {
+    if (!path) {
+      throw new BadRequestException('path query parameter is required');
+    }
+    await this.filesService.deleteImage(path);
     return { success: true, message: 'Image deleted' };
   }
 
@@ -130,15 +107,7 @@ export class FilesController {
   @Post('documents')
   @UseInterceptors(
     FileInterceptor('file', {
-      storage: diskStorage({
-        destination: (_req, _file, cb) => {
-          cb(null, join(process.cwd(), '../frontend/public/documents'));
-        },
-        filename: (_req, file, cb) => {
-          const sanitized = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
-          cb(null, sanitized);
-        },
-      }),
+      storage: uploadStorage(),
       fileFilter: documentFileFilter,
       limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
     }),
@@ -161,19 +130,7 @@ export class FilesController {
   @Post('audio')
   @UseInterceptors(
     FilesInterceptor('files', 20, {
-      storage: diskStorage({
-        destination: (_req, _file, cb) => {
-          const dir = join(process.cwd(), '../frontend/public/audio/temp');
-          mkdir(dir, { recursive: true })
-            .then(() => cb(null, dir))
-            .catch((err) => cb(err, dir));
-        },
-        filename: (_req, file, cb) => {
-          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-          const ext = extname(file.originalname) || '.mp3';
-          cb(null, `audio-${uniqueSuffix}${ext}`);
-        },
-      }),
+      storage: uploadStorage(),
       fileFilter: audioFileFilter,
       limits: { fileSize: 30 * 1024 * 1024 }, // 30MB
     }),
@@ -197,10 +154,12 @@ export class FilesController {
     return { audio: results };
   }
 
-  @Delete('audio/*')
-  async deleteAudio(@Param() params: { 0: string }) {
-    const audioPath = '/' + params[0];
-    await this.filesService.deleteAudio(audioPath);
+  @Delete('audio')
+  async deleteAudio(@Query('path') path: string) {
+    if (!path) {
+      throw new BadRequestException('path query parameter is required');
+    }
+    await this.filesService.deleteAudio(path);
     return { success: true, message: 'Audio deleted' };
   }
 }
