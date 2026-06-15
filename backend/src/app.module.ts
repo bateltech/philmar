@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ContentModule } from './content/content.module';
 import { FilesModule } from './files/files.module';
+import { SupabaseModule } from './supabase/supabase.module';
 import configuration from './config/configuration';
 
 @Module({
@@ -13,6 +14,7 @@ import configuration from './config/configuration';
       isGlobal: true,
       load: [configuration],
     }),
+    SupabaseModule,
     AuthModule,
     ContentModule,
     FilesModule,

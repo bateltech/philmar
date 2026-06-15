@@ -2,6 +2,7 @@
 
 
 import { useEffect, useState } from 'react';
+import { getContent } from '../lib/content';
 
 
 type PlayerConfig = { soundcloud?: { playlistUrl?: string } };
@@ -14,11 +15,7 @@ const [error, setError] = useState<string | null>(null);
 
 useEffect(() => {
 let isMounted = true;
-fetch('/data/dernier_album.json', { cache: 'no-store' })
-.then((r) => {
-if (!r.ok) throw new Error('Impossible de charger /data/dernier_album.json');
-return r.json();
-})
+getContent<PlayerConfig>('dernier_album')
 .then((data) => {
 if (isMounted) setConfig(data);
 })

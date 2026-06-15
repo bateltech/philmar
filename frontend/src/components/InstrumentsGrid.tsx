@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { getContent } from '../lib/content';
 
 type Instrument = {
   nom: string;
@@ -15,11 +16,7 @@ const InstrumentsGrid = () => {
   // Charger depuis /public/data (pas d'import ESM)
   useEffect(() => {
     let alive = true;
-    fetch('/data/instruments.json', { cache: 'no-store' })
-      .then((r) => {
-        if (!r.ok) throw new Error('Impossible de charger /data/instruments.json');
-        return r.json();
-      })
+    getContent<Instrument[]>('instruments')
       .then((data: Instrument[]) => {
         if (!alive) return;
         setInstruments(Array.isArray(data) ? data : []);

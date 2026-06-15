@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as fs from 'fs/promises';
 import * as path from 'path';
 import * as sharp from 'sharp';
+import { SupabaseService } from '../supabase/supabase.service';
 
 export interface ImageMetadata {
   path: string;
@@ -26,70 +26,53 @@ export interface AudioMetadata {
   size: number;
 }
 
+const THUMBNAILS_PREFIX = 'thumbnails';
+
 @Injectable()
 export class FilesService {
-  private publicPath: string;
-  private imagesPath: string;
-  private documentsPath: string;
-  private thumbnailsPath: string;
-  private audioPath: string;
+  private imagesBucket: string;
+  private audioBucket: string;
+  private documentsBucket: string;
 
-  constructor(private configService: ConfigService) {
-    const frontendPath = this.configService.get<string>('paths.frontend');
-    this.publicPath = path.join(process.cwd(), frontendPath);
-    this.imagesPath = path.join(this.publicPath, 'images');
-    this.documentsPath = path.join(this.publicPath, 'documents');
-    this.thumbnailsPath = path.join(this.imagesPath, 'thumbnails');
-    this.audioPath = path.join(this.publicPath, 'audio');
-  }
-
-  async ensureDirectories() {
-    await fs.mkdir(this.thumbnailsPath, { recursive: true });
-    await fs.mkdir(this.documentsPath, { recursive: true });
-    await fs.mkdir(this.audioPath, { recursive: true });
-  }
-
-  async listImages(category?: string): Promise<ImageMetadata[]> {
-    const images: ImageMetadata[] = [];
-    const baseDir = category ? path.join(this.imagesPath, category) : this.imagesPath;
-
-    try {
-      await this.scanImagesRecursively(baseDir, images, '');
-    } catch (error) {
-      if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
-        throw error;
-      }
-    }
-
-    return images;
-  }
-
-  private async scanImagesRecursively(
-    dir: string,
-    images: ImageMetadata[],
-    relativePath: string,
+  constructor(
+    private configService: ConfigService,
+    private supabaseService: SupabaseService,
   ) {
-    const entries = await fs.readdir(dir, { withFileTypes: true });
+    this.imagesBucket = this.configService.get<string>('supabase.buckets.images');
+    this.audioBucket = this.configService.get<string>('supabase.buckets.audio');
+    this.documentsBucket = this.configService.get<string>('supabase.buckets.documents');
+  }
 
-    for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name);
-      const relPath = relativePath ? `${relativePath}/${entry.name}` : entry.name;
+  private get storage() {
+    return this.supabaseService.getClient().storage;
+  }
 
-      if (entry.isDirectory() && entry.name !== 'thumbnails') {
-        await this.scanImagesRecursively(fullPath, images, relPath);
-      } else if (entry.isFile() && this.isImageFile(entry.name)) {
-        const stats = await fs.stat(fullPath);
-        const category = relativePath.split('/')[0] || 'root';
+  private generateFilename(file: Express.Multer.File): string {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    const ext = path.extname(file.originalname) || '';
+    return `${file.fieldname}-${uniqueSuffix}${ext}`;
+  }
 
-        images.push({
-          path: `/images/${relPath}`,
-          name: entry.name,
-          size: stats.size,
-          category,
-          thumbnail: `/images/thumbnails/${relPath.replace(/\//g, '_')}`,
-        });
-      }
+  private publicUrl(bucket: string, key: string): string {
+    return this.storage.from(bucket).getPublicUrl(key).data.publicUrl;
+  }
+
+  /**
+   * Accepts either a full Supabase public URL or a stored storage key and
+   * returns the key relative to the given bucket. Returns null when the value
+   * does not belong to this bucket (e.g. a legacy static path like /images/..).
+   */
+  private keyFromPath(bucket: string, value: string): string | null {
+    const marker = `/object/public/${bucket}/`;
+    const idx = value.indexOf(marker);
+    if (idx !== -1) {
+      return decodeURIComponent(value.slice(idx + marker.length));
     }
+    // Already a bare key (no protocol, no leading slash)
+    if (!value.startsWith('http') && !value.startsWith('/')) {
+      return value;
+    }
+    return null;
   }
 
   private isImageFile(filename: string): boolean {
@@ -97,183 +80,197 @@ export class FilesService {
     return ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext);
   }
 
+  async listImages(category?: string): Promise<ImageMetadata[]> {
+    const images: ImageMetadata[] = [];
+
+    let folders: string[];
+    if (category) {
+      folders = [category];
+    } else {
+      const { data: rootEntries, error } = await this.storage
+        .from(this.imagesBucket)
+        .list('', { limit: 1000 });
+      if (error) {
+        throw new BadRequestException(`Failed to list images: ${error.message}`);
+      }
+      folders = (rootEntries || [])
+        .filter((e) => e.id === null && e.name !== THUMBNAILS_PREFIX)
+        .map((e) => e.name);
+    }
+
+    for (const folder of folders) {
+      const { data: files, error } = await this.storage
+        .from(this.imagesBucket)
+        .list(folder, { limit: 1000 });
+      if (error) {
+        continue;
+      }
+
+      for (const file of files || []) {
+        if (file.id === null || !this.isImageFile(file.name)) {
+          continue;
+        }
+        const key = `${folder}/${file.name}`;
+        images.push({
+          path: this.publicUrl(this.imagesBucket, key),
+          name: file.name,
+          size: (file.metadata?.size as number) || 0,
+          category: folder,
+          thumbnail: this.publicUrl(
+            this.imagesBucket,
+            `${THUMBNAILS_PREFIX}/${folder}_${file.name}`,
+          ),
+        });
+      }
+    }
+
+    return images;
+  }
+
+  async getImageCategories(): Promise<string[]> {
+    const { data: rootEntries, error } = await this.storage
+      .from(this.imagesBucket)
+      .list('', { limit: 1000 });
+    if (error) {
+      throw new BadRequestException(`Failed to list categories: ${error.message}`);
+    }
+    return (rootEntries || [])
+      .filter((e) => e.id === null && e.name !== THUMBNAILS_PREFIX)
+      .map((e) => e.name);
+  }
+
   async uploadImage(
     file: Express.Multer.File,
     category: string,
   ): Promise<ImageMetadata> {
-    await this.ensureDirectories();
+    const filename = this.generateFilename(file);
+    const key = `${category}/${filename}`;
 
-    const categoryPath = path.join(this.imagesPath, category);
-    await fs.mkdir(categoryPath, { recursive: true });
-
-    const finalPath = path.join(categoryPath, file.filename);
-
-    // Move file to final location if not already there
-    if (file.path !== finalPath) {
-      await fs.rename(file.path, finalPath);
+    const { error } = await this.storage
+      .from(this.imagesBucket)
+      .upload(key, file.buffer, { contentType: file.mimetype, upsert: false });
+    if (error) {
+      throw new BadRequestException(`Failed to upload image: ${error.message}`);
     }
 
-    // Generate thumbnail
-    const thumbnailName = `${category}_${file.filename}`;
-    const thumbnailPath = path.join(this.thumbnailsPath, thumbnailName);
-
+    // Generate and upload a thumbnail (best effort)
+    const thumbnailKey = `${THUMBNAILS_PREFIX}/${category}_${filename}`;
     try {
-      await sharp(finalPath)
+      const thumbBuffer = await sharp(file.buffer)
         .resize(200, 200, { fit: 'cover' })
-        .toFile(thumbnailPath);
-    } catch (error) {
-      console.error('Error generating thumbnail:', error);
+        .toBuffer();
+      await this.storage
+        .from(this.imagesBucket)
+        .upload(thumbnailKey, thumbBuffer, {
+          contentType: file.mimetype,
+          upsert: true,
+        });
+    } catch (err) {
+      console.error('Error generating thumbnail:', err);
     }
-
-    const stats = await fs.stat(finalPath);
 
     return {
-      path: `/images/${category}/${file.filename}`,
-      name: file.filename,
-      size: stats.size,
+      path: this.publicUrl(this.imagesBucket, key),
+      name: filename,
+      size: file.size,
       category,
-      thumbnail: `/images/thumbnails/${thumbnailName}`,
+      thumbnail: this.publicUrl(this.imagesBucket, thumbnailKey),
     };
   }
 
   async deleteImage(imagePath: string): Promise<void> {
-    // imagePath is like /images/category/filename.jpg
-    const relativePath = imagePath.replace(/^\/images\//, '');
-    const fullPath = path.join(this.imagesPath, relativePath);
-
-    try {
-      await fs.access(fullPath);
-    } catch {
-      throw new NotFoundException(`Image not found: ${imagePath}`);
+    const key = this.keyFromPath(this.imagesBucket, imagePath);
+    if (!key) {
+      throw new NotFoundException(`Image not managed by storage: ${imagePath}`);
     }
 
-    await fs.unlink(fullPath);
+    const { error } = await this.storage.from(this.imagesBucket).remove([key]);
+    if (error) {
+      throw new BadRequestException(`Failed to delete image: ${error.message}`);
+    }
 
-    // Try to delete thumbnail too
-    const thumbnailName = relativePath.replace(/\//g, '_');
-    const thumbnailPath = path.join(this.thumbnailsPath, thumbnailName);
-    try {
-      await fs.unlink(thumbnailPath);
-    } catch {
-      // Thumbnail might not exist
+    // Best-effort thumbnail removal: thumbnails/<category>_<filename>
+    const parts = key.split('/');
+    if (parts.length >= 2) {
+      const category = parts[0];
+      const filename = parts.slice(1).join('/');
+      const thumbKey = `${THUMBNAILS_PREFIX}/${category}_${filename}`;
+      await this.storage.from(this.imagesBucket).remove([thumbKey]);
     }
   }
 
   async listDocuments(): Promise<DocumentMetadata[]> {
-    const documents: DocumentMetadata[] = [];
-
-    try {
-      const entries = await fs.readdir(this.documentsPath, { withFileTypes: true });
-
-      for (const entry of entries) {
-        if (entry.isFile() && entry.name.endsWith('.pdf')) {
-          const fullPath = path.join(this.documentsPath, entry.name);
-          const stats = await fs.stat(fullPath);
-
-          documents.push({
-            path: `/documents/${entry.name}`,
-            name: entry.name,
-            size: stats.size,
-          });
-        }
-      }
-    } catch (error) {
-      if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
-        throw error;
-      }
+    const { data: files, error } = await this.storage
+      .from(this.documentsBucket)
+      .list('', { limit: 1000 });
+    if (error) {
+      throw new BadRequestException(`Failed to list documents: ${error.message}`);
     }
 
-    return documents;
+    return (files || [])
+      .filter((f) => f.id !== null && f.name.toLowerCase().endsWith('.pdf'))
+      .map((f) => ({
+        path: this.publicUrl(this.documentsBucket, f.name),
+        name: f.name,
+        size: (f.metadata?.size as number) || 0,
+      }));
   }
 
   async uploadDocument(file: Express.Multer.File): Promise<DocumentMetadata> {
-    await this.ensureDirectories();
+    const name = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
 
-    const finalPath = path.join(this.documentsPath, file.filename);
-
-    // Move file to final location if not already there
-    if (file.path !== finalPath) {
-      await fs.rename(file.path, finalPath);
+    const { error } = await this.storage
+      .from(this.documentsBucket)
+      .upload(name, file.buffer, { contentType: file.mimetype, upsert: true });
+    if (error) {
+      throw new BadRequestException(`Failed to upload document: ${error.message}`);
     }
 
-    const stats = await fs.stat(finalPath);
-
     return {
-      path: `/documents/${file.filename}`,
-      name: file.filename,
-      size: stats.size,
+      path: this.publicUrl(this.documentsBucket, name),
+      name,
+      size: file.size,
     };
   }
 
   async deleteDocument(name: string): Promise<void> {
-    const fullPath = path.join(this.documentsPath, name);
-
-    try {
-      await fs.access(fullPath);
-    } catch {
-      throw new NotFoundException(`Document not found: ${name}`);
+    const { error } = await this.storage.from(this.documentsBucket).remove([name]);
+    if (error) {
+      throw new BadRequestException(`Failed to delete document: ${error.message}`);
     }
-
-    await fs.unlink(fullPath);
   }
 
   async uploadAudio(
     file: Express.Multer.File,
     category: string,
   ): Promise<AudioMetadata> {
-    await this.ensureDirectories();
+    const filename = this.generateFilename(file);
+    const key = `${category}/${filename}`;
 
-    const categoryPath = path.join(this.audioPath, category);
-    await fs.mkdir(categoryPath, { recursive: true });
-
-    const finalPath = path.join(categoryPath, file.filename);
-
-    // Move file to final location if not already there
-    if (file.path !== finalPath) {
-      await fs.rename(file.path, finalPath);
+    const { error } = await this.storage
+      .from(this.audioBucket)
+      .upload(key, file.buffer, { contentType: file.mimetype, upsert: false });
+    if (error) {
+      throw new BadRequestException(`Failed to upload audio: ${error.message}`);
     }
 
-    const stats = await fs.stat(finalPath);
-
     return {
-      path: `/audio/${category}/${file.filename}`,
-      name: file.filename,
+      path: this.publicUrl(this.audioBucket, key),
+      name: filename,
       title: path.parse(file.originalname).name,
-      size: stats.size,
+      size: file.size,
     };
   }
 
   async deleteAudio(audioPath: string): Promise<void> {
-    // audioPath is like /audio/category/filename.mp3
-    const relativePath = audioPath.replace(/^\/audio\//, '');
-    const fullPath = path.join(this.audioPath, relativePath);
-
-    try {
-      await fs.access(fullPath);
-    } catch {
-      throw new NotFoundException(`Audio not found: ${audioPath}`);
+    const key = this.keyFromPath(this.audioBucket, audioPath);
+    if (!key) {
+      throw new NotFoundException(`Audio not managed by storage: ${audioPath}`);
     }
 
-    await fs.unlink(fullPath);
-  }
-
-  async getImageCategories(): Promise<string[]> {
-    const categories: string[] = [];
-
-    try {
-      const entries = await fs.readdir(this.imagesPath, { withFileTypes: true });
-
-      for (const entry of entries) {
-        if (entry.isDirectory() && entry.name !== 'thumbnails') {
-          categories.push(entry.name);
-        }
-      }
-    } catch (error) {
-      if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
-        throw error;
-      }
+    const { error } = await this.storage.from(this.audioBucket).remove([key]);
+    if (error) {
+      throw new BadRequestException(`Failed to delete audio: ${error.message}`);
     }
-
-    return categories;
   }
 }

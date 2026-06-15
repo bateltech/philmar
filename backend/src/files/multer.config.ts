@@ -1,5 +1,4 @@
-import { diskStorage } from 'multer';
-import { extname } from 'path';
+import { memoryStorage } from 'multer';
 import { BadRequestException } from '@nestjs/common';
 
 export const imageFileFilter = (
@@ -41,26 +40,9 @@ export const audioFileFilter = (
   }
 };
 
-export const createImageStorage = (basePath: string) =>
-  diskStorage({
-    destination: (_req, _file, cb) => {
-      cb(null, basePath);
-    },
-    filename: (_req, file, cb) => {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      const ext = extname(file.originalname);
-      cb(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
-    },
-  });
-
-export const createDocumentStorage = (basePath: string) =>
-  diskStorage({
-    destination: (_req, _file, cb) => {
-      cb(null, basePath);
-    },
-    filename: (_req, file, cb) => {
-      // Preserve original filename for documents
-      const sanitized = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
-      cb(null, sanitized);
-    },
-  });
+/**
+ * Files are kept in memory and streamed straight to Supabase Storage, so no
+ * disk is ever touched. This is what makes the backend deployable on
+ * serverless / ephemeral hosts.
+ */
+export const uploadStorage = () => memoryStorage();

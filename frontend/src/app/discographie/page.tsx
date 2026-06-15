@@ -3,6 +3,7 @@ import FilterDropdown from '../../components/FilterDropdown';
 import AlbumCard from '../../components/AlbumCard';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { getContent } from '../../lib/content';
 
 type SortMode = 'recent' | 'old' | 'alpha';
 
@@ -31,12 +32,12 @@ export default function Discographie () {
     const [albums, setAlbums] = useState<Album[]>([]);
     const [albumsLoaded, setAlbumsLoaded] = useState(false);
     useEffect(() => {
-      fetch('/data/discographie.json')
-        .then((res) => res.json())
+      getContent<Album[]>('discographie')
         .then((data) => {
           setAlbums(data);
           setAlbumsLoaded(true);
-        });
+        })
+        .catch(() => setAlbumsLoaded(true));
     }, []);
 
   return (

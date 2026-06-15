@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef, useCallback, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getContent } from '../../lib/content';
 
 type Concert = {
   title: string;
@@ -59,11 +60,8 @@ export default function Concerts() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const concertsRes = await fetch('/data/concerts.json');
-        const concertsData = await concertsRes.json();
-
-        const galleryRes = await fetch('/data/galerie.json');
-        const galleryData = await galleryRes.json();
+        const concertsData = await getContent<Concert[]>('concerts');
+        const galleryData = await getContent<string[]>('galerie');
 
         setConcerts(concertsData);
         setGalleryImages(galleryData);
