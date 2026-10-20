@@ -1,8 +1,24 @@
 'use client';
+import { useEffect, useState } from 'react';
+import DOMPurify from 'dompurify';
 import VoixCardsGrid from '@/components/VoixCardsGrid';
 import AvisSliderVoix from '@/components/AvisSliderVoix';
+import { getContent } from '@/lib/content';
+import { DEFAULT_VOIX_PRESENTATION, type VoixPresentationSection } from '@/lib/voix-presentation';
 
 export default function Voix() {
+  const [sections, setSections] = useState<VoixPresentationSection[] | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    getContent<VoixPresentationSection[]>('voix_presentation')
+      .then((data) => {
+        if (alive) setSections(Array.isArray(data) && data.length ? data : DEFAULT_VOIX_PRESENTATION);
+      })
+      .catch(() => { if (alive) setSections(DEFAULT_VOIX_PRESENTATION); });
+    return () => { alive = false; };
+  }, []);
+
   return (
     <main className="bg-black text-white overflow-x-hidden">
       {/* SECTION INTRO + CARTES */}
@@ -31,178 +47,44 @@ export default function Voix() {
           </p>
         </div>
 
-        {/* Cartes */}
+        {/* Cartes (modifiables depuis l'admin) */}
         <div className="max-w-7xl mx-auto mt-16 sm:mt-24 grid gap-8 sm:gap-12 md:grid-cols-3 px-1 sm:px-2 md:px-6 items-stretch">
-          {/* Carte : La méthode */}
-          <div className="flex flex-col items-stretch">
-            <article
-              className="relative rounded-xs bg-black/40 bg-blend-multiply h-full flex flex-col min-h-[400px] sm:min-h-0"
-              style={{
-                backgroundImage: "url('/images/voix/methode.jpg')",
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            >
-              {/* Soleil superposé */}
-              <img
-                src="/images/voix/soleil.png"
-                alt=""
-                className="absolute -top-10 sm:-top-14 -left-6 sm:-left-10 w-16 h-20 sm:w-20 sm:h-24 md:w-28 md:h-28 pointer-events-none select-none z-20"
-              />
+          {(sections ?? []).map((section) => (
+            <div key={section.key} className="flex flex-col items-stretch">
+              <article
+                className="relative rounded-xs bg-black/40 bg-blend-multiply h-full flex flex-col min-h-[400px] sm:min-h-0"
+                style={{
+                  backgroundImage: section.image ? `url("${section.image}")` : undefined,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              >
+                {/* Soleil superposé */}
+                <img
+                  src="/images/voix/soleil.png"
+                  alt=""
+                  className="absolute -top-10 sm:-top-14 -left-6 sm:-left-10 w-16 h-20 sm:w-20 sm:h-24 md:w-28 md:h-28 pointer-events-none select-none z-20"
+                />
 
-              {/* Overlay + texte */}
-              <div className="relative z-10 bg-gradient-to-b from-black/30 via-black/20 to-black/10 backdrop-blur-sm h-full p-3 sm:p-4 md:p-4 text-xs sm:text-sm leading-relaxed">
-                <h3 className="text-lg sm:text-xl font-bold text-yellow-500 mb-1 text-center">
-                  La méthode
-                </h3>
-                <p className="text-xs italic text-yellow-300 mb-3 sm:mb-5 text-center">
-                  &quot;Le Champ des Voix - la Voie du Chant&quot;
-                </p>
+                {/* Overlay + texte */}
+                <div className="relative z-10 bg-gradient-to-b from-black/30 via-black/20 to-black/10 backdrop-blur-sm h-full p-3 sm:p-4 md:p-4 text-xs sm:text-sm leading-relaxed">
+                  <h3 className="text-lg sm:text-xl font-bold text-yellow-500 mb-1 text-center">
+                    {section.title}
+                  </h3>
+                  {section.subtitle && (
+                    <p className="text-xs italic text-yellow-300 mb-3 sm:mb-5 text-center">
+                      {section.subtitle}
+                    </p>
+                  )}
 
-                <p className="mb-3 sm:mb-4">
-                  C&apos;est une approche qui repose sur une série d&apos;exercices
-                  ludiques destinés à retrouver le naturel de sa voix, et ainsi son
-                  expressivité. L&apos;exploration vocale et l&apos;improvisation en
-                  sont les piliers : chanter sans paroles, jouer avec les sons et
-                  laisser place au jeu et à l&apos;échange.
-                </p>
-                <p>
-                  L&apos;objectif est de développer une musicalité naturelle en
-                  s&apos;affranchissant de la technique au profit d&apos;une
-                  perception intuitive des intentions vocales et sonores.
-                  L&apos;improvisation, abordée sous un angle ludique, favorise
-                  l&apos;expression des émotions et la connexion avec l&apos;essentiel
-                  de chacun. Des jeux simples permettent d&apos;expérimenter la
-                  relation entre intérieur et extérieur, facilitant l&apos;écoute,
-                  la communication et l&apos;ouverture aux autres.
-                </p>
-              </div>
-            </article>
-          </div>
-
-          {/* Carte : Les objectifs */}
-          <div className="flex flex-col items-stretch">
-            <article
-              className="relative rounded-xs bg-black/40 bg-blend-multiply h-full flex flex-col min-h-[450px] sm:min-h-0"
-              style={{
-                backgroundImage: "url('/images/voix/objectifs.jpg')",
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            >
-              {/* Soleil superposé */}
-              <img
-                src="/images/voix/soleil.png"
-                alt=""
-                className="absolute -top-10 sm:-top-14 -left-6 sm:-left-10 w-16 h-20 sm:w-20 sm:h-24 md:w-28 md:h-28 pointer-events-none select-none z-20"
-              />
-
-              {/* Overlay + texte */}
-              <div className="relative z-10 bg-gradient-to-b from-black/30 via-black/20 to-black/10 backdrop-blur-sm h-full p-3 sm:p-4 md:p-4 text-xs sm:text-sm leading-relaxed">
-                <h3 className="text-lg sm:text-xl font-bold text-yellow-500 mb-1 text-center">
-                  Les objectifs
-                </h3>
-                <p className="text-xs italic text-yellow-300 mb-3 sm:mb-5 text-center">
-                  (Le formateur s&apos;adapte selon la demande ou les besoins
-                  du contexte et du public)
-                </p>
-
-                <p className="mb-2 sm:mb-3">
-                  À qui s&apos;adresse un atelier ponctuel ou une série d&apos;ateliers&nbsp;?
-                </p>
-
-                <ul className="list-disc pl-4 sm:pl-5 space-y-1 mb-3 sm:mb-4">
-                  <li>
-                    <span className="font-semibold">Privé&nbsp;:</span> Artistes,
-                    entreprises, musicothérapie.
-                  </li>
-                  <li>
-                    <span className="font-semibold">Public&nbsp;:</span> Particuliers,
-                    centres culturels, développement personnel, associations, festivals.
-                  </li>
-                </ul>
-
-                <p className="mb-1">
-                  <span className="font-semibold underline">Cohésion de groupe</span> – développer un esprit d&apos;équipe et un engagement collectif.
-                </p>
-                <p className="mb-1">
-                  <span className="font-semibold underline">Expression artistique</span> – explorer les sonorités et stimuler la créativité vocale.
-                </p>
-                <p className="mb-2 sm:mb-3">
-                  <span className="font-semibold underline">Développement personnel</span> – libérer sa voix pour favoriser
-                  l&apos;épanouissement individuel.
-                </p>
-
-                <p>
-                  L&apos;improvisation en groupe encourage naturellement l&apos;empathie
-                  et la co-création, permettant de retrouver une perception ludique
-                  des sons et d&apos;expérimenter un chant libre et spontané. S&apos;en
-                  suit naturellement un plaisir de l&apos;échange et un sentiment de
-                  partage qui ouvrent à la confiance en la coopération.
-                </p>
-              </div>
-            </article>
-          </div>
-
-          {/* Carte : Les moyens */}
-          <div className="flex flex-col items-stretch">
-            <article
-              className="relative rounded-xs bg-black/40 bg-blend-multiply h-full flex flex-col min-h-[400px] sm:min-h-0"
-              style={{
-                backgroundImage: "url('/images/voix/moyens.jpg')",
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            >
-              {/* Soleil superposé */}
-              <img
-                src="/images/voix/soleil.png"
-                alt=""
-                className="absolute -top-10 sm:-top-14 -left-6 sm:-left-10 w-16 h-20 sm:w-20 sm:h-24 md:w-28 md:h-28 pointer-events-none select-none z-20"
-              />
-
-              {/* Overlay + texte */}
-              <div className="relative z-10 bg-gradient-to-b from-black/30 via-black/20 to-black/10 backdrop-blur-sm h-full p-3 sm:p-4 md:p-4 text-xs sm:text-sm leading-relaxed">
-                <h3 className="text-lg sm:text-xl font-bold text-yellow-500 mb-1 text-center">
-                  Les moyens
-                </h3>
-                <p className="text-xs italic text-yellow-300 mb-3 sm:mb-5 text-center">
-                  selon les objectifs ou le choix du stage/atelier/cours
-                </p>
-
-                <ul className="list-disc pl-4 sm:pl-5 space-y-1">
-                  <li>
-                    Échauffements physiques et énergétiques
-                    (Do In, Qi-Gong, danse libre…).
-                  </li>
-                  <li>
-                    Préparation vocale ludique (rire, théâtre sonore…).
-                  </li>
-                  <li>
-                    Jeux sur l&apos;expression corporelle et vocale
-                    (souffle, percussions corporelles, mélodies…).
-                  </li>
-                  <li>
-                    Exploration stylistique et vocale (tessitures, yodel,
-                    chant diphonique, phonèmes, élocution…).
-                  </li>
-                  <li>
-                    Pratique interactive (chants en cercle, dialogues,
-                    improvisations collectives…) sur toutes sortes de jeux vocaux.
-                  </li>
-                  <li>
-                    Utilisation d&apos;instruments simples par les participants
-                    (maracas, tambourins, flûtes harmoniques…) et accompagnement
-                    d&apos;instruments par l&apos;animateur (guitare, harmonium,
-                    tambour sur cadre, djembé, esraj…).
-                  </li>
-                  <li>
-                    Informations didactiques adaptées aux demandes, au contexte.
-                  </li>
-                </ul>
-              </div>
-            </article>
-          </div>
+                  <div
+                    className="[&_p]:mb-3 sm:[&_p]:mb-4 [&_p:last-child]:mb-0 [&_li_p]:mb-0 [&_ul]:list-disc [&_ul]:pl-4 sm:[&_ul]:pl-5 [&_ul]:space-y-1 [&_ul]:mb-3 [&_ol]:list-decimal [&_ol]:pl-4 sm:[&_ol]:pl-5 [&_ol]:space-y-1 [&_ol]:mb-3 [&_strong]:font-semibold [&_a]:underline [&_a]:text-yellow-300"
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(section.content) }}
+                  />
+                </div>
+              </article>
+            </div>
+          ))}
         </div>
       </section>
 
