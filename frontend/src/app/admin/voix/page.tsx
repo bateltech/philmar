@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { AdminLayout, DataTable, ConfirmDialog, FormField, ImagePicker, DocumentPicker } from '@/components/admin';
+import { AdminLayout, DataTable, ConfirmDialog, FormField, ImagePicker, DocumentPicker, VoixPresentationEditor } from '@/components/admin';
 import { adminApi } from '@/lib/admin-api';
 import { X, Plus, Trash2, Image as ImageIcon } from 'lucide-react';
 
@@ -148,7 +148,7 @@ export default function VoixPage() {
 
   if (isLoading) {
     return (
-      <AdminLayout title="Voix">
+      <AdminLayout title="Ateliers Voix">
         <div className="flex items-center justify-center py-12">
           <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-600 border-t-transparent"></div>
         </div>
@@ -157,10 +157,14 @@ export default function VoixPage() {
   }
 
   return (
-    <AdminLayout title="Voix">
+    <AdminLayout title="Ateliers Voix">
       {error && (
         <div className="mb-4 rounded-lg bg-red-50 p-4 text-red-700">{error}</div>
       )}
+
+      <VoixPresentationEditor />
+
+      <h2 className="mb-3 text-lg font-semibold">Stages, ateliers et cours</h2>
 
       <DataTable
         data={voixData}
