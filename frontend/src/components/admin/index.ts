@@ -8,3 +8,5 @@ export { default as ImageUploader } from './ImageUploader';
 export { default as ImagePicker } from './ImagePicker';
 export { default as DocumentUploader } from './DocumentUploader';
 export { default as DocumentPicker } from './DocumentPicker';
+export { default as RichTextEditor } from './RichTextEditor';
+export { default as VoixPresentationEditor } from './VoixPresentationEditor';

@@ -183,6 +183,31 @@ class AdminApi {
       { method: 'DELETE' },
     );
   }
+
+  // Messages du formulaire de contact
+  async getMessages() {
+    return this.request<ContactMessage[]>('/contact/messages');
+  }
+
+  async setMessageRead(id: string, read: boolean) {
+    return this.request<ContactMessage>(`/contact/messages/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ read }),
+    });
+  }
+
+  async deleteMessage(id: string) {
+    return this.request<{ success: boolean }>(`/contact/messages/${id}`, { method: 'DELETE' });
+  }
+}
+
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  read: boolean;
+  created_at: string;
 }
 
 export interface ImageMetadata {

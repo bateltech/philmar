@@ -14,7 +14,8 @@ export type ContentType =
   | 'galerie'
   | 'galerie_spectacle'
   | 'social_links'
-  | 'page_404';
+  | 'page_404'
+  | 'voix_presentation';
 
 const CONTENT_TYPES: ContentType[] = [
   'concerts',
@@ -30,6 +31,7 @@ const CONTENT_TYPES: ContentType[] = [
   'galerie_spectacle',
   'social_links',
   'page_404',
+  'voix_presentation',
 ];
 
 const CONTENT_TABLE = 'content';

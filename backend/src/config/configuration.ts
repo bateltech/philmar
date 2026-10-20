@@ -19,6 +19,12 @@ export default () => ({
       documents: process.env.SUPABASE_BUCKET_DOCUMENTS || 'documents',
     },
   },
+  contact: {
+    turnstileSecretKey: process.env.TURNSTILE_SECRET_KEY,
+    brevoApiKey: process.env.BREVO_API_KEY,
+    senderEmail: process.env.CONTACT_SENDER_EMAIL,
+    recipientEmail: process.env.CONTACT_RECIPIENT_EMAIL,
+  },
   cors: {
     origin: process.env.CORS_ORIGIN || 'http://localhost:3001',
   },
