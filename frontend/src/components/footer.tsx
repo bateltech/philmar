@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import Link from 'next/link';
+import ContactForm from './ContactForm';
 
 const Footer = () => {
   return (
@@ -15,22 +16,7 @@ const Footer = () => {
        
             {/* Contact Form */}
             <div className="flex flex-col items-center space-y-4">
-                <h2 className="text-lg text-right">Pour toute proposition, vous pouvez me contacter</h2>
-          
-                <input 
-                    type="email" 
-                    placeholder="Entrez votre email ici..." 
-                    className="p-2 w-80 text-black border border-red-500"
-                />
-          
-                <textarea 
-                    placeholder="Entrez le message ici..." 
-                    className="p-2 w-80 h-32 text-black border border-red-500"
-                />
-          
-                <button className="bg-white text-black font-semibold py-2 px-6 mt-4">
-                    Envoyer
-                </button>
+                <ContactForm />
 
                 {/* Contact Details */}
                 <div className="flex space-x-8 justify-center text-white">

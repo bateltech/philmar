@@ -18,17 +18,19 @@ import {
   Settings,
   LogOut,
   X,
+  Mail,
 } from 'lucide-react';
 import { useAuth } from '@/lib/auth-context';
 
 const menuItems = [
   { href: '/admin', icon: Home, label: 'Dashboard' },
+  { href: '/admin/messages', icon: Mail, label: 'Messages' },
   { href: '/admin/concerts', icon: Music, label: 'Concerts' },
   { href: '/admin/spectacles', icon: Theater, label: 'Spectacles' },
   { href: '/admin/discographie', icon: Disc3, label: 'Discographie' },
   { href: '/admin/instruments', icon: Guitar, label: 'Instruments' },
-  { href: '/admin/voix', icon: Mic2, label: 'Voix' },
-  { href: '/admin/ateliers', icon: Users, label: 'Ateliers' },
+  { href: '/admin/voix', icon: Mic2, label: 'Ateliers Voix' },
+  { href: '/admin/ateliers', icon: Users, label: 'Ateliers Instruments' },
   { href: '/admin/avis', icon: MessageSquare, label: 'Avis' },
   { href: '/admin/galerie', icon: Image, label: 'Galerie' },
   { href: '/admin/documents', icon: FileText, label: 'Documents' },

@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { ContentModule } from './content/content.module';
 import { FilesModule } from './files/files.module';
 import { SupabaseModule } from './supabase/supabase.module';
+import { ContactModule } from './contact/contact.module';
 import configuration from './config/configuration';
 
 @Module({
@@ -18,6 +19,7 @@ import configuration from './config/configuration';
     AuthModule,
     ContentModule,
     FilesModule,
+    ContactModule,
   ],
   controllers: [AppController],
   providers: [AppService],
