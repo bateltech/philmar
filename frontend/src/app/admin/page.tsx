@@ -13,6 +13,7 @@ import {
   MessageSquare,
   Image,
   FileText,
+  Scale,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -153,6 +154,13 @@ export default function AdminDashboardPage() {
           >
             <FileText className="h-5 w-5 text-blue-600" />
             <span className="text-blue-600">Gérer les documents</span>
+          </Link>
+          <Link
+            href="/admin/mentions-legales"
+            className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 hover:border-blue-300 hover:bg-blue-50"
+          >
+            <Scale className="h-5 w-5 text-blue-600" />
+            <span className="text-blue-600">Modifier les mentions légales</span>
           </Link>
         </div>
       </div>
