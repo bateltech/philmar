@@ -37,7 +37,13 @@ const Footer = () => {
 
         {/* Copyright Section */}
         <div className="relative z-10 text-center mt-12">
-            <p>© Créé par Batel Tech 2025 | Copyright Philmar. Tous droits réservés</p>
+            <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+                <span>© Créé par Batel Tech 2026 | Copyright Philmar. Tous droits réservés</span>
+                <span aria-hidden="true">|</span>
+                <Link href="/mentions-legales" className="underline underline-offset-4 hover:text-amber-300">
+                    Mentions légales
+                </Link>
+            </p>
         </div>
 
     </footer>

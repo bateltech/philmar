@@ -13,6 +13,7 @@ import {
   MessageSquare,
   Image,
   FileText,
+  Scale,
   Share2,
   Compass,
   Settings,
@@ -36,6 +37,7 @@ const menuItems = [
   { href: '/admin/documents', icon: FileText, label: 'Documents' },
   { href: '/admin/reseaux', icon: Share2, label: 'Réseaux' },
   { href: '/admin/page-404', icon: Compass, label: 'Page introuvable' },
+  { href: '/admin/mentions-legales', icon: Scale, label: 'Mentions légales' },
   { href: '/admin/parametres', icon: Settings, label: 'Paramètres' },
 ];
 
