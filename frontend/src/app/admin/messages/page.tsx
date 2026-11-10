@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { AdminLayout, ConfirmDialog } from '@/components/admin';
 import { adminApi, ContactMessage } from '@/lib/admin-api';
+import { useUnreadMessages } from '@/lib/unread-messages-context';
 import { Mail, MailOpen, Reply, Trash2, RefreshCw } from 'lucide-react';
 
 const formatDate = (iso: string) =>
@@ -22,6 +23,8 @@ export default function MessagesPage() {
   const [filter, setFilter] = useState<'all' | 'unread'>('all');
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { unreadCount: globalUnread, refresh: refreshUnread } = useUnreadMessages();
+  const [highlightedId, setHighlightedId] = useState<string | null>(null);
 
   useEffect(() => {
     loadMessages();
@@ -32,6 +35,7 @@ export default function MessagesPage() {
     try {
       setMessages(await adminApi.getMessages());
       setError(null);
+      refreshUnread();
     } catch {
       setError('Erreur lors du chargement des messages');
     } finally {
@@ -43,6 +47,7 @@ export default function MessagesPage() {
     try {
       const updated = await adminApi.setMessageRead(msg.id, !msg.read);
       setMessages((prev) => prev.map((m) => (m.id === msg.id ? updated : m)));
+      refreshUnread();
     } catch {
       setError('Erreur lors de la mise à jour du message');
     }
@@ -53,6 +58,7 @@ export default function MessagesPage() {
     try {
       await adminApi.deleteMessage(deleteId);
       setMessages((prev) => prev.filter((m) => m.id !== deleteId));
+      refreshUnread();
     } catch {
       setError('Erreur lors de la suppression');
     } finally {
@@ -61,6 +67,27 @@ export default function MessagesPage() {
   };
 
   const unreadCount = messages.filter((m) => !m.read).length;
+
+  // Arrivée depuis une notification (#message-<id>) : on fait défiler jusqu'au message et on le met en évidence
+  useEffect(() => {
+    if (isLoading) return;
+    const match = window.location.hash.match(/^#message-(.+)$/);
+    if (!match) return;
+    const el = document.getElementById(`message-${match[1]}`);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setHighlightedId(match[1]);
+    // On retire l'ancre pour ne pas re-déclencher l'effet au prochain rechargement de la liste
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+    const timer = setTimeout(() => setHighlightedId(null), 2500);
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
+  // Un nouveau message est arrivé pendant qu'on est sur la page : on recharge la liste
+  useEffect(() => {
+    if (!isLoading && globalUnread !== unreadCount) loadMessages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [globalUnread]);
   const visible = filter === 'unread' ? messages.filter((m) => !m.read) : messages;
 
   return (
@@ -103,7 +130,8 @@ export default function MessagesPage() {
           {visible.map((msg) => (
             <article
               key={msg.id}
-              className={`rounded-lg bg-white p-4 shadow ${msg.read ? '' : 'border-l-4 border-blue-600'}`}
+              id={`message-${msg.id}`}
+              className={`scroll-mt-24 rounded-lg bg-white p-4 shadow ring-blue-500 transition-shadow duration-500 ${msg.read ? '' : 'border-l-4 border-blue-600'} ${highlightedId === msg.id ? 'ring-2' : ''}`}
             >
               <div className="mb-2 flex flex-wrap items-start justify-between gap-2">
                 <div className="min-w-0">

@@ -1,0 +1,157 @@
+/*
+ * Mode sombre de l'interface admin.
+ *
+ * Actif uniquement quand <html> porte la classe "admin-dark" (gérée par
+ * lib/admin-theme.tsx), et seulement à l'intérieur des conteneurs ".admin-root".
+ * Le site public n'est jamais concerné.
+ *
+ * Plutôt que d'ajouter des variantes dark: dans chaque page, on réassocie ici
+ * les classes Tailwind utilisées par l'admin à une palette sombre. On garde
+ * la même famille de gris (Tailwind "gray") et le même bleu d'accent que le
+ * thème clair pour conserver l'identité de l'interface.
+ *
+ * Palette :
+ *   fond de page   #111827   (gray-900)
+ *   menu latéral   #0b0f19   (un cran plus sombre que la page)
+ *   cartes         #1f2937   (gray-800, remplace bg-white)
+ *   zones 2nd plan #283241   (remplace bg-gray-50 / survols)
+ *   champs         #111827   (creusés dans la carte)
+ *   bordures       #374151 / #4b5563
+ *   texte          #f3f4f6 → #9ca3af selon l'importance
+ *   accent         bleu-600 conservé pour les boutons, bleu-400 pour les liens/texte
+ */
+
+html.admin-dark .admin-root {
+  color-scheme: dark;
+}
+
+/* ---------- Fonds ---------- */
+
+html.admin-dark .admin-root.bg-gray-100 { background-color: #111827; }
+html.admin-dark .admin-root aside.bg-gray-900 {
+  background-color: #0b0f19;
+  border-right: 1px solid #1f2937;
+}
+
+html.admin-dark .admin-root .bg-white { background-color: #1f2937; }
+html.admin-dark .admin-root .bg-gray-50 { background-color: #283241; }
+html.admin-dark .admin-root .bg-gray-100 { background-color: #374151; }
+html.admin-dark .admin-root .bg-gray-200 { background-color: #4b5563; }
+html.admin-dark .admin-root .bg-gray-300 { background-color: #4b5563; }
+
+html.admin-dark .admin-root .bg-blue-50 { background-color: rgba(59, 130, 246, 0.12); }
+html.admin-dark .admin-root .bg-blue-100 { background-color: rgba(59, 130, 246, 0.22); }
+html.admin-dark .admin-root .bg-red-50 { background-color: rgba(239, 68, 68, 0.12); }
+html.admin-dark .admin-root .bg-red-100 { background-color: rgba(239, 68, 68, 0.2); }
+html.admin-dark .admin-root .bg-green-50 { background-color: rgba(34, 197, 94, 0.12); }
+html.admin-dark .admin-root .bg-green-100 { background-color: rgba(34, 197, 94, 0.2); }
+html.admin-dark .admin-root .bg-yellow-50 { background-color: rgba(234, 179, 8, 0.12); }
+html.admin-dark .admin-root .bg-yellow-100 { background-color: rgba(234, 179, 8, 0.2); }
+html.admin-dark .admin-root .bg-amber-50 { background-color: rgba(245, 158, 11, 0.12); }
+html.admin-dark .admin-root .bg-purple-100 { background-color: rgba(168, 85, 247, 0.2); }
+
+/* Le toast reste lisible sur le fond sombre */
+html.admin-dark .admin-root .fixed.bg-gray-900 { box-shadow: 0 0 0 1px #374151, 0 10px 15px -3px rgba(0, 0, 0, 0.5); }
+
+/* ---------- Textes ---------- */
+
+html.admin-dark .admin-root.text-gray-900,
+html.admin-dark .admin-root .text-gray-900,
+html.admin-dark .admin-root .text-gray-800,
+html.admin-dark .admin-root .text-black { color: #f3f4f6; }
+html.admin-dark .admin-root .text-gray-700 { color: #d1d5db; }
+html.admin-dark .admin-root .text-gray-600 { color: #b4bcc8; }
+html.admin-dark .admin-root .text-gray-500 { color: #9ca3af; }
+
+html.admin-dark .admin-root .text-blue-500,
+html.admin-dark .admin-root .text-blue-600 { color: #60a5fa; }
+html.admin-dark .admin-root .text-blue-700 { color: #93c5fd; }
+html.admin-dark .admin-root .text-red-500,
+html.admin-dark .admin-root .text-red-600 { color: #f87171; }
+html.admin-dark .admin-root .text-red-700 { color: #fca5a5; }
+html.admin-dark .admin-root .text-green-700 { color: #86efac; }
+html.admin-dark .admin-root .text-yellow-700,
+html.admin-dark .admin-root .text-yellow-800 { color: #fcd34d; }
+html.admin-dark .admin-root .text-amber-900 { color: #fcd34d; }
+html.admin-dark .admin-root .text-purple-700 { color: #d8b4fe; }
+
+/* ---------- Bordures ---------- */
+
+html.admin-dark .admin-root .border-gray-100 { border-color: #283241; }
+html.admin-dark .admin-root .border-gray-200 { border-color: #374151; }
+html.admin-dark .admin-root .border-gray-300 { border-color: #4b5563; }
+html.admin-dark .admin-root .border-gray-400 { border-color: #6b7280; }
+html.admin-dark .admin-root .divide-gray-200 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+html.admin-dark .admin-root .border-red-200 { border-color: rgba(248, 113, 113, 0.35); }
+html.admin-dark .admin-root .border-yellow-200 { border-color: rgba(250, 204, 21, 0.35); }
+html.admin-dark .admin-root .border-amber-200 { border-color: rgba(245, 158, 11, 0.35); }
+html.admin-dark .admin-root .border-blue-300 { border-color: #3b82f6; }
+html.admin-dark .admin-root .ring-blue-200 { --tw-ring-color: rgba(59, 130, 246, 0.45); }
+
+/* Les cartes ombrées gardent un contour discret (l'ombre seule se voit peu en sombre).
+   On passe par --tw-shadow pour rester compatible avec les classes ring-*. */
+html.admin-dark .admin-root .shadow {
+  --tw-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+}
+html.admin-dark .admin-root .shadow-sm { --tw-shadow: 0 1px 0 0 #374151; }
+html.admin-dark .admin-root .shadow-lg {
+  --tw-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+html.admin-dark .admin-root .shadow-2xl {
+  --tw-shadow: 0 0 0 1px #374151, 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- États (survol, focus) ---------- */
+/* Ces règles doivent rester plus spécifiques que celles des fonds/bordures ci-dessus. */
+
+html.admin-dark .admin-root .hover\:bg-gray-50:hover { background-color: #283241; }
+html.admin-dark .admin-root .hover\:bg-gray-100:hover { background-color: #374151; }
+html.admin-dark .admin-root .hover\:bg-gray-200:hover { background-color: #4b5563; }
+html.admin-dark .admin-root .hover\:bg-blue-50:hover { background-color: rgba(59, 130, 246, 0.12); }
+html.admin-dark .admin-root .hover\:bg-red-50:hover { background-color: rgba(239, 68, 68, 0.12); }
+
+html.admin-dark .admin-root .hover\:text-gray-600:hover,
+html.admin-dark .admin-root .hover\:text-gray-700:hover { color: #e5e7eb; }
+html.admin-dark .admin-root .hover\:text-blue-600:hover { color: #93c5fd; }
+html.admin-dark .admin-root .hover\:text-red-600:hover { color: #fca5a5; }
+
+html.admin-dark .admin-root .hover\:border-gray-300:hover { border-color: #6b7280; }
+html.admin-dark .admin-root .hover\:border-gray-400:hover { border-color: #9ca3af; }
+html.admin-dark .admin-root .hover\:border-blue-300:hover { border-color: #60a5fa; }
+
+html.admin-dark .admin-root .focus\:border-blue-500:focus,
+html.admin-dark .admin-root .focus-within\:border-blue-500:focus-within { border-color: #3b82f6; }
+
+/* ---------- Champs de formulaire ---------- */
+
+html.admin-dark .admin-root input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']):not([type='color']),
+html.admin-dark .admin-root textarea,
+html.admin-dark .admin-root select {
+  background-color: #111827;
+  color: #f3f4f6;
+}
+html.admin-dark .admin-root input::placeholder,
+html.admin-dark .admin-root textarea::placeholder { color: #6b7280; }
+
+/* Éditeur de texte riche (TipTap) */
+html.admin-dark .admin-root .ProseMirror { background-color: #111827; color: #f3f4f6; }
+html.admin-dark .admin-root .ProseMirror a { color: #60a5fa; }
+
+/* ---------- Transition au changement de thème ---------- */
+/* Classe posée sur <html> uniquement pendant le changement (voir lib/admin-theme.tsx). */
+
+html.admin-theme-transition .admin-root,
+html.admin-theme-transition .admin-root *:not(.theme-toggle-icon),
+html.admin-theme-transition .admin-root *::before,
+html.admin-theme-transition .admin-root *::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow !important;
+  transition-duration: 350ms !important;
+  transition-timing-function: ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.admin-theme-transition .admin-root,
+  html.admin-theme-transition .admin-root * {
+    transition: none !important;
+  }
+}

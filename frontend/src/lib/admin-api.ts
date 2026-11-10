@@ -189,6 +189,13 @@ class AdminApi {
     return this.request<ContactMessage[]>('/contact/messages');
   }
 
+  async getMessageNotifications(since?: string | null) {
+    const query = since ? `?since=${encodeURIComponent(since)}` : '';
+    return this.request<{ unreadCount: number; items: MessageNotification[] }>(
+      `/contact/messages/notifications${query}`,
+    );
+  }
+
   async setMessageRead(id: string, read: boolean) {
     return this.request<ContactMessage>(`/contact/messages/${id}`, {
       method: 'PATCH',
@@ -199,6 +206,14 @@ class AdminApi {
   async deleteMessage(id: string) {
     return this.request<{ success: boolean }>(`/contact/messages/${id}`, { method: 'DELETE' });
   }
+}
+
+export interface MessageNotification {
+  id: string;
+  name: string;
+  excerpt: string;
+  read: boolean;
+  created_at: string;
 }
 
 export interface ContactMessage {

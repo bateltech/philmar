@@ -17,6 +17,17 @@ const BREVO_SEND_URL = 'https://api.brevo.com/v3/smtp/email';
 const MIN_FILL_TIME_MS = 3000;
 const MAX_LINKS = 3;
 
+const NOTIFICATIONS_LIMIT = 20;
+const NOTIFICATION_EXCERPT_LENGTH = 140;
+
+export interface MessageNotification {
+  id: string;
+  name: string;
+  excerpt: string;
+  read: boolean;
+  created_at: string;
+}
+
 export interface ContactMessage {
   id: string;
   name: string;
@@ -137,6 +148,45 @@ export class ContactService {
       throw new BadRequestException(`Lecture des messages impossible : ${error.message}`);
     }
     return data as ContactMessage[];
+  }
+
+  async unreadCount(): Promise<number> {
+    const { count, error } = await this.supabaseService
+      .getClient()
+      .from(MESSAGES_TABLE)
+      .select('id', { count: 'exact', head: true })
+      .eq('read', false);
+
+    if (error) throw new BadRequestException(error.message);
+    return count ?? 0;
+  }
+
+  /** Derniers messages reçus (après `since` si fourni), sous forme d'aperçu court. */
+  async recent(since?: string): Promise<MessageNotification[]> {
+    let query = this.supabaseService
+      .getClient()
+      .from(MESSAGES_TABLE)
+      .select('id, name, message, read, created_at')
+      .order('created_at', { ascending: false })
+      .limit(NOTIFICATIONS_LIMIT);
+
+    if (since && !Number.isNaN(Date.parse(since))) {
+      query = query.gt('created_at', new Date(since).toISOString());
+    }
+
+    const { data, error } = await query;
+    if (error) throw new BadRequestException(error.message);
+
+    return (data ?? []).map((m) => ({
+      id: m.id,
+      name: m.name,
+      excerpt:
+        m.message.length > NOTIFICATION_EXCERPT_LENGTH
+          ? `${m.message.slice(0, NOTIFICATION_EXCERPT_LENGTH).trimEnd()}…`
+          : m.message,
+      read: m.read,
+      created_at: m.created_at,
+    }));
   }
 
   async setRead(id: string, read: boolean): Promise<ContactMessage> {

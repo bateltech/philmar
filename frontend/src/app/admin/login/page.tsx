@@ -116,7 +116,7 @@ function LoginForm() {
 
 export default function AdminLoginPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 text-gray-900">
+    <div className="admin-root flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 text-gray-900">
       <Suspense fallback={
         <div className="flex items-center justify-center">
           <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-600 border-t-transparent"></div>

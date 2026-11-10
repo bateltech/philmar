@@ -22,6 +22,7 @@ import {
   Mail,
 } from 'lucide-react';
 import { useAuth } from '@/lib/auth-context';
+import { useUnreadMessages } from '@/lib/unread-messages-context';
 
 const menuItems = [
   { href: '/admin', icon: Home, label: 'Dashboard' },
@@ -49,6 +50,7 @@ interface AdminSidebarProps {
 export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
   const pathname = usePathname();
   const { logout } = useAuth();
+  const { unreadCount } = useUnreadMessages();
 
   const handleLogout = async () => {
     await logout();
@@ -89,6 +91,7 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
               {menuItems.map((item) => {
                 const isActive = pathname === item.href;
                 const Icon = item.icon;
+                const badge = item.href === '/admin/messages' ? unreadCount : 0;
 
                 return (
                   <li key={item.href}>
@@ -103,6 +106,14 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
                     >
                       <Icon className="h-5 w-5" />
                       <span>{item.label}</span>
+                      {badge > 0 && (
+                        <span
+                          className="ml-auto min-w-[1.25rem] rounded-full bg-red-500 px-1.5 py-0.5 text-center text-xs font-semibold leading-none text-white"
+                          aria-label={`${badge} message${badge > 1 ? 's' : ''} non lu${badge > 1 ? 's' : ''}`}
+                        >
+                          {badge > 99 ? '99+' : badge}
+                        </span>
+                      )}
                     </Link>
                   </li>
                 );

@@ -2,18 +2,17 @@ export interface LegalNoticeSection {
   id: string;
   title: string;
   body: string;
+  /** Clé d'icône choisie dans l'admin (voir legal-notice-icons.ts). */
+  icon?: string;
 }
 
 export interface LegalNoticesContent {
   intro: string;
-  publicationNote: string;
   sections: LegalNoticeSection[];
 }
 
 export const DEFAULT_LEGAL_NOTICES: LegalNoticesContent = {
   intro: 'Informations relatives à l’édition, à l’hébergement et à l’utilisation de ce site.',
-  publicationNote:
-    'Cette page est à finaliser avant publication : les éléments dépendant du statut de l’éditeur, les téléphones des hébergeurs, les durées de conservation et les réglages des traceurs restent à vérifier et à compléter.',
   sections: [
     {
       id: 'edition',
@@ -58,8 +57,11 @@ Vous pouvez demander l’accès à vos données, leur rectification ou leur effa
     },
     {
       id: 'online-sales',
-      title: 'Vente en ligne',
-      body: 'Aucune fonctionnalité de commande, de paiement ou d’abonnement en ligne n’a été repérée sur le site. Si une telle fonctionnalité est ajoutée, les conditions générales de vente et, le cas échéant, le dispositif de résiliation en ligne devront être prévus.',
+      title: 'Liens externes',
+      icon: 'link',
+      body: `Ce site contient des liens vers des sites tiers, notamment pour l’achat d’albums ou de billets de concerts. Ces achats sont effectués directement sur ces sites et sont régis par leurs propres conditions de vente.
+
+Philmar n’exerce aucun contrôle sur ces sites et ne saurait être tenu responsable de leur contenu ni des transactions qui y sont réalisées.`,
     },
   ],
 };
@@ -70,10 +72,6 @@ export function normalizeLegalNotices(value: unknown): LegalNoticesContent {
   const content = value as Partial<LegalNoticesContent>;
   return {
     intro: typeof content.intro === 'string' ? content.intro : DEFAULT_LEGAL_NOTICES.intro,
-    publicationNote:
-      typeof content.publicationNote === 'string'
-        ? content.publicationNote
-        : DEFAULT_LEGAL_NOTICES.publicationNote,
     sections: Array.isArray(content.sections)
       ? content.sections.filter(
           (section): section is LegalNoticeSection =>

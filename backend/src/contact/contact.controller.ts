@@ -9,6 +9,7 @@ import {
   Req,
   UseGuards,
   ParseUUIDPipe,
+  Query,
   HttpCode,
 } from '@nestjs/common';
 import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
@@ -41,6 +42,20 @@ export class ContactController {
   @UseGuards(JwtAuthGuard)
   list() {
     return this.contactService.list();
+  }
+
+  /**
+   * Résumé pour les notifications de l'admin : nombre de non lus
+   * + derniers messages reçus après `since` (date ISO, optionnelle).
+   */
+  @Get('messages/notifications')
+  @UseGuards(JwtAuthGuard)
+  async notifications(@Query('since') since?: string) {
+    const [unreadCount, items] = await Promise.all([
+      this.contactService.unreadCount(),
+      this.contactService.recent(since),
+    ]);
+    return { unreadCount, items };
   }
 
   @Patch('messages/:id')

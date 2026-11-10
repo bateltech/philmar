@@ -11,6 +11,7 @@ import {
   normalizeLegalNotices,
   toRichTextHtml,
 } from '@/lib/legal-notices';
+import { LEGAL_NOTICE_ICONS, getSectionIconKey } from '@/lib/legal-notice-icons';
 import { Plus, Save, Trash2 } from 'lucide-react';
 
 export default function AdminMentionsLegalesPage() {
@@ -70,21 +71,17 @@ export default function AdminMentionsLegalesPage() {
 
       <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
         Vérifiez les informations juridiques avant publication. Les modifications sont visibles sur
-        la page publique après leur enregistrement.
+        la page publique après leur enregistrement. La date de « Dernière mise à jour » affichée sur
+        la page publique se met à jour automatiquement à chaque enregistrement.
       </div>
 
       <div className="max-w-4xl space-y-6">
         <section className="rounded-lg border border-gray-200 bg-white p-6">
-          <h2 className="mb-4 text-lg font-semibold text-gray-900">Introduction et note</h2>
+          <h2 className="mb-4 text-lg font-semibold text-gray-900">Introduction</h2>
           <RichTextEditor
             label="Introduction"
             value={toRichTextHtml(content.intro)}
             onChange={(html) => setContent({ ...content, intro: html })}
-          />
-          <RichTextEditor
-            label="Note de vérification"
-            value={toRichTextHtml(content.publicationNote)}
-            onChange={(html) => setContent({ ...content, publicationNote: html })}
           />
         </section>
 
@@ -98,6 +95,31 @@ export default function AdminMentionsLegalesPage() {
             </div>
             <label className="mb-2 block text-sm font-medium text-gray-700" htmlFor={`legal-title-${section.id}`}>Titre</label>
             <input id={`legal-title-${section.id}`} value={section.title} onChange={(event) => updateSection(index, { title: event.target.value })} className="mb-5 w-full rounded-md border border-gray-300 p-3 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+            <fieldset className="mb-5">
+              <legend className="mb-2 block text-sm font-medium text-gray-700">Icône</legend>
+              <div className="flex flex-wrap gap-2">
+                {LEGAL_NOTICE_ICONS.map(({ key, label, Icon }) => {
+                  const selected = getSectionIconKey(section) === key;
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => updateSection(index, { icon: key })}
+                      title={label}
+                      aria-label={label}
+                      aria-pressed={selected}
+                      className={`flex h-10 w-10 items-center justify-center rounded-lg border transition-colors ${
+                        selected
+                          ? 'border-blue-600 bg-blue-600 text-white'
+                          : 'border-gray-300 text-gray-600 hover:bg-gray-50'
+                      }`}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </button>
+                  );
+                })}
+              </div>
+            </fieldset>
             <RichTextEditor
               label="Texte"
               value={toRichTextHtml(section.body)}

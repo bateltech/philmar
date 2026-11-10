@@ -22,8 +22,9 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
+  // suppressHydrationWarning : l'admin ajoute une classe de thème sur <html> avant l'hydratation
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
       <body>
         <LayoutShell navbar={<Navbar />} footer={<Footer />}>
           {children}
