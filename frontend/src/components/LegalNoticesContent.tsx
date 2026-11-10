@@ -36,7 +36,12 @@ const RICH_TEXT =
   '[&_a]:text-amber-300 [&_a]:underline [&_a]:decoration-amber-300/40 [&_a]:underline-offset-4 ' +
   '[&_a]:transition-colors [&_a:hover]:decoration-amber-300';
 
-const anchorId = (id: string) => `mentions-${id}`;
+/**
+ * Ancre d'une rubrique, basée sur sa position. On évite d'utiliser l'identifiant
+ * de la rubrique : les bloqueurs de pub masquent tout élément dont l'id contient
+ * « cookie » (ex. « mentions-cookies »), ce qui faisait disparaître la rubrique.
+ */
+const anchorId = (index: number) => `rubrique-${index + 1}`;
 
 export default function LegalNoticesContent() {
   const [safeContent, setSafeContent] = useState<SafeLegalNotices | null>(null);
@@ -81,8 +86,8 @@ export default function LegalNoticesContent() {
       },
       { rootMargin: '-25% 0px -65% 0px' },
     );
-    safeContent.sections.forEach((s) => {
-      const el = document.getElementById(anchorId(s.id));
+    safeContent.sections.forEach((_, index) => {
+      const el = document.getElementById(anchorId(index));
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
@@ -162,12 +167,12 @@ export default function LegalNoticesContent() {
                     className="flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:flex-col lg:gap-0 lg:overflow-visible lg:border-l lg:border-white/10"
                   >
                     {safeContent.sections.map((section, index) => {
-                      const isActive = activeId === anchorId(section.id);
+                      const isActive = activeId === anchorId(index);
                       return (
                         <li key={section.id} className="shrink-0">
                           <a
-                            href={`#${anchorId(section.id)}`}
-                            onClick={(e) => scrollToSection(e, anchorId(section.id))}
+                            href={`#${anchorId(index)}`}
+                            onClick={(e) => scrollToSection(e, anchorId(index))}
                             aria-current={isActive ? 'location' : undefined}
                             className={`block whitespace-nowrap rounded-full border px-3 py-1.5 text-sm transition-colors lg:-ml-px lg:whitespace-normal lg:rounded-none lg:border-0 lg:border-l-2 lg:px-4 lg:py-2 ${
                               isActive
@@ -192,7 +197,7 @@ export default function LegalNoticesContent() {
                 return (
                   <section
                     key={section.id}
-                    id={anchorId(section.id)}
+                    id={anchorId(index)}
                     className="scroll-mt-36 rounded-2xl lg:scroll-mt-28 border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-white/20 md:p-8"
                   >
                     <div className="mb-5 flex items-center gap-4">

@@ -1,6 +1,6 @@
 import {
   Building2,
-  Cookie,
+  createLucideIcon,
   Copyright,
   FileText,
   Globe,
@@ -17,6 +17,20 @@ import {
 } from 'lucide-react';
 import type { LegalNoticeSection } from './legal-notices';
 
+/**
+ * Icône « cookie » de Lucide recréée sous un nom neutre : les bloqueurs de pub
+ * (Brave, uBlock…) masquent tout élément dont la classe contient « cookie »,
+ * et Lucide ajoute automatiquement la classe « lucide-cookie ».
+ */
+const Biscuit = createLucideIcon('biscuit', [
+  ['path', { d: 'M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5', key: 'a' }],
+  ['path', { d: 'M8.5 8.5v.01', key: 'b' }],
+  ['path', { d: 'M16 15.5v.01', key: 'c' }],
+  ['path', { d: 'M12 12v.01', key: 'd' }],
+  ['path', { d: 'M11 17v.01', key: 'e' }],
+  ['path', { d: 'M7 14v.01', key: 'f' }],
+]);
+
 export interface LegalNoticeIconOption {
   key: string;
   label: string;
@@ -31,7 +45,7 @@ export const LEGAL_NOTICE_ICONS: LegalNoticeIconOption[] = [
   { key: 'server', label: 'Hébergement', Icon: Server },
   { key: 'copyright', label: 'Propriété intellectuelle', Icon: Copyright },
   { key: 'shield', label: 'Données personnelles', Icon: ShieldCheck },
-  { key: 'cookie', label: 'Cookies', Icon: Cookie },
+  { key: 'cookie', label: 'Cookies', Icon: Biscuit },
   { key: 'cart', label: 'Vente', Icon: ShoppingCart },
   { key: 'link', label: 'Liens externes', Icon: Link2 },
   { key: 'globe', label: 'Site / Internet', Icon: Globe },
