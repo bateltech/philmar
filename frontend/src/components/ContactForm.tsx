@@ -45,8 +45,11 @@ export default function ContactForm() {
   const startedAtRef = useRef(Date.now());
   const widgetElRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
+  // Cloudflare Turnstile n'est chargé que quand le visiteur commence à remplir le formulaire
+  const [armed, setArmed] = useState(false);
 
   useEffect(() => {
+    if (!armed) return;
     let cancelled = false;
     loadTurnstile()
       .then(() => {
@@ -66,7 +69,7 @@ export default function ContactForm() {
       if (widgetIdRef.current) window.turnstile?.remove(widgetIdRef.current);
       widgetIdRef.current = null;
     };
-  }, []);
+  }, [armed]);
 
   const resetTurnstile = () => {
     setToken('');
@@ -76,6 +79,7 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!token) {
+      setArmed(true);
       setStatus({ type: 'error', text: 'Merci de patienter pendant la vérification anti-robot.' });
       return;
     }
@@ -119,7 +123,7 @@ export default function ContactForm() {
   const field = 'p-2 w-80 max-w-full text-black border border-red-500';
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4">
+    <form onSubmit={handleSubmit} onFocus={() => setArmed(true)} className="flex flex-col items-center space-y-4">
       <h2 className="text-lg text-right">Pour toute proposition, vous pouvez me contacter</h2>
 
       <input
