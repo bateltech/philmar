@@ -129,7 +129,6 @@ out
 .yarn/install-state.gz
 .pnp.*
 
-frontend/yarn.lock
 frontend/package-lock.json
 
 # Admin temp files
