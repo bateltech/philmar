@@ -4,6 +4,7 @@ import { SITE_NAME, SITE_URL } from '@/lib/seo';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import LayoutShell from '../components/layout-shell';
+import SiteAnalytics from '../components/SiteAnalytics';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LayoutShell navbar={<Navbar />} footer={<Footer />}>
           {children}
         </LayoutShell>
+        <SiteAnalytics />
       </body>
     </html>
   );
