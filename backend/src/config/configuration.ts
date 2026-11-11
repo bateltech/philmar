@@ -25,6 +25,10 @@ export default () => ({
     senderEmail: process.env.CONTACT_SENDER_EMAIL,
     recipientEmail: process.env.CONTACT_RECIPIENT_EMAIL,
   },
+  stats: {
+    // Secret partagé avec le site Next.js (variable STATS_INGEST_SECRET sur Render ET sur Vercel)
+    ingestSecret: process.env.STATS_INGEST_SECRET,
+  },
   cors: {
     origin: process.env.CORS_ORIGIN || 'http://localhost:3001',
   },
