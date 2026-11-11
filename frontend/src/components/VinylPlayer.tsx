@@ -163,11 +163,11 @@ export default function VinylPlayer() {
         <button
           onClick={handleTap}
           className={`relative w-20 h-20 rounded-full cursor-pointer focus:outline-none vinyl-spinning${isPlaying ? '' : ' vinyl-paused'}`}
-          aria-label={isPlaying ? 'Pause' : 'Lecture'}
+          aria-label={isPlaying ? 'Mettre en pause la musique de Philmar' : 'Écouter la musique de Philmar (lecteur SoundCloud)'}
         >
           <img
             src="/images/vinyle.png"
-            alt="Vinyl"
+            alt=""
             className="w-full h-full rounded-full object-cover"
             draggable={false}
           />

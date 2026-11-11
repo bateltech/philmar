@@ -11,6 +11,28 @@ import { Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 
+/** Descriptions des photos du diaporama « Nouvelles Orientations » (orient-1 à orient-9). */
+const ORIENTATION_SLIDES = [
+  'Philmar chantant au micro en jouant de la guitare électrique',
+  'Philmar en concert avec un autre musicien, sous les projecteurs',
+  "Philmar jouant d'un tambour sur cadre",
+  "Philmar chantant en jouant d'un instrument à cordes, assis derrière un harmonium",
+  'Spectacle réunissant une conteuse, une harpiste et Philmar assis sur scène',
+  "Philmar et deux autres artistes saluant le public à la fin d'un concert",
+  'Philmar et des musiciens jouant sur scène avec une danseuse',
+  'Philmar chantant debout aux côtés de musiciens indiens assis sur scène',
+  'Philmar chantant seul au micro dans une lumière rouge',
+];
+
+/** Descriptions des photos du diaporama « Instruments du monde » (instrus-2 à instrus-6). */
+const INSTRUMENT_SLIDES = [
+  { n: '2', alt: "Collection d'instruments du monde : tambours, flûtes, luths, guitares et percussions" },
+  { n: '3', alt: 'Atelier musical de Philmar avec des personnes âgées réunies en cercle' },
+  { n: '4', alt: 'Un luth et une guitare posés côte à côte dans une lumière chaude' },
+  { n: '5', alt: 'Philmar présentant des petites percussions à des enfants assis par terre' },
+  { n: '6', alt: 'Philmar faisant essayer un djembé à des personnes âgées' },
+];
+
 
 
 export default function Biographie() {
@@ -23,7 +45,7 @@ export default function Biographie() {
       {/* Section 1 */}
       <section className="flex flex-col md:flex-row items-center gap-8 pr-4" data-aos="fade-up">
         <div className="md:w-1/2">
-          <Image src="/images/biographie/hero.png" alt="Première expérience" width={700} height={500} className="rounded-lg w-full h-auto object-cover" />
+          <Image src="/images/biographie/hero.png" alt="Philmar jouant d'un grand tambour sur cadre en concert" width={700} height={500} className="rounded-lg w-full h-auto object-cover" />
         </div>
         <div className="md:w-1/2">
           <h2 className="text-xl font-bold mb-8">Premières expériences musicales</h2>
@@ -55,7 +77,7 @@ export default function Biographie() {
           <div className="absolute top-0 left-0 w-[180px] z-20">
             <Image
               src="/images/biographie/pro-1.png"
-              alt="Photo 1"
+              alt="Philmar et son groupe sur scène dans les années 1980"
               width={100}
               height={100}
               className="object-cover w-full"
@@ -66,7 +88,7 @@ export default function Biographie() {
           <div className="absolute top-[60px] right-[50px] w-[240px] z-10">
             <Image
               src="/images/biographie/pro-2.png"
-              alt="Photo 2"
+              alt="Photo de groupe de musiciens posant dans la neige avec leurs instruments"
               width={160}
               height={160}
               className="object-cover w-full"
@@ -77,7 +99,7 @@ export default function Biographie() {
           <div className="absolute top-[340px] right-0 w-[160px] z-30">
             <Image
               src="/images/biographie/pro-3.png"
-              alt="Photo 3"
+              alt="Musiciens jouant parmi des branchages, entourés de percussions"
               width={130}
               height={130}
               className="object-cover w-full"
@@ -99,11 +121,11 @@ export default function Biographie() {
             loop={true}
             className="w-full h-full"
           >
-            {Array.from({ length: 9 }).map((_, i) => (
+            {ORIENTATION_SLIDES.map((alt, i) => (
               <SwiperSlide key={i} className="w-full h-full relative">
                 <Image
                   src={`/images/biographie/orient-${i + 1}.png`}
-                  alt={`Diapo ${i + 1}`}
+                  alt={alt}
                   fill
                   className="object-cover"
                   style={{ objectFit: 'cover' }}
@@ -136,7 +158,7 @@ export default function Biographie() {
         <div className="w-full">
           <Image
             src="/images/biographie/instrus-1.png"
-            alt="Instrument 1"
+            alt="Philmar assis sur scène jouant d'un harmonium indien, entouré d'un sitar et de percussions"
             width={800}
             height={400}
             className="w-full object-cover rounded-lg"
@@ -154,11 +176,11 @@ export default function Biographie() {
             loop={true}
             className="w-full h-full"
           >
-            {['2', '3', '4', '5', '6'].map((n) => (
+            {INSTRUMENT_SLIDES.map(({ n, alt }) => (
               <SwiperSlide key={n} className="w-full h-full relative">
                 <Image
                   src={`/images/biographie/instrus-${n}.png`}
-                  alt={`Instrument ${n}`}
+                  alt={alt}
                   fill
                   className="object-cover"
                 />
@@ -203,7 +225,7 @@ export default function Biographie() {
           </p>
         </div>
         <div className="md:w-1/2">
-          <Image src="/images/biographie/parcours.png" alt="Parcours vivant" width={600} height={400} className="rounded-lg w-full object-cover" />
+          <Image src="/images/biographie/parcours.png" alt="Philmar de dos, assis sur un tapis en plein air, une guitare à l'épaule et des instruments autour de lui" width={600} height={400} className="rounded-lg w-full object-cover" />
         </div>
       </section>
     </div>
