@@ -189,6 +189,11 @@ class AdminApi {
     return this.request<ContactMessage[]>('/contact/messages');
   }
 
+  // Statistiques de visites
+  async getStats(days: number) {
+    return this.request<StatsSummary>(`/stats?days=${days}`);
+  }
+
   // Sauvegarde / restauration du contenu
   async exportBackup() {
     return this.request<BackupFile>('/backup');
@@ -218,6 +223,19 @@ class AdminApi {
   async deleteMessage(id: string) {
     return this.request<{ success: boolean }>(`/contact/messages/${id}`, { method: 'DELETE' });
   }
+}
+
+export interface StatsSummary {
+  days: number;
+  from: string;
+  to: string;
+  totals: { visitors: number; pageViews: number };
+  previous: { visitors: number; pageViews: number };
+  daily: { day: string; visitors: number; pageViews: number }[];
+  pages: { path: string; pageViews: number; visitors: number }[];
+  referrers: { source: string; visitors: number }[];
+  countries: { country: string; visitors: number }[];
+  devices: { device: string; visitors: number }[];
 }
 
 export interface BackupFile {

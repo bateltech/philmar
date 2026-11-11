@@ -155,3 +155,24 @@ html.admin-theme-transition .admin-root *::after {
     transition: none !important;
   }
 }
+
+/* ---------- Page Statistiques ----------
+   Couleurs des graphiques validées (lisibles par les daltoniens, contraste suffisant)
+   séparément pour le mode clair et le mode sombre. */
+.stats-page {
+  --stats-c1: #2a78d6; /* visiteurs, ordinateur */
+  --stats-c2: #1baf7a; /* pages vues, mobile */
+  --stats-c3: #e0703a; /* tablette */
+}
+.stats-page .stats-bar { background-color: rgba(42, 120, 214, 0.1); }
+.stats-page .stats-ring-track { stroke: #f3f4f6; }
+.stats-page .stats-dot { box-shadow: 0 0 0 2px #ffffff; }
+
+html.admin-dark .admin-root .stats-page {
+  --stats-c1: #3b82e6;
+  --stats-c2: #19a874;
+  --stats-c3: #e0703a;
+}
+html.admin-dark .admin-root .stats-page .stats-bar { background-color: rgba(59, 130, 230, 0.2); }
+html.admin-dark .admin-root .stats-page .stats-ring-track { stroke: #374151; }
+html.admin-dark .admin-root .stats-page .stats-dot { box-shadow: 0 0 0 2px #1f2937; }

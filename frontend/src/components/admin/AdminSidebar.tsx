@@ -20,6 +20,7 @@ import {
   LogOut,
   X,
   Mail,
+  BarChart3,
 } from 'lucide-react';
 import { useAuth } from '@/lib/auth-context';
 import { useUnreadMessages } from '@/lib/unread-messages-context';
@@ -27,6 +28,7 @@ import { useUnreadMessages } from '@/lib/unread-messages-context';
 const menuItems = [
   { href: '/admin', icon: Home, label: 'Dashboard' },
   { href: '/admin/messages', icon: Mail, label: 'Messages' },
+  { href: '/admin/statistiques', icon: BarChart3, label: 'Statistiques' },
   { href: '/admin/concerts', icon: Music, label: 'Concerts' },
   { href: '/admin/spectacles', icon: Theater, label: 'Spectacles' },
   { href: '/admin/discographie', icon: Disc3, label: 'Discographie' },
