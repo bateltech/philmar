@@ -1,8 +1,13 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as path from 'path';
-import * as sharp from 'sharp';
 import { SupabaseService } from '../supabase/supabase.service';
+
+// sharp ≥ 0.35 : en CommonJS, require('sharp') renvoie directement la fonction,
+// mais TypeScript lit ses types « ESM » (export default). On garde donc ces types
+// tout en chargeant la version CommonJS, sans changer la config du projet.
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const sharp: typeof import('sharp').default = require('sharp');
 
 export interface ImageMetadata {
   path: string;
