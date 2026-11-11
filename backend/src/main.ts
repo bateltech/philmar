@@ -17,6 +17,9 @@ async function bootstrap() {
     credentials: true,
   });
 
+  // Restauration d'une sauvegarde depuis l'admin : autorise des corps JSON plus gros (100 ko par defaut)
+  app.useBodyParser('json', { limit: '5mb' });
+
   // Cookie parser for JWT in cookies
   app.use(cookieParser());
 

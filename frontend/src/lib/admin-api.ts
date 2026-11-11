@@ -189,6 +189,18 @@ class AdminApi {
     return this.request<ContactMessage[]>('/contact/messages');
   }
 
+  // Sauvegarde / restauration du contenu
+  async exportBackup() {
+    return this.request<BackupFile>('/backup');
+  }
+
+  async restoreBackup(backup: BackupFile) {
+    return this.request<{ restored: string[] }>('/backup/restore', {
+      method: 'POST',
+      body: JSON.stringify(backup),
+    });
+  }
+
   async getMessageNotifications(since?: string | null) {
     const query = since ? `?since=${encodeURIComponent(since)}` : '';
     return this.request<{ unreadCount: number; items: MessageNotification[] }>(
@@ -206,6 +218,14 @@ class AdminApi {
   async deleteMessage(id: string) {
     return this.request<{ success: boolean }>(`/contact/messages/${id}`, { method: 'DELETE' });
   }
+}
+
+export interface BackupFile {
+  format: 'philmar-backup';
+  version: number;
+  exportedAt: string;
+  content: Record<string, { data: unknown; updated_at: string | null }>;
+  messages: unknown[];
 }
 
 export interface MessageNotification {

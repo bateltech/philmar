@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { AdminLayout, FormField } from '@/components/admin';
+import BackupSection from '@/components/admin/BackupSection';
 import { adminApi } from '@/lib/admin-api';
 import { Save, Check } from 'lucide-react';
 
@@ -162,6 +163,8 @@ export default function ParametresPage() {
             </li>
           </ul>
         </div>
+
+        <BackupSection />
 
         {/* Credentials reminder */}
         <div className="mt-6 rounded-lg border border-yellow-200 bg-yellow-50 p-6">
